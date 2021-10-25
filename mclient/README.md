@@ -1,3 +1,11 @@
+## Mock-up
+
+![Desktop view 1](mockups/MusicPlayerDesktop.jpg)
+
+![Mobile view 1](mockups/MusicPlayerMobile1.jpg)
+
+![Mobile view 2](mockups/MusicPlayerMobile2.jpg)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
