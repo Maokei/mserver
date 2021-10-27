@@ -6,6 +6,10 @@
 
 ![Mobile view 2](mockups/MusicPlayerMobile2.jpg)
 
+# Miscellaneous notes
+
+-   @svgr/webpack to import svg file, not used but kept temporarily
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

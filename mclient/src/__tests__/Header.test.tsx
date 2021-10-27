@@ -9,8 +9,12 @@ beforeEach(() => {
 });
 
 describe("Page should have a header component", () => {
-    it("should show logo", () => {
-        expect(getByTestId(container, "logo")).toBeTruthy();
+    it("should show show-more-icon", () => {
+        expect(getByTestId(container, "show-more")).toBeTruthy();
+    });
+
+    it("should have a search-wrapper", () => {
+        expect(getByTestId(container, "search-wrapper")).toBeTruthy();
     });
 
     it("should show searchbar", () => {
