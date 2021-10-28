@@ -12,6 +12,11 @@
     box-shadow: 8px 8px 20px 0px #0000005a, -8px -8px 20px 0px #7a86971a;
 }
 
+.search-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 .show-more-wrapper {
     display: flex;
     justify-content: flex-end;

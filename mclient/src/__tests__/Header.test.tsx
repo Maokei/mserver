@@ -5,7 +5,7 @@ import { Header } from "../components/Header";
 let container: any = null;
 
 beforeEach(() => {
-    container = render(<Header />).container;
+    container = render(<Header onClick={() => "test"} />).container;
 });
 
 describe("Page should have a header component", () => {
@@ -13,8 +13,8 @@ describe("Page should have a header component", () => {
         expect(getByTestId(container, "show-more")).toBeTruthy();
     });
 
-    it("should have a search-wrapper", () => {
-        expect(getByTestId(container, "search-wrapper")).toBeTruthy();
+    it("should have a show-more-wrapper", () => {
+        expect(getByTestId(container, "show-more-wrapper")).toBeTruthy();
     });
 
     it("should show searchbar", () => {

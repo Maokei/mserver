@@ -3,7 +3,11 @@ import { ReactComponent as SearchIcon } from "../assets/search-vector.svg";
 import { ReactComponent as MoreIcon } from "../assets/union-vector.svg";
 // import { ReactComponent as BackIcon } from "../assets/back-vector.svg";
 
-export const Header = () => {
+interface HeaderProps {
+    onClick: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onClick }) => {
     return (
         <header className="columns header">
             {/* <div data-testid="back-btn" className="icon">
@@ -11,17 +15,13 @@ export const Header = () => {
             </div> */}
 
             <div
-                data-testid="search-wrapper"
-                className="column is-four-fifths wrapper"
+                data-testid="search"
+                className="control column is-four-fifths search-wrapper"
             >
-                <div className="columns">
-                    <button className="icon">
-                        <SearchIcon />
-                    </button>
-                    <form data-testid="search" action="" className="column">
-                        <input type="text" placeholder="search" />
-                    </form>
-                </div>
+                <button className="icon" onClick={onClick}>
+                    <SearchIcon />
+                </button>
+                <input className="input" type="text" placeholder="search" />
             </div>
 
             <div className="column show-more-wrapper">
