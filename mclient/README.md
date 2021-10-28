@@ -9,6 +9,7 @@
 # Miscellaneous notes
 
 -   @svgr/webpack to import svg file, not used but kept temporarily
+-   using Bulma cdn
 
 # Getting Started with Create React App
 

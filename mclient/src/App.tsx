@@ -1,10 +1,10 @@
 import React from "react";
 import { Header } from "./components/Header";
-import "./App.css";
+import "./App.scss";
 
 function App() {
     return (
-        <div className="app is-dark">
+        <div className="app has-background-dark">
             <Header />
         </div>
     );

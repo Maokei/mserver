@@ -1,0 +1,11 @@
+@import "./styles/header.scss";
+
+:root {
+    --color-dark: #2a2e34;
+}
+
+.app {
+    height: 100vh;
+    overflow-x: hidden;
+    padding: 3vh 5vw;
+}
