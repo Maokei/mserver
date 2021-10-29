@@ -1,6 +1,10 @@
 import React from "react";
 import { ReactComponent as MoreIcon } from "../assets/union-vector.svg";
 
+/* interface ShowMoreProps {
+    ref: HTMLDivElement
+} */
+
 export const ShowMore = () => {
     const ref = React.useRef<HTMLDivElement>(null);
     const [isActive, setIsActive] = React.useState<boolean>(false);
