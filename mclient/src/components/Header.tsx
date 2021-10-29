@@ -2,16 +2,33 @@ import React from "react";
 import { Search } from "./Search";
 import { ShowMore } from "./ShowMore";
 
-/* interface HeaderProps {
-    onSearch: () => void;
-} */
-
 export const Header = () => {
     const [isHidden, setIsHidden] = React.useState<boolean>(true);
 
     const toggleSearchbar = () => {
         setIsHidden(!isHidden);
     };
+
+    const ref = React.useRef<HTMLDivElement>(null);
+    const [isActive, setIsActive] = React.useState<boolean>(false);
+
+    React.useEffect(() => {
+        const checkIfClickedOutside = (e: MouseEvent) => {
+            if (
+                isActive &&
+                ref.current &&
+                !ref.current.contains(e.target as Node)
+            ) {
+                setIsActive(false);
+            }
+        };
+
+        document.addEventListener("mousedown", checkIfClickedOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", checkIfClickedOutside);
+        };
+    }, [isActive]);
 
     return (
         <header className="columns header">
@@ -21,7 +38,7 @@ export const Header = () => {
 
             <Search hidden={isHidden} onClick={toggleSearchbar} />
 
-            <ShowMore />
+            <ShowMore ref={ref} state={isActive} setState={setIsActive} />
         </header>
     );
 };

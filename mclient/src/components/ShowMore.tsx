@@ -1,32 +1,14 @@
 import React from "react";
 import { ReactComponent as MoreIcon } from "../assets/union-vector.svg";
 
-/* interface ShowMoreProps {
-    ref: HTMLDivElement
-} */
+interface ShowMoreProps {
+    ref: any;
+    state: boolean;
+    setState: Function;
+}
 
-export const ShowMore = () => {
-    const ref = React.useRef<HTMLDivElement>(null);
-    const [isActive, setIsActive] = React.useState<boolean>(false);
-    const dropdownActiveClass = isActive ? "is-active" : "";
-
-    React.useEffect(() => {
-        const checkIfClickedOutside = (e: MouseEvent) => {
-            if (
-                isActive &&
-                ref.current &&
-                !ref.current.contains(e.target as HTMLElement)
-            ) {
-                setIsActive(false);
-            }
-        };
-
-        document.addEventListener("mousedown", checkIfClickedOutside);
-
-        return () => {
-            document.removeEventListener("mousedown", checkIfClickedOutside);
-        };
-    }, [isActive]);
+export const ShowMore: React.FC<ShowMoreProps> = ({ ref, state, setState }) => {
+    const dropdownActiveClass = state ? "is-active" : "";
 
     return (
         <div
@@ -38,7 +20,7 @@ export const ShowMore = () => {
                     className="button icon"
                     aria-haspopup="true"
                     aria-controls="dropdown-menu"
-                    onClick={() => setIsActive(!isActive)}
+                    onClick={() => setState(!state)}
                 >
                     <MoreIcon />
                 </button>

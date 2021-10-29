@@ -5,7 +5,7 @@ import { Header } from "../components/Header";
 let container: any = null;
 
 beforeEach(() => {
-    container = render(<Header onClick={() => "test"} />).container;
+    container = render(<Header />).container;
 });
 
 describe("Page should have a header component", () => {
