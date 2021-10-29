@@ -14,7 +14,7 @@ export const Search: React.FC<SearchProps> = ({ onClick, hidden }) => {
             data-testid="search"
             className="control column is-four-fifths search-wrapper"
         >
-            <button className="icon" onClick={onClick}>
+            <button className="button icon search-btn" onClick={onClick}>
                 <SearchIcon />
             </button>
             <input
