@@ -14,10 +14,15 @@ export const Search: React.FC<SearchProps> = ({ onClick, hidden }) => {
             data-testid="search"
             className="control column is-four-fifths search-wrapper"
         >
-            <button className="button icon search-btn" onClick={onClick}>
+            <button
+                data-testid="search-btn"
+                className="button icon search-btn"
+                onClick={onClick}
+            >
                 <SearchIcon />
             </button>
             <input
+                data-testid="search-input"
                 className={`input is-large ${hiddenClass}`}
                 type="text"
                 placeholder="search"

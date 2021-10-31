@@ -2,16 +2,21 @@ import React from "react";
 import { ReactComponent as MoreIcon } from "../assets/union-vector.svg";
 
 interface ShowMoreProps {
-    ref: any;
+    dropdownRef: any;
     state: boolean;
     setState: Function;
 }
 
-export const ShowMore: React.FC<ShowMoreProps> = ({ ref, state, setState }) => {
+export const ShowMore: React.FC<ShowMoreProps> = ({
+    dropdownRef,
+    state,
+    setState,
+}) => {
     const dropdownActiveClass = state ? "is-active" : "";
 
     return (
         <div
+            data-testid="show-more-wrapper"
             className={`column dropdown is-right ${dropdownActiveClass} show-more-wrapper`}
         >
             <div className="dropdown-trigger">
@@ -27,7 +32,8 @@ export const ShowMore: React.FC<ShowMoreProps> = ({ ref, state, setState }) => {
             </div>
 
             <div
-                ref={ref}
+                data-testid="dropdown-menu-test"
+                ref={dropdownRef}
                 className="dropdown-menu"
                 id="dropdown-menu"
                 role="menu"

@@ -38,7 +38,11 @@ export const Header = () => {
 
             <Search hidden={isHidden} onClick={toggleSearchbar} />
 
-            <ShowMore ref={ref} state={isActive} setState={setIsActive} />
+            <ShowMore
+                dropdownRef={ref}
+                state={isActive}
+                setState={setIsActive}
+            />
         </header>
     );
 };
