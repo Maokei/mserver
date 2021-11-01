@@ -16,7 +16,7 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
 
     return (
         <div
-            data-testid="show-more-wrapper"
+            data-testid="dropdown-test"
             className={`column dropdown is-right ${dropdownActiveClass} show-more-wrapper`}
         >
             <div className="dropdown-trigger">
@@ -38,8 +38,16 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
                 id="dropdown-menu"
                 role="menu"
             >
-                <div className="dropdown-content">
-                    <div className="dropdown-item">Dropdown item</div>
+                <div
+                    data-testid="dropdown-content-test"
+                    className="dropdown-content"
+                >
+                    <div
+                        data-testid="dropdown-item-test"
+                        className="dropdown-item"
+                    >
+                        Dropdown item
+                    </div>
                     <div className="dropdown-item">Other dropdown item</div>
                     <div className="dropdown-item is-active">
                         Active dropdown item

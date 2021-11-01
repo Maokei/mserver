@@ -4,9 +4,18 @@ import { ReactComponent as SearchIcon } from "../assets/search-vector.svg";
 interface SearchProps {
     onClick: () => void;
     hidden: boolean;
+    value: string;
+    setKeywords: any;
+    onKeyDown: any;
 }
 
-export const Search: React.FC<SearchProps> = ({ onClick, hidden }) => {
+export const Search: React.FC<SearchProps> = ({
+    onClick,
+    hidden,
+    value,
+    setKeywords,
+    onKeyDown,
+}) => {
     const hiddenClass = hidden ? "hidden" : "";
 
     return (
@@ -26,6 +35,9 @@ export const Search: React.FC<SearchProps> = ({ onClick, hidden }) => {
                 className={`input is-large ${hiddenClass}`}
                 type="text"
                 placeholder="search"
+                value={value}
+                onChange={(e: any) => setKeywords(e.target.value)}
+                onKeyDown={onKeyDown}
             />
         </div>
     );

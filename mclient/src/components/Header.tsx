@@ -3,6 +3,12 @@ import { Search } from "./Search";
 import { ShowMore } from "./ShowMore";
 
 export const Header = () => {
+    const [inputTexts, setInputTexts] = React.useState<string>("");
+
+    const handleKeyDown = (e: any) => {
+        console.log(e.target.value);
+    };
+
     const [isHidden, setIsHidden] = React.useState<boolean>(true);
 
     const toggleSearchbar = () => {
@@ -36,7 +42,13 @@ export const Header = () => {
                 <BackIcon />
             </div> */}
 
-            <Search hidden={isHidden} onClick={toggleSearchbar} />
+            <Search
+                hidden={isHidden}
+                onClick={toggleSearchbar}
+                value={inputTexts}
+                setKeywords={setInputTexts}
+                onKeyDown={handleKeyDown}
+            />
 
             <ShowMore
                 dropdownRef={ref}
