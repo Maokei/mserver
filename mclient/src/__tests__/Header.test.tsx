@@ -1,10 +1,10 @@
 import React from "react";
+import * as ReactDOM from "react-dom";
 import {
     getByTestId,
-    // cleanup,
     fireEvent,
     render,
-    screen,
+    // screen,
     getAllByRole,
 } from "@testing-library/react";
 import renderer from "react-test-renderer";
@@ -12,12 +12,19 @@ import { shallow } from "enzyme";
 import { Header } from "../components/Header";
 import { ShowMore } from "../components/ShowMore";
 import { Search } from "../components/Search";
-import userEvent from "@testing-library/user-event";
+// import userEvent from "@testing-library/user-event";
 
-let container: any = null;
+let container: HTMLDivElement;
 
 beforeEach(() => {
-    container = render(<Header />).container;
+    container = document.createElement("div");
+    document.body.appendChild(container);
+    ReactDOM.render(<Header />, container);
+});
+
+afterEach(() => {
+    document.body.removeChild(container);
+    container.remove();
 });
 
 describe("Page should have a header component", () => {
@@ -42,8 +49,6 @@ describe("Page should have a header component", () => {
     });
 });
 
-// afterEach(cleanup);
-
 describe("Test input functions", () => {
     it("render input", () => {
         const tree = renderer
@@ -63,23 +68,65 @@ describe("Test input functions", () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it("call setKeywords when user type in the input", () => {
-        const setValue = jest.fn();
+    it("should render only one input that has a hidden class", () => {
+        const inputs = container.querySelectorAll("input");
+        expect(inputs).toHaveLength(1);
 
-        render(
+        const hiddenInpupClass = container.querySelector(".hidden");
+        expect(hiddenInpupClass).toBeInTheDocument();
+    });
+
+    it("should show input if button is clicked", () => {
+        const mockShowBtnClick = jest.fn();
+        const wrapper = shallow(
             <Search
                 value=""
                 onKeyDown={() => {}}
-                setKeywords={setValue}
-                onClick={function (): void {
-                    throw new Error("Function not implemented.");
-                }}
+                setKeywords={() => {}}
+                onClick={mockShowBtnClick}
                 hidden={false}
             />
         );
 
-        userEvent.type(screen.getByPlaceholderText("search"), "M");
-        expect(setValue).toHaveBeenCalledWith("M");
+        wrapper.find("button").at(0).simulate("click");
+        expect(mockShowBtnClick).toHaveBeenCalled();
+    });
+
+    it("render input with a hidden class", () => {
+        const tree = renderer
+            .create(
+                <Search
+                    value="something"
+                    onKeyDown={() => {}}
+                    setKeywords={() => {}}
+                    onClick={function (): void {
+                        throw new Error("Function not implemented.");
+                    }}
+                    hidden={true}
+                />
+            )
+            .toJSON();
+
+        expect(tree).toMatchSnapshot();
+    });
+
+    it("call setKeywords when input texts", () => {
+        const setKeywords = jest.fn();
+
+        render(
+            <Search
+                value="something"
+                onKeyDown={() => {}}
+                setKeywords={setKeywords}
+                onClick={function (): void {
+                    throw new Error("Function not implemented.");
+                }}
+                hidden={true}
+            />
+        );
+
+        // userEvent.type(screen.getByTestId("search-input"), "something");
+        // expect(setKeywords).toHaveValue("something");
     });
 });
 
