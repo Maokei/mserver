@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as SearchIcon } from "../assets/search-vector.svg";
+import { ReactComponent as SearchIcon } from "../../assets/search-vector.svg";
 
 interface SearchProps {
     onClick: () => void;

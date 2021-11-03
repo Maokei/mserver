@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as MoreIcon } from "../assets/union-vector.svg";
+import { ReactComponent as MoreIcon } from "../../assets/union-vector.svg";
 
 interface ShowMoreProps {
     dropdownRef: any;
