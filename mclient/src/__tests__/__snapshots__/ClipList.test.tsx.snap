@@ -1,7 +1,314 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Test ClipList component should render component 1`] = `
-<div>
-  ClipList
-</div>
+<section
+  className="clipList-wrapper"
+  data-testid="clipList-wrapper"
+>
+  <div
+    className="clipList clips"
+    data-testid="clips"
+  >
+    <div
+      className="card clip"
+    >
+      <div
+        className="card-content clip-content"
+      >
+        <div
+          className="media"
+        >
+          <div
+            className="media-left"
+          >
+            <figure
+              className="image is-48x48"
+            >
+              <img
+                alt="Placeholder"
+                src="https://bulma.io/images/placeholders/96x96.png"
+              />
+            </figure>
+          </div>
+          <div
+            className="media-content"
+          >
+            <p
+              className="title is-4"
+            >
+              Dark Imperium ch3
+            </p>
+            <p
+              className="subtitle is-6"
+            >
+              Guy Haley
+            </p>
+          </div>
+        </div>
+        <div
+          className="footer clip-footer"
+        >
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Like
+            </button>
+          </div>
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Play
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="card clip"
+    >
+      <div
+        className="card-content clip-content"
+      >
+        <div
+          className="media"
+        >
+          <div
+            className="media-left"
+          >
+            <figure
+              className="image is-48x48"
+            >
+              <img
+                alt="Placeholder"
+                src="https://bulma.io/images/placeholders/96x96.png"
+              />
+            </figure>
+          </div>
+          <div
+            className="media-content"
+          >
+            <p
+              className="title is-4"
+            >
+              Dark Imperium ch3
+            </p>
+            <p
+              className="subtitle is-6"
+            >
+              Guy Haley
+            </p>
+          </div>
+        </div>
+        <div
+          className="footer clip-footer"
+        >
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Like
+            </button>
+          </div>
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Play
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="card clip"
+    >
+      <div
+        className="card-content clip-content"
+      >
+        <div
+          className="media"
+        >
+          <div
+            className="media-left"
+          >
+            <figure
+              className="image is-48x48"
+            >
+              <img
+                alt="Placeholder"
+                src="https://bulma.io/images/placeholders/96x96.png"
+              />
+            </figure>
+          </div>
+          <div
+            className="media-content"
+          >
+            <p
+              className="title is-4"
+            >
+              Dark Imperium ch3
+            </p>
+            <p
+              className="subtitle is-6"
+            >
+              Guy Haley
+            </p>
+          </div>
+        </div>
+        <div
+          className="footer clip-footer"
+        >
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Like
+            </button>
+          </div>
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Play
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="card clip"
+    >
+      <div
+        className="card-content clip-content"
+      >
+        <div
+          className="media"
+        >
+          <div
+            className="media-left"
+          >
+            <figure
+              className="image is-48x48"
+            >
+              <img
+                alt="Placeholder"
+                src="https://bulma.io/images/placeholders/96x96.png"
+              />
+            </figure>
+          </div>
+          <div
+            className="media-content"
+          >
+            <p
+              className="title is-4"
+            >
+              Dark Imperium ch3
+            </p>
+            <p
+              className="subtitle is-6"
+            >
+              Guy Haley
+            </p>
+          </div>
+        </div>
+        <div
+          className="footer clip-footer"
+        >
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Like
+            </button>
+          </div>
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Play
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="card clip"
+    >
+      <div
+        className="card-content clip-content"
+      >
+        <div
+          className="media"
+        >
+          <div
+            className="media-left"
+          >
+            <figure
+              className="image is-48x48"
+            >
+              <img
+                alt="Placeholder"
+                src="https://bulma.io/images/placeholders/96x96.png"
+              />
+            </figure>
+          </div>
+          <div
+            className="media-content"
+          >
+            <p
+              className="title is-4"
+            >
+              Dark Imperium ch3
+            </p>
+            <p
+              className="subtitle is-6"
+            >
+              Guy Haley
+            </p>
+          </div>
+        </div>
+        <div
+          className="footer clip-footer"
+        >
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Like
+            </button>
+          </div>
+          <div
+            className="card-footer-item clip-footer-item"
+          >
+            <button
+              className="button is-dark"
+            >
+              Play
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 `;
