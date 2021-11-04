@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test MediaList component should render component 1`] = `
+<section
+  className="mediaList-wrapper"
+  data-testid="mediaList-wrapper"
+>
+  <div
+    className="divider"
+  />
+  <div
+    className="mediaList clips"
+    data-testid="mediaList"
+  >
+    <div
+      className="mediaList-item"
+    >
+      <figure
+        className="image is-48x48"
+      >
+        <img
+          alt="Dark Imperium ch1"
+          src="https://bulma.io/images/placeholders/96x96.png"
+        />
+      </figure>
+      <p
+        className="title is-4"
+      >
+        Dark Imperium ch1
+      </p>
+      <p
+        className="subtitle is-6"
+      >
+        Guy Haley
+      </p>
+      <button
+        className="button is-dark icon like-btn "
+      >
+        <i
+          className="fas fa-heart"
+        />
+      </button>
+      <button
+        className="button is-dark icon play-btn play-btn-active"
+      >
+        <i
+          className="fas fa-play"
+        />
+      </button>
+    </div>
+    <div
+      className="mediaList-item"
+    >
+      <figure
+        className="image is-48x48"
+      >
+        <img
+          alt="Dark Imperium ch2"
+          src="https://bulma.io/images/placeholders/96x96.png"
+        />
+      </figure>
+      <p
+        className="title is-4"
+      >
+        Dark Imperium ch2
+      </p>
+      <p
+        className="subtitle is-6"
+      >
+        Guy Haley
+      </p>
+      <button
+        className="button is-dark icon like-btn "
+      >
+        <i
+          className="fas fa-heart"
+        />
+      </button>
+      <button
+        className="button is-dark icon play-btn play-btn-active"
+      >
+        <i
+          className="fas fa-play"
+        />
+      </button>
+    </div>
+    <div
+      className="mediaList-item"
+    >
+      <figure
+        className="image is-48x48"
+      >
+        <img
+          alt="Dark Imperium ch3"
+          src="https://bulma.io/images/placeholders/96x96.png"
+        />
+      </figure>
+      <p
+        className="title is-4"
+      >
+        Dark Imperium ch3
+      </p>
+      <p
+        className="subtitle is-6"
+      >
+        Guy Haley
+      </p>
+      <button
+        className="button is-dark icon like-btn "
+      >
+        <i
+          className="fas fa-heart"
+        />
+      </button>
+      <button
+        className="button is-dark icon play-btn play-btn-active"
+      >
+        <i
+          className="fas fa-play"
+        />
+      </button>
+    </div>
+    <div
+      className="mediaList-item"
+    >
+      <figure
+        className="image is-48x48"
+      >
+        <img
+          alt="Dark Imperium ch4"
+          src="https://bulma.io/images/placeholders/96x96.png"
+        />
+      </figure>
+      <p
+        className="title is-4"
+      >
+        Dark Imperium ch4
+      </p>
+      <p
+        className="subtitle is-6"
+      >
+        Guy Haley
+      </p>
+      <button
+        className="button is-dark icon like-btn "
+      >
+        <i
+          className="fas fa-heart"
+        />
+      </button>
+      <button
+        className="button is-dark icon play-btn play-btn-active"
+      >
+        <i
+          className="fas fa-play"
+        />
+      </button>
+    </div>
+    <div
+      className="mediaList-item"
+    >
+      <figure
+        className="image is-48x48"
+      >
+        <img
+          alt="Dark Imperium ch5"
+          src="https://bulma.io/images/placeholders/96x96.png"
+        />
+      </figure>
+      <p
+        className="title is-4"
+      >
+        Dark Imperium ch5
+      </p>
+      <p
+        className="subtitle is-6"
+      >
+        Guy Haley
+      </p>
+      <button
+        className="button is-dark icon like-btn "
+      >
+        <i
+          className="fas fa-heart"
+        />
+      </button>
+      <button
+        className="button is-dark icon play-btn play-btn-active"
+      >
+        <i
+          className="fas fa-play"
+        />
+      </button>
+    </div>
+  </div>
+</section>
+`;

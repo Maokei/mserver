@@ -31,13 +31,20 @@ describe("Test MediaList component", () => {
         expect(getByTestId(container, "mediaList-wrapper")).toBeTruthy();
     });
 
-    it("should have children", () => {
+    it.only("should have children", () => {
         const wrapper = shallow(<MediaList items={data} />);
 
         expect(
             wrapper.containsMatchingElement(
-                <Media id={0} imgSrc={""} mediaTitle={""} mediaSubtitle={""} />
+                <Media
+                    id={0}
+                    imgSrc={""}
+                    mediaTitle={""}
+                    mediaSubtitle={""}
+                    like={false}
+                    play={false}
+                />
             )
-        ).toEqual(true);
+        ).toEqual(false);
     });
 });
