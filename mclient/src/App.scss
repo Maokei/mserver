@@ -4,6 +4,7 @@
 :root {
     --color-dark: #2a2e34;
     --color-dark-lighten: lighten(var(var(--color-dark)));
+    --color-grey: #727579;
 }
 
 .app {
@@ -13,7 +14,7 @@
 .main {
     position: relative;
     width: 100%;
-    height: auto;
+    height: calc(100vh - 137px);
     left: 0px;
 
     background: linear-gradient(146.6deg, #1f2328 12.49%, #17191d 81%);
