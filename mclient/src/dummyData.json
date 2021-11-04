@@ -3,30 +3,40 @@
         "id": 1,
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch1",
-        "mediaSubtitle": "Guy Haley"
+        "mediaSubtitle": "Guy Haley",
+        "like": true,
+        "play": false
     },
     {
         "id": 2,
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch2",
-        "mediaSubtitle": "Guy Haley"
+        "mediaSubtitle": "Guy Haley",
+        "like": true,
+        "play": false
     },
     {
         "id": 3,
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch3",
-        "mediaSubtitle": "Guy Haley"
+        "mediaSubtitle": "Guy Haley",
+        "like": true,
+        "play": true
     },
     {
         "id": 4,
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch4",
-        "mediaSubtitle": "Guy Haley"
+        "mediaSubtitle": "Guy Haley",
+        "like": false,
+        "play": false
     },
     {
         "id": 5,
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch5",
-        "mediaSubtitle": "Guy Haley"
+        "mediaSubtitle": "Guy Haley",
+        "like": false,
+        "play": false
     }
 ]

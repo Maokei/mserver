@@ -17,6 +17,9 @@ export const MediaList: React.FC<MediaListProps> = ({ items }) => {
                         imgSrc={item.imgSrc}
                         mediaTitle={item.mediaTitle}
                         mediaSubtitle={item.mediaSubtitle}
+                        like={item.like}
+                        play={item.play}
+                        // onPlayClick={handlePlayClick}
                     />
                 ))}
             </div>

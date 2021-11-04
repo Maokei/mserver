@@ -19,7 +19,7 @@
 
         &-item {
             background-color: transparent;
-            color: #999999;
+            color: var(--subtitle);
             border-radius: 0;
             box-shadow: none;
             border-top: none;
@@ -42,6 +42,7 @@
 
         .title {
             grid-column: 2 / 4;
+            color: var(--title);
         }
 
         .subtitle {
@@ -56,6 +57,10 @@
 
         .like-btn {
             grid-column: 11 / 12;
+
+            &-active {
+                color: red;
+            }
         }
     }
 }
