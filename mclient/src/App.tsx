@@ -9,7 +9,7 @@ function App() {
         <div className="app has-background-dark">
             <Header />
             <main className="main">
-                <MediaList items={data} />
+                {!data ? "There is nothing yet" : <MediaList items={data} />}
             </main>
         </div>
     );

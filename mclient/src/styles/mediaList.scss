@@ -51,7 +51,8 @@
         }
 
         .like-btn,
-        .play-btn {
+        .play-btn,
+        .pause-btn {
             color: var(--color-grey);
         }
 
@@ -60,6 +61,13 @@
 
             &-active {
                 color: red;
+            }
+        }
+
+        .play-btn,
+        .pause-btn {
+            &-active {
+                color: var(--color-orange);
             }
         }
     }

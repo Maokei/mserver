@@ -10,10 +10,11 @@
     border: 2px solid;
     border-image-source: linear-gradient(
         143.75deg,
-        #41464b 4.51%,
-        #191c21 82.12%
+        rgba(65, 70, 75, 1),
+        rgba(25, 28, 33, 1)
     );
-    box-shadow: 8px 8px 20px 0px #0000005a, -8px -8px 20px 0px #7a86971a;
+    box-shadow: 8px 8px 20px 0px rgba(0, 0, 0, 0.35),
+        -8px -8px 20px 0px rgba(122, 134, 151, 0.1);
 }
 
 .search-wrapper {
