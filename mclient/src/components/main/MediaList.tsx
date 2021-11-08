@@ -2,20 +2,14 @@ import * as React from "react";
 import { Media, MediaProps } from "./Media";
 
 interface MediaListProps {
-    // items: MediaProps[];
-    items: any[];
+    items: MediaProps[];
+    handleToggle: Function;
 }
 
-export const MediaList: React.FC<MediaListProps> = ({ items }) => {
-    const [isLiked, setIsLiked] = React.useState<boolean>(false);
-    const [currentItem, setCurrentItem] = React.useState<number>(0);
-
-    const handleLikeColor = (likeId: number) => {
-        setCurrentItem(likeId);
-        setIsLiked(!isLiked);
-        console.log(likeId);
-    };
-
+export const MediaList: React.FC<MediaListProps> = ({
+    items,
+    handleToggle,
+}) => {
     return (
         <section data-testid="mediaList-wrapper" className="mediaList-wrapper">
             <div className="divider"></div>
@@ -28,10 +22,10 @@ export const MediaList: React.FC<MediaListProps> = ({ items }) => {
                         mediaTitle={item.mediaTitle}
                         mediaSubtitle={item.mediaSubtitle}
                         playState={item.play}
-                        likeState={isLiked}
-                        likeId={item.id}
-                        activeItem={currentItem}
-                        handleClick={handleLikeColor}
+                        likeState={item.like}
+                        handleToggle={handleToggle}
+                        play={false}
+                        like={false}
                     />
                 ))}
             </div>

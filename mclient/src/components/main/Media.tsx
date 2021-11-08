@@ -5,11 +5,11 @@ export interface MediaProps {
     imgSrc: string;
     mediaTitle: string;
     mediaSubtitle: string;
+    play: boolean;
+    like: boolean;
     playState: boolean;
     likeState: boolean;
-    likeId: number;
-    activeItem: any;
-    handleClick: any;
+    handleToggle: Function;
 }
 
 export const Media: React.FC<MediaProps> = ({
@@ -19,13 +19,14 @@ export const Media: React.FC<MediaProps> = ({
     mediaSubtitle,
     playState,
     likeState,
-    handleClick,
-    likeId,
-    activeItem,
+    handleToggle,
 }) => {
-    const likeBtnActive = likeState ? "like-btn-active" : "";
-    activeItem = 0;
     const playBtnActive = playState ? "play-btn-active" : "";
+
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        handleToggle(e.currentTarget.id);
+    };
 
     return (
         <div className="mediaList-item">
@@ -35,8 +36,11 @@ export const Media: React.FC<MediaProps> = ({
             <p className="title is-4">{mediaTitle}</p>
             <p className="subtitle is-6">{mediaSubtitle}</p>
             <button
-                className={`button is-dark icon like-btn ${likeBtnActive}`}
-                onClick={() => handleClick(likeId)}
+                id={id.toString()}
+                className={`button is-dark icon like-btn ${
+                    likeState ? "like-btn-active" : ""
+                }`}
+                onClick={handleClick}
             >
                 <i className="fas fa-heart"></i>
             </button>
