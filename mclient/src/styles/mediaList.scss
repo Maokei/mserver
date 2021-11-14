@@ -67,7 +67,8 @@
         .play-btn,
         .pause-btn {
             &-active {
-                color: var(--color-orange);
+                background: var(--color-orange);
+                color: whitesmoke;
             }
         }
     }

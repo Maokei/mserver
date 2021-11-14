@@ -1,14 +1,14 @@
 import * as React from "react";
-import { Media, MediaProps } from "./Media";
+import { Media, SongItem } from "./Media";
 
-interface MediaListProps {
-    items: MediaProps[];
-    handleToggle: Function;
+interface MediaPropsList {
+    items: SongItem[];
+    handleToggleLike: Function;
 }
 
-export const MediaList: React.FC<MediaListProps> = ({
+export const MediaList: React.FC<MediaPropsList> = ({
     items,
-    handleToggle,
+    handleToggleLike,
 }) => {
     return (
         <section data-testid="mediaList-wrapper" className="mediaList-wrapper">
@@ -17,15 +17,8 @@ export const MediaList: React.FC<MediaListProps> = ({
                 {items.map((item) => (
                     <Media
                         key={item.id}
-                        id={item.id}
-                        imgSrc={item.imgSrc}
-                        mediaTitle={item.mediaTitle}
-                        mediaSubtitle={item.mediaSubtitle}
-                        playState={item.play}
-                        likeState={item.like}
-                        handleToggle={handleToggle}
-                        play={false}
-                        like={false}
+                        songItem={item}
+                        handleToggleLike={handleToggleLike}
                     />
                 ))}
             </div>

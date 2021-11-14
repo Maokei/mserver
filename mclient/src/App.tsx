@@ -1,13 +1,14 @@
 import React from "react";
 import { Header } from "./components/header/Header";
 import { MediaList } from "./components/main/MediaList";
+import { SongItem } from "./components/main/Media";
 import "./App.scss";
 import dummyData from "./dummyData.json";
 
 function App() {
-    const [data, setData] = React.useState(dummyData);
+    const [data, setData] = React.useState<SongItem[]>(dummyData);
 
-    const handleToggle = (id: number) => {
+    const handleToggleLike = (id: number) => {
         const mapped = data.map((item) => {
             return item.id === Number(id)
                 ? { ...item, like: !item.like }
@@ -23,8 +24,10 @@ function App() {
                 {!data ? (
                     "There is nothing yet"
                 ) : (
-                    // @ts-ignore
-                    <MediaList items={data} handleToggle={handleToggle} />
+                    <MediaList
+                        items={data}
+                        handleToggleLike={handleToggleLike}
+                    />
                 )}
             </main>
         </div>
