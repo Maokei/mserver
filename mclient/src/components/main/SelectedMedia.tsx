@@ -18,25 +18,38 @@ export const SelectedMedia = () => {
                 <p id="timestamp">03:54</p>
             </div>
 
-            <div data-testid="now-playing" className="now-playing-wrapper">
-                <figure className="image is-128x128">
+            <div
+                data-testid="now-playing"
+                className="medium now-playing-wrapper"
+            >
+                <figure className="image is-128x128 medium-art">
                     <img
                         className="is-rounded"
                         src="https://bulma.io/images/placeholders/96x96.png"
                         alt="warhammer ch3"
                     />
                 </figure>
-                <p className="subtitle is-6">warhammer ch3</p>
-                <p className="title is-4">Dark Imperioum</p>
-                <p className="subtitle is-6">Guy Hayley</p>
+                <p className="subtitle is-6 medium-album">warhammer ch3</p>
+                <p className="title is-4 medium-title">Dark Imperioum</p>
+                <p className="subtitle is-6 medium-artist">Guy Hayley</p>
             </div>
 
             <div data-testid="button-group" className="buttons-wrapper">
-                <button className="button">Prev</button>
-                <button className="button">Play</button>
-                <button className="button">Next</button>
-                <button className="button">Shuffle</button>
-                <button className="button">Volume</button>
+                <button className="button is-dark icon icon-previous">
+                    <i className="fas fa-caret-left"></i>
+                </button>
+                <button className="button is-dark icon icon-play">
+                    <i className="fas fa-play"></i>
+                </button>
+                <button className="button is-dark icon icon-next">
+                    <i className="fas fa-caret-right"></i>
+                </button>
+                <button className="button is-dark icon icon-shuffle">
+                    <i className="fas fa-random"></i>
+                </button>
+                <button className="button is-dark icon icon-volume">
+                    <i className="fas fa-volume-up"></i>
+                </button>
             </div>
         </section>
     );

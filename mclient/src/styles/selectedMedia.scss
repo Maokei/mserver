@@ -1,13 +1,81 @@
 .selectedMedia-wrapper {
     padding: 0 3.5vw;
+    display: grid;
+    grid-template-areas:
+        "progressbar progressbar progressbar progressbar"
+        "now-playing button-group button-group button-group";
 }
 
 .progress-wrapper {
+    grid-area: progressbar;
     display: flex;
     align-items: center;
     gap: 1em;
 
     #timestamp {
         margin-bottom: 1.5rem;
+    }
+}
+
+.now-playing-wrapper {
+    grid-area: now-playing;
+
+    display: grid;
+    grid-template-areas:
+        "medium-art ."
+        "medium-art medium-album"
+        "medium-art medium-title"
+        "medium-art medium-artist"
+        "medium-art .";
+
+    p {
+        text-align: center;
+    }
+}
+
+.medium {
+    &-art {
+        grid-area: medium-art;
+    }
+
+    &-album {
+        grid-area: medium-album;
+    }
+
+    &-title {
+        grid-area: medium-title;
+    }
+
+    &-artist {
+        grid-area: medium-artist;
+    }
+}
+
+.buttons-wrapper {
+    padding-left: 8vw;
+    grid-area: button-group;
+
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    align-self: center;
+
+    .icon {
+        &-play,
+        &-previous,
+        &-next,
+        &-shuffle,
+        &-volume {
+            justify-self: center;
+            align-self: center;
+        }
+
+        &-play {
+            width: 75px;
+            height: 75px;
+        }
+
+        &-shuffle {
+            grid-column: 9 / span 1;
+        }
     }
 }
