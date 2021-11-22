@@ -1,0 +1,13 @@
+.selectedMedia-wrapper {
+    padding: 0 3.5vw;
+}
+
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    #timestamp {
+        margin-bottom: 1.5rem;
+    }
+}

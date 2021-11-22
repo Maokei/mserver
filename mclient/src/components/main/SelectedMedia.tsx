@@ -2,15 +2,21 @@ import React from "react";
 
 export const SelectedMedia = () => {
     return (
-        <div className="selectedMedia-wrapper">
-            <progress
-                data-testid="progressbar"
-                className="progress is-small now-playing"
-                value="20"
-                max="100"
-            >
-                20%
-            </progress>
+        <section className="selectedMedia-wrapper">
+            <div className="content progress-wrapper">
+                <p id="timestamp">00:48</p>
+
+                <progress
+                    data-testid="progressbar"
+                    className="progress is-small"
+                    value="20"
+                    max="100"
+                >
+                    20%
+                </progress>
+
+                <p id="timestamp">03:54</p>
+            </div>
 
             <div data-testid="now-playing" className="now-playing-wrapper">
                 <figure className="image is-128x128">
@@ -32,6 +38,6 @@ export const SelectedMedia = () => {
                 <button className="button">Shuffle</button>
                 <button className="button">Volume</button>
             </div>
-        </div>
+        </section>
     );
 };
