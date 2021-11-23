@@ -84,6 +84,7 @@
 
     .icon {
         &-play,
+        &-pause,
         &-previous,
         &-next,
         &-shuffle,
@@ -92,7 +93,8 @@
             align-self: center;
         }
 
-        &-play {
+        &-play,
+        &-pause {
             width: 75px;
             height: 75px;
             background-color: var(--color-orange);
