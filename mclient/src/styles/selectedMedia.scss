@@ -15,6 +15,14 @@
     #timestamp {
         margin-bottom: 1.5rem;
     }
+
+    #progressbar {
+        height: 5px;
+    }
+
+    .is-orange::-webkit-progress-value {
+        background: linear-gradient(90deg, #ff611a 0%, #cb340d 82.68%);
+    }
 }
 
 .now-playing-wrapper {
@@ -36,6 +44,18 @@
 .medium {
     &-art {
         grid-area: medium-art;
+        position: inherit;
+        width: 128px;
+        height: 128px;
+        border: 2px solid;
+        border-image-source: linear-gradient(
+            141.17deg,
+            #41464b 16.39%,
+            #1a1b1f 86.27%
+        );
+        border-radius: 100%;
+        box-shadow: 8px 8px 20px 0px rgba(0, 0, 0, 0.3),
+            -8px -8px 20px 0px rgba(122, 134, 151, 0.15);
     }
 
     &-album {
@@ -44,10 +64,13 @@
 
     &-title {
         grid-area: medium-title;
+        color: var(--color-orange);
+        filter: blur(0.75px);
     }
 
     &-artist {
         grid-area: medium-artist;
+        color: var(--color-grey);
     }
 }
 
@@ -72,6 +95,7 @@
         &-play {
             width: 75px;
             height: 75px;
+            background-color: var(--color-orange);
         }
 
         &-shuffle {
