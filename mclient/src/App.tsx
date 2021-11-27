@@ -19,6 +19,10 @@ function App() {
         setData(mapped);
     };
 
+    const handlePlay = () => {
+        console.log("play media...");
+    };
+
     return (
         <div className="app has-background-dark">
             <Header />
@@ -36,7 +40,7 @@ function App() {
                             items={data}
                             handleToggleLike={handleToggleLike}
                         />
-                        <SelectedMedia />
+                        <SelectedMedia onClickPlay={handlePlay} />
                     </>
                 )}
             </main>

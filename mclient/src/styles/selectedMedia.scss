@@ -98,6 +98,10 @@
             width: 75px;
             height: 75px;
             background-color: var(--color-orange);
+
+            &:hover {
+                background-color: lighten(#ea5110, 5%);
+            }
         }
 
         &-shuffle {

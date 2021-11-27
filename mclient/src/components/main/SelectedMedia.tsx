@@ -3,14 +3,18 @@ import { MediaButtons } from "./MediaButtons";
 import { MediaPlaying } from "./MediaPlaying";
 import { MediaProgress } from "./MediaProgress";
 
-export const SelectedMedia = () => {
+interface ButtonGroupProps {
+    onClickPlay: Function;
+}
+
+export const SelectedMedia: React.FC<ButtonGroupProps> = ({ onClickPlay }) => {
     return (
         <section className="selectedMedia-wrapper">
             <MediaProgress />
 
             <MediaPlaying />
 
-            <MediaButtons />
+            <MediaButtons onClickPlay={onClickPlay} />
         </section>
     );
 };
