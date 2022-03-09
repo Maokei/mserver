@@ -4,7 +4,7 @@ updates:
     directory: "/mserver"
     schedule:
       interval: "weekly"
-  - package-ecosystem:
+  - package-ecosystem: "npm"
     directory: "/mclient"
     schedule:
       interval: "weekly"
