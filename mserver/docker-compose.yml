@@ -4,6 +4,11 @@ services:
   app:
     build: .
     restart: always
+    environment:
+      #- SPRING_DATA_MONGODB_HOST=mongo_db
+      #- SPRING_DATA_MONGODB_PORT=27017
+      #- SPRING_DATA_MONGODB_DATABASE=testdb
+      - SPRING_DATA_MONGODB_URI=mongodb://mongo_db:27017/testdb
     ports:
       - 8080:8080
     networks:
