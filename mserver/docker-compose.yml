@@ -12,10 +12,10 @@ services:
       - SPRING_DATA_MONGODB_URI=mongodb://mongo_db:27017/testdb
     ports:
       - 8080:8080
-    networks:
-      - my-network
     depends_on:
       - mongo_db
+    networks:
+      - my-network
   mongo_db:
     image: mongo:latest
     container_name: mserver-mongodb
