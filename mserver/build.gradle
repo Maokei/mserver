@@ -1,9 +1,9 @@
 plugins {
-	id 'org.springframework.boot' version '2.5.5'
+	id 'org.springframework.boot' version '2.6.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id 'org.springframework.experimental.aot' version '0.10.4'
-	id 'org.graalvm.buildtools.native' version '0.9.3'
+	id 'org.springframework.experimental.aot' version '0.11.3'
+	id 'org.graalvm.buildtools.native' version '0.9.10'
 }
 
 group = 'se.maokei'
@@ -22,16 +22,24 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'io.jsonwebtoken:jjwt:0.9.1'
-	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.5.11'
-	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.11'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'com.auth0:java-jwt:3.18.3'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+
+	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.6'
+	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.6'
 	implementation 'commons-io:commons-io:2.11.0'
 	compileOnly 'org.projectlombok:lombok'
-	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'
+	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+
+	testImplementation "org.testcontainers:mongodb:1.16.3"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
@@ -46,10 +54,10 @@ bootBuildImage {
 	environment = ['BP_NATIVE_IMAGE': 'true']
 }
 
-nativeBuild {
-	classpath processAotResources.outputs, compileAotJava.outputs
-}
+//nativeBuild {
+//	classpath processAotResources.outputs, compileAotJava.outputs
+//}
 
-nativeTest {
-	classpath processAotTestResources.outputs, compileAotTestJava.outputs
-}
+//nativeTest {
+//	classpath processAotTestResources.outputs, compileAotTestJava.outputs
+//}
