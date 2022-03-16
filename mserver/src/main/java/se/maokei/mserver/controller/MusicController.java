@@ -1,4 +1,4 @@
 package se.maokei.mserver.controller;
 
-public class UserController {
+public class MusicController {
 }
