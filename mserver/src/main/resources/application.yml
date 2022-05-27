@@ -21,17 +21,24 @@ spring:
     active:
       on-profile:
         - dev
+  mongodb:
+    embedded:
+      version: 4.4.1
 ---
 spring:
   config:
     activate:
       on-profile:
         - test
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/testdb
+  #if set embedded mongo does not work
+  #data:
+  #  mongodb:
+  #    uri: mongodb://localhost:27017/testdb
     #  authentication-database: admin
     #  username: admin
     #  password: admin
     #  database: testdb
     #  port: 27017
+  mongodb:
+    embedded:
+      version: 4.4.1
