@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -22,6 +23,17 @@ import java.security.Principal;
 @RestController
 @Tag(name = "Test API", description = "API for testing purpose")
 public class HelloWorld {
+    @GetMapping("/ping")
+    public Mono<String> ping(Mono<Principal> principal) {
+        return Mono.just("alive");
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/protected")
+    public Mono<String> protectedPing(Mono<Principal> principal) {
+        return Mono.just("alive");
+    }
+
     @GetMapping("/hello")
     @Operation(description = "Hello world, returns a hello to logged in user")
     public Mono<String> greet(Mono<Principal> principal) {
