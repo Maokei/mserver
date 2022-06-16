@@ -50,11 +50,11 @@ export const Header = () => {
                 onKeyDown={handleKeyDown}
             />
 
-            <ShowMore
+            {/* <ShowMore
                 dropdownRef={ref}
                 state={isActive}
                 setState={setIsActive}
-            />
+            /> */}
         </header>
     );
 };

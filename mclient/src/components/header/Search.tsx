@@ -28,7 +28,7 @@ export const Search: React.FC<SearchProps> = ({
                 className="button icon search-btn"
                 onClick={onClick}
             >
-                <SearchIcon />
+                {/* <SearchIcon /> */}
             </button>
             <input
                 data-testid="search-input"
