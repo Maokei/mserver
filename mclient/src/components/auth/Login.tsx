@@ -1,13 +1,14 @@
 import * as React from "react";
-// import { useNavigate } from "react-router-dom";
 import { ChangeEvent } from "react";
 
 // TODO
 // error handling for submitting form
 
-const Login = () => {
-	// const navigate = useNavigate();
+export interface formProps {
+	handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+}
 
+const Login: React.FC<formProps> = ({ handleSubmit }) => {
 	const [username, setUsername] = React.useState("");
 	const [password, setPassword] = React.useState("");
 
@@ -17,12 +18,6 @@ const Login = () => {
 			: "submit-btn";
 
 	const submitDisabled = () => username.length < 3 || password.length < 3;
-
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		// redirect to /
-		// navigate("/");
-	};
 
 	return (
 		<div className="form-wrapper">

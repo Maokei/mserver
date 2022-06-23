@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/auth/Login";
 import { Header } from "./components/header/Header";
@@ -10,6 +10,8 @@ import dummyData from "./dummyData.json";
 import { SelectedMedia } from "./components/main/SelectedMedia";
 
 function App() {
+	const navigate = useNavigate();
+
 	const [data, setData] = React.useState<SongItem[]>(dummyData);
 	const hasSelected = React.useState<boolean>(false);
 
@@ -24,6 +26,12 @@ function App() {
 
 	const handlePlay = () => {
 		console.log("play media...");
+	};
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		// redirect to /
+		navigate("/");
 	};
 
 	return (
@@ -60,7 +68,10 @@ function App() {
 						}
 					/>
 				</Route>
-				<Route path="login" element={<Login />} />
+				<Route
+					path="login"
+					element={<Login handleSubmit={handleSubmit} />}
+				/>
 			</Routes>
 		</div>
 	);
