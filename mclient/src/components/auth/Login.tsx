@@ -1,12 +1,12 @@
 import * as React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { ChangeEvent } from "react";
 
 // TODO
 // error handling for submitting form
 
 const Login = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
 	const [username, setUsername] = React.useState("");
 	const [password, setPassword] = React.useState("");
@@ -21,7 +21,7 @@ const Login = () => {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		// redirect to /
-		navigate("/");
+		// navigate("/");
 	};
 
 	return (
