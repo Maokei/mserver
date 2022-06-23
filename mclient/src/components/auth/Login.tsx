@@ -1,16 +1,27 @@
 import * as React from "react";
+import { useNavigate } from "react-router-dom";
 import { ChangeEvent } from "react";
 
-// TODO error handling for submitting form
+// TODO
+// error handling for submitting form
+
 const Login = () => {
+	const navigate = useNavigate();
+
 	const [username, setUsername] = React.useState("");
 	const [password, setPassword] = React.useState("");
 
-	const submitDisabled = () => username.length === 0 || password.length === 0;
+	const submitBtnClasses =
+		username.length < 3 || password.length < 3
+			? "submit-btn btn-disabled"
+			: "submit-btn";
+
+	const submitDisabled = () => username.length < 3 || password.length < 3;
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		console.log("Submit button clicked!");
+		// redirect to /
+		navigate("/");
 	};
 
 	return (
@@ -37,6 +48,7 @@ const Login = () => {
 				<button
 					type="submit"
 					data-testid="submitButton"
+					className={submitBtnClasses}
 					disabled={submitDisabled()}
 				>
 					Login

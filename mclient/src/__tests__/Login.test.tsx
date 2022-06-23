@@ -1,29 +1,31 @@
-// @ts-nocheck
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+
 import Login from "../components/auth/Login";
 
-test("submit username and password", async () => {
-	// ARRANGE
-	const username = "testuser";
-	const password = "testpw123";
-	const mockLogin = jest.fn();
+describe("input", () => {
+	it("accepts user typing", async () => {
+		render(
+			<input
+				type="text"
+				data-testid="username"
+				// aria-label="blah"
+				name="username"
+			/>
+		);
+		// const input = screen.getByLabelText("blah");
+		const input = screen.getByTestId("username");
+		await userEvent.type(input, "Hello,{enter}World!");
+	});
+});
 
-	render(<Login onSumit={mockLogin(username, password)} />);
+it("form can be submitted & input field is modifiable", () => {
+	const mockSubmit = jest.fn();
+	render(<Login />);
 
-	const usernameInput = screen.getByPlaceholderText("Username");
-	userEvent.type(usernameInput, "testuser");
-	const passwordInput = screen.getByPlaceholderText("Password");
-	userEvent.type(passwordInput, "testpw123");
-	const loginButton = screen.getByTestId("submitButton");
-	// expect(loginButton).not.toBeDisabled();
-	expect(loginButton).toBeDisabled();
+	// fireEvent.change(queryByTestId('input'), { target: { value: 'username'}})
+	screen.queryByTestId("form");
 
-	// ACT
-	userEvent.click(loginButton);
-
-	// ASSERT
-	await expect(mockLogin).toHaveBeenCalled();
-	await expect(mockLogin).toHaveBeenCalledTimes(1);
-	await expect(mockLogin).toHaveBeenCalledWith("testuser", "testpw123");
+	expect(mockSubmit).toHaveBeenCalled();
 });

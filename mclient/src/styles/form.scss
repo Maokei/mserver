@@ -59,7 +59,7 @@
 		margin: 15px -10px;
 	}
 
-	button {
+	.submit-btn {
 		cursor: pointer;
 		color: #fff;
 		font-size: 16px;
@@ -77,6 +77,12 @@
 			background-color: var(--color-dark-orange);
 			color: #fff;
 		}
+	}
+
+	.btn-disabled {
+		pointer-events: none;
+		background-color: var(--color-grey);
+		color: var(--subtitle);
 	}
 }
 
