@@ -18,6 +18,8 @@ export const Header = () => {
 	const ref = React.useRef<HTMLDivElement>(null);
 	const [isActive, setIsActive] = React.useState<boolean>(false);
 
+	// TODO: close dropdown after clicking on any item
+
 	React.useEffect(() => {
 		const checkIfClickedOutside = (e: MouseEvent) => {
 			if (

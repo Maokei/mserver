@@ -28,6 +28,7 @@ function App() {
 		console.log("play media...");
 	};
 
+	// TODO: hardcode token to test authentication
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		// redirect to /

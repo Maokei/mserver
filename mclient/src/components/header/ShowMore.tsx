@@ -53,9 +53,11 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
 						data-testid="dropdown-item-test"
 						className="dropdown-item"
 					>
+						{/* TODO: if authenticated, show Logout */}
 						<Link to={"/login"}>Login</Link>
 					</div>
 					<div className="dropdown-item">
+						{/* TODO: if authenticated, show Logout */}
 						<Link to={"/signup"}>Sign Up</Link>
 					</div>
 				</div>

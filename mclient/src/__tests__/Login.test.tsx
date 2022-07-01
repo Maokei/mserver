@@ -12,13 +12,13 @@ describe("input", () => {
 });
 
 it("input value", () => {
-	render(<Login onSubmit={() => console.log("login")} />);
+	render(<Login handleSubmit={() => console.log("login")} />);
 	const passwordInput = screen.getByTestId("password");
 	userEvent.type(passwordInput, "12345");
 });
 
 it("button state in form", () => {
-	render(<Login onSubmit={() => console.log("login")} />);
+	render(<Login handleSubmit={() => console.log("login")} />);
 	const button = screen.getByTestId("submitButton");
 	expect(button).toBeDisabled();
 
