@@ -86,6 +86,11 @@
 	}
 }
 
+.message {
+	background: transparent;
+	color: var(--color-orange);
+}
+
 @keyframes wawes {
 	from {
 		transform: rotate(0);

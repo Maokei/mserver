@@ -47,18 +47,24 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
 						data-testid="dropdown-item-test"
 						className="dropdown-item"
 					>
-						<Link to={"/"}>Home</Link>
+						<Link to={"/"} onClick={() => setState(!state)}>
+							Home
+						</Link>
 					</div>
 					<div
 						data-testid="dropdown-item-test"
 						className="dropdown-item"
 					>
 						{/* TODO: if authenticated, show Logout */}
-						<Link to={"/login"}>Login</Link>
+						<Link to={"/login"} onClick={() => setState(!state)}>
+							Login
+						</Link>
 					</div>
 					<div className="dropdown-item">
 						{/* TODO: if authenticated, show Logout */}
-						<Link to={"/signup"}>Sign Up</Link>
+						<Link to={"/signup"} onClick={() => setState(!state)}>
+							Sign Up
+						</Link>
 					</div>
 				</div>
 			</div>

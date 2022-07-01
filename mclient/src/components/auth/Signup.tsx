@@ -1,41 +1,44 @@
 import * as React from "react";
 import { ChangeEvent } from "react";
+import { FormProps } from "./Login";
 
-// TODO
-// error handling for submitting form
-
-export interface FormProps {
-	username: string;
-	password: string;
-	setUsername: Function;
-	setPassword: Function;
-}
-
-interface LoginProps {
+interface SignupProps extends FormProps {
+	email: string;
 	message: string;
-	handleLoginSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+	setEmail: Function;
+	handleSignupSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-type LoginType = FormProps & LoginProps;
-
-const Login: React.FC<LoginType> = ({
+const Signup: React.FC<SignupProps> = ({
+	email,
+	setEmail,
 	username,
 	setUsername,
 	password,
 	setPassword,
 	message,
-	handleLoginSubmit,
+	handleSignupSubmit,
 }) => {
 	const submitBtnClasses =
-		username.length < 3 || password.length < 3
+		email.length < 3 || username.length < 3 || password.length < 3
 			? "submit-btn btn-disabled"
 			: "submit-btn";
 
-	const submitDisabled = () => username.length < 3 || password.length < 3;
+	const submitDisabled = () =>
+		username.length < 3 || username.length < 3 || password.length < 3;
 
 	return (
 		<div className="form-wrapper">
-			<form className="login" onSubmit={handleLoginSubmit}>
+			<form className="login" onSubmit={handleSignupSubmit}>
+				<input
+					type="text"
+					data-testid="email"
+					placeholder="email@email.com"
+					value={email}
+					onChange={(e: ChangeEvent<HTMLInputElement>) =>
+						setEmail(e.target.value)
+					}
+				/>
 				<input
 					type="text"
 					data-testid="username"
@@ -61,11 +64,11 @@ const Login: React.FC<LoginType> = ({
 					className={submitBtnClasses}
 					disabled={submitDisabled()}
 				>
-					Login
+					Sign Up
 				</button>
 			</form>
 		</div>
 	);
 };
 
-export default Login;
+export default Signup;

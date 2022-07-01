@@ -2,6 +2,7 @@ import * as React from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/auth/Login";
+import Signup from "./components/auth/Signup";
 import { Header } from "./components/header/Header";
 import { MediaList } from "./components/main/MediaList";
 import { SongItem } from "./components/main/Media";
@@ -28,11 +29,58 @@ function App() {
 		console.log("play media...");
 	};
 
-	// TODO: hardcode token to test authentication
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const [username, setUsername] = React.useState("");
+	const [email, setEmail] = React.useState("");
+	const [password, setPassword] = React.useState("");
+	const [message, setMessage] = React.useState("");
+
+	const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		// redirect to /
-		navigate("/");
+
+		// hardcoded token
+		const tempToken = {
+			username: "test1234",
+			password: "pw1234",
+		};
+
+		if (
+			username === tempToken.username &&
+			password === tempToken.password
+		) {
+			// redirect to /
+			navigate("/");
+			setUsername("");
+			setPassword("");
+		} else {
+			setMessage("Wrong username or password!");
+		}
+	};
+
+	const handleSignupSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+
+		const emailRegex = /\S+@\S+\.\S+/;
+		const usernameReg = /^[a-zA-Z0-9]+$/;
+		const passwordReg = /^[A-Za-z]\w{7,14}$/;
+
+		if (
+			emailRegex.test(email) &&
+			usernameReg.test(username) &&
+			passwordReg.test(password)
+		) {
+			// redirect to /
+			navigate("/");
+
+			// store credientials
+
+			// empty form
+			setEmail("");
+			setUsername("");
+			setPassword("");
+		} else {
+			console.log(email, username, password);
+			setMessage("Invalid email, username or password!");
+		}
 	};
 
 	return (
@@ -71,7 +119,31 @@ function App() {
 				</Route>
 				<Route
 					path="login"
-					element={<Login handleSubmit={handleSubmit} />}
+					element={
+						<Login
+							username={username}
+							password={password}
+							setUsername={setUsername}
+							setPassword={setPassword}
+							message={message}
+							handleLoginSubmit={handleLoginSubmit}
+						/>
+					}
+				/>
+				<Route
+					path="signup"
+					element={
+						<Signup
+							email={email}
+							username={username}
+							password={password}
+							setEmail={setEmail}
+							setUsername={setUsername}
+							setPassword={setPassword}
+							message={message}
+							handleSignupSubmit={handleSignupSubmit}
+						/>
+					}
 				/>
 			</Routes>
 		</div>
