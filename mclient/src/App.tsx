@@ -33,15 +33,15 @@ function App() {
 	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
 	const [message, setMessage] = React.useState("");
+	// hardcoded token
+	const tempToken = {
+		email: "test@test.com",
+		username: "test1234",
+		password: "pw1234",
+	};
 
 	const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-
-		// hardcoded token
-		const tempToken = {
-			username: "test1234",
-			password: "pw1234",
-		};
 
 		if (
 			username === tempToken.username &&
@@ -66,12 +66,17 @@ function App() {
 		if (
 			emailRegex.test(email) &&
 			usernameReg.test(username) &&
-			passwordReg.test(password)
+			passwordReg.test(password) &&
+			email !== tempToken.email
 		) {
 			// redirect to /
 			navigate("/");
 
-			// store credientials
+			// if the new credentials do not exist already store them in the database
+			localStorage.setItem(
+				"mserver-client",
+				JSON.stringify({ email, username, password })
+			);
 
 			// empty form
 			setEmail("");
