@@ -12,21 +12,39 @@ describe("input", () => {
 });
 
 it("input value", () => {
-	render(<Login handleSubmit={() => console.log("login")} />);
+	render(
+		<Login
+			handleLoginSubmit={() => console.log("login")}
+			username={""}
+			password={""}
+			setUsername={() => console.log("test1234")}
+			setPassword={() => console.log("12345")}
+			message={""}
+		/>
+	);
 	const passwordInput = screen.getByTestId("password");
-	userEvent.type(passwordInput, "12345");
+	userEvent.type(passwordInput, "123456");
 });
 
 it("button state in form", () => {
-	render(<Login handleSubmit={() => console.log("login")} />);
+	render(
+		<Login
+			handleLoginSubmit={() => console.log("login")}
+			username={""}
+			password={""}
+			setUsername={() => console.log("test1234")}
+			setPassword={() => console.log("12345")}
+			message={""}
+		/>
+	);
 	const button = screen.getByTestId("submitButton");
 	expect(button).toBeDisabled();
 
 	const usernameInput = screen.getByTestId("username");
 	const passwordInput = screen.getByTestId("password");
-	userEvent.type(usernameInput, "test123");
+	userEvent.type(usernameInput, "test1234");
 	userEvent.type(passwordInput, "123456");
-	// expect(button).toBeEnabled();
+	expect(button).toBeEnabled();
 
 	userEvent.clear(usernameInput);
 	userEvent.clear(passwordInput);
