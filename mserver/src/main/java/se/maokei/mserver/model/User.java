@@ -1,61 +1,79 @@
 package se.maokei.mserver.model;
 
-import lombok.Builder;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.UUID;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Builder
+@Document
 public class User implements UserDetails {
-    //@Id
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    UUID id;
+
+    @Getter
+    @Setter
     private String username;
+
     private String password;
 
-    private boolean active = true;
-    private Set<GrantedAuthority> roles = new HashSet<GrantedAuthority>();
+    @Getter @Setter
+    private Boolean enabled;
 
-    @Builder
-    public User(String username, String password){
-        this.username = username;
+    @Getter @Setter
+    private List<Role> roles;
+
+    @JsonIgnore
+    public String getPassword() {
+        return password;
+    }
+
+    @JsonProperty
+    public void setPassword(String password) {
         this.password = password;
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return active;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return active;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return active;
     }
 
     @Override
     public boolean isEnabled() {
-        return active;
+        return enabled;
     }
 
     @Override
-    public String getPassword() {
-        return this.password;
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (Role r : this.roles) {
+            authorities.add(new SimpleGrantedAuthority(r.toString()));
+        }
+        return authorities;
     }
 
     @Override
-    public String getUsername() {
-        return this.username;
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
     }
 }

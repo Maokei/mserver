@@ -3,17 +3,24 @@ package se.maokei.mserver.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.codec.multipart.FilePart;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import se.maokei.mserver.services.FileService;
 import se.maokei.mserver.services.StreamingService;
 
-import java.io.InputStream;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.Principal;
 
 /**
@@ -22,9 +29,28 @@ import java.security.Principal;
 @RestController
 @Tag(name = "Test API", description = "API for testing purpose")
 public class HelloWorld {
+    @GetMapping("/ping")
+    public Mono<String> ping(Mono<Principal> principal) {
+        return Mono.just("alive");
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @GetMapping("/protected")
+    public Mono<String> protectedPing(Mono<Principal> principal) {
+        return Mono.just("alive");
+    }
+
     @GetMapping("/hello")
     @Operation(description = "Hello world, returns a hello to logged in user")
     public Mono<String> greet(Mono<Principal> principal) {
+        return principal
+                .map(Principal::getName)
+                .map(name -> String.format("Hello, %s", name));
+    }
+
+    @PostMapping("/bonk")
+    public Mono<String> bonk(Mono<Principal> principal) {
+        System.out.println("bonk");
         return principal
                 .map(Principal::getName)
                 .map(name -> String.format("Hello, %s", name));
@@ -74,4 +100,87 @@ public class HelloWorld {
         String produces = "audio/mp4";
 
     }*/
+
+    //file upload test
+    @Autowired
+    FileService fileService;
+
+    @PostMapping("/image")
+    String uploadImage(@RequestPart("image") Mono<FilePart> fileMono) throws Exception {
+        //@RequestPart("image") MultipartFile image
+        System.out.println("cat");
+        //fileMono.flatMap(fp -> fp.content())
+        //return fileService.save(image.getBytes(), image.getOriginalFilename());
+        //fp.transferTo(basePath.resolve(fp.filename()))
+        fileService.save(fileMono);
+        return "hello";
+    }
+
+
+
+    @PostMapping("/upload")
+    public ResponseEntity<?> handleFileUpload( @RequestParam("file") Mono<FilePart> file) {
+        Path basePath = Paths.get("/home/maokei/");
+        //String fileName = file.getOriginalFilename();
+        //String fileName = String.valueOf(file.subscribe(s -> s.filename()));
+        String fileName = "fake.jpg";
+        System.out.println("/upload " + fileName);
+        try {
+            //file.transferTo( new File("/home/maokei/" + fileName));
+            file.doOnNext(fp -> System.out.println("Received File : " + fp.filename()))
+                    .flatMap(fp -> fp.transferTo(basePath.resolve(fp.filename())))
+                    .then();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+        return ResponseEntity.ok("File uploaded successfully.");
+    }
+
+    @PostMapping("/single")
+    public Mono<Void> singleUpload(@RequestParam("upload")Mono<FilePart> fileMono) {
+        Path path = Paths.get("/home/maokei/");
+        return fileMono.doOnNext(f -> System.out.println("filename: " + f.filename()))
+                .flatMap(f -> f.transferTo(path.resolve(f.filename())))
+                .then();
+    }
+
+    private final Path basePath = Paths.get("./src/main/resources/upload/");
+
+    @PostMapping("file/single")
+    public Mono<Void> upload(@RequestPart("user-name") String name,
+                             @RequestPart("fileToUpload") Mono<FilePart> filePartMono){
+        System.out.println("user : " + name);
+
+        return  filePartMono
+                .doOnNext(fp -> System.out.println("Received File : " + fp.filename()))
+                .flatMap(fp -> fp.transferTo(basePath.resolve(fp.filename())))
+                .then();
+    }
+
+    @PostMapping("file/multi1")
+    public Mono<Void> upload(@RequestPart("files") Flux<FilePart> partFlux){
+        return  partFlux
+                .doOnNext(fp -> System.out.println(fp.filename()))
+                .flatMap(fp -> fp.transferTo(basePath.resolve(fp.filename())))
+                .then();
+    }
+
+    @Valid
+    @RequestMapping(value = "/saveFile")
+    public @ResponseBody String storeAd(@NotNull @RequestPart ("model") String adString, @NotNull @RequestPart ("file") FilePart file) throws IOException {
+        System.out.println("adString > "+adString);
+        return "OK";
+    }
+
+    @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
+    FileSystemResource downloadImage(@PathVariable String imageId) throws Exception {
+        return fileService.find(imageId);
+    }
+
+    @PostMapping("/uploader")
+    public Mono<String> upload(@RequestPart("file") FilePart filePart) throws Exception {
+        String fileName = System.nanoTime() + "-" + filePart.filename();
+        System.out.println("2222");
+        return Mono.just("2 " + fileName);
+    }
 }

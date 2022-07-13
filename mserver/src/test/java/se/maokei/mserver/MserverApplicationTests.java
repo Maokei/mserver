@@ -9,5 +9,4 @@ class MserverApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

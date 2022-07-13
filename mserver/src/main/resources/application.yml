@@ -1,0 +1,44 @@
+#open-api
+springdoc:
+  api-docs:
+    enabled: true
+# swagger-ui custom path
+# springdoc.swagger-ui.path=/swagger-ui.html
+
+app:
+  jjwt:
+    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+    expiration: 28800
+    iteration: 33
+    keylength: 256
+
+spring:
+  profiles:
+    active: test
+---
+spring:
+  config:
+    active:
+      on-profile:
+        - dev
+  mongodb:
+    embedded:
+      version: 4.4.1
+---
+spring:
+  config:
+    activate:
+      on-profile:
+        - test
+  #if set embedded mongo does not work
+  #data:
+  #  mongodb:
+  #    uri: mongodb://localhost:27017/testdb
+    #  authentication-database: admin
+    #  username: admin
+    #  password: admin
+    #  database: testdb
+    #  port: 27017
+  mongodb:
+    embedded:
+      version: 4.4.1

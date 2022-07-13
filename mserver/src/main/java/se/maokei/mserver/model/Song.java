@@ -1,11 +1,14 @@
 package se.maokei.mserver.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Song {
     private String id;
+    private String title;
+    private String length;
 }
