@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { ShowMoreIcon } from "../../assets/union-vector";
 
 interface ShowMoreProps {
@@ -46,11 +47,24 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
 						data-testid="dropdown-item-test"
 						className="dropdown-item"
 					>
-						Dropdown item
+						<Link to={"/"} onClick={() => setState(!state)}>
+							Home
+						</Link>
 					</div>
-					<div className="dropdown-item">Other dropdown item</div>
-					<div className="dropdown-item is-active">
-						Active dropdown item
+					<div
+						data-testid="dropdown-item-test"
+						className="dropdown-item"
+					>
+						{/* TODO: if authenticated, show Logout */}
+						<Link to={"/login"} onClick={() => setState(!state)}>
+							Login
+						</Link>
+					</div>
+					<div className="dropdown-item">
+						{/* TODO: if authenticated, show Logout */}
+						<Link to={"/signup"} onClick={() => setState(!state)}>
+							Sign Up
+						</Link>
 					</div>
 				</div>
 			</div>

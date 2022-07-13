@@ -1,11 +1,11 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { Search } from "./Search";
 import { ShowMore } from "./ShowMore";
 
 export const Header = () => {
 	const [inputTexts, setInputTexts] = React.useState<string>("");
 
-	const handleKeyDown = (e: any) => {
+	const handleKeyDown = (e: ChangeEvent<HTMLInputElement>) => {
 		console.log(e.target.value);
 	};
 
