@@ -1,6 +1,7 @@
 import * as React from "react";
 import { ChangeEvent } from "react";
 import { FormProps } from "./Login";
+import styles from "./form.module.scss";
 
 interface SignupProps extends FormProps {
 	email: string;
@@ -21,15 +22,15 @@ const Signup: React.FC<SignupProps> = ({
 }) => {
 	const submitBtnClasses =
 		email.length < 3 || username.length < 3 || password.length < 3
-			? "submit-btn btn-disabled"
-			: "submit-btn";
+			? `${styles.submitBtn} ${styles.btnDisabled}`
+			: `${styles.submitBtn}`;
 
 	const submitDisabled = () =>
 		username.length < 3 || username.length < 3 || password.length < 3;
 
 	return (
-		<div className="form-wrapper">
-			<form className="login" onSubmit={handleSignupSubmit}>
+		<div className={styles.wrapper}>
+			<form className={styles.login} onSubmit={handleSignupSubmit}>
 				<input
 					type="text"
 					data-testid="email"
@@ -57,7 +58,7 @@ const Signup: React.FC<SignupProps> = ({
 						setPassword(e.target.value)
 					}
 				/>
-				<p className="message">{message}</p>
+				<p className={styles.message}>{message}</p>
 				<button
 					type="submit"
 					data-testid="submitButton"
