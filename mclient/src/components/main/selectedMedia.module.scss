@@ -1,0 +1,7 @@
+.wrapper {
+	padding: 0 3.5vw;
+	display: grid;
+	grid-template-areas:
+		"progressbar progressbar progressbar progressbar"
+		"now-playing button-group button-group button-group";
+}

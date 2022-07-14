@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { Search } from "./Search";
 import { ShowMore } from "./ShowMore";
+import styles from "./header.module.scss";
 
 export const Header = () => {
 	const [inputTexts, setInputTexts] = React.useState<string>("");
@@ -37,7 +38,7 @@ export const Header = () => {
 	}, [isActive]);
 
 	return (
-		<header className="columns header">
+		<header className={`${styles.header} columns`}>
 			{/* <div data-testid="back-btn" className="icon">
                 <BackIcon />
             </div> */}

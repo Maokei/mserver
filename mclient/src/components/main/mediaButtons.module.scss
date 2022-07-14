@@ -1,0 +1,33 @@
+.wrapper {
+	padding-left: 8vw;
+	grid-area: button-group;
+
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+	align-self: center;
+
+	.pause,
+	.play,
+	.previous,
+	.next,
+	.shuffle,
+	.volume {
+		justify-self: center;
+		align-self: center;
+	}
+
+	.play,
+	.pause {
+		width: 75px;
+		height: 75px;
+		background-color: var(--color-orange);
+
+		&:hover {
+			background-color: lighten(#ea5110, 5%);
+		}
+	}
+
+	.shuffle {
+		grid-column: 9 / span 1;
+	}
+}

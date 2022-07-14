@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ShowMoreIcon } from "../../assets/union-vector";
+import headerStyle from "./header.module.scss";
+import styles from "./showMore.module.scss";
 
 interface ShowMoreProps {
 	dropdownRef: any;
@@ -18,12 +20,12 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
 	return (
 		<div
 			data-testid="dropdown-test"
-			className={`column dropdown is-right ${dropdownActiveClass} show-more-wrapper`}
+			className={`column dropdown is-right ${dropdownActiveClass} ${styles.wrapper}`}
 		>
 			<div className="dropdown-trigger">
 				<button
 					data-testid="show-more"
-					className="button icon"
+					className={`button ${headerStyle.icon}`}
 					aria-haspopup="true"
 					aria-controls="dropdown-menu"
 					onClick={() => setState(!state)}
