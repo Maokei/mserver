@@ -1,4 +1,4 @@
-.form-wrapper {
+.wrapper {
 	position: relative;
 	width: 100vw;
 	height: calc(100vh - 9rem);
@@ -59,7 +59,7 @@
 		margin: 15px -10px;
 	}
 
-	.submit-btn {
+	.submitBtn {
 		cursor: pointer;
 		color: #fff;
 		font-size: 16px;
@@ -79,7 +79,7 @@
 		}
 	}
 
-	.btn-disabled {
+	.btnDisabled {
 		pointer-events: none;
 		background-color: var(--color-grey);
 		color: var(--subtitle);

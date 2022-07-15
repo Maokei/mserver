@@ -6,9 +6,9 @@ import Signup from "./components/auth/Signup";
 import { Header } from "./components/header/Header";
 import { MediaList } from "./components/main/MediaList";
 import { SongItem } from "./components/main/Media";
-import "./App.scss";
-import dummyData from "./dummyData.json";
 import { SelectedMedia } from "./components/main/SelectedMedia";
+import dummyData from "./dummyData.json";
+import styles from "./App.module.scss";
 
 function App() {
 	const navigate = useNavigate();
@@ -89,7 +89,7 @@ function App() {
 	};
 
 	return (
-		<div className="app has-background-dark">
+		<div className={styles.app}>
 			<Header />
 
 			<Routes>
@@ -97,7 +97,7 @@ function App() {
 					<Route
 						index
 						element={
-							<main className="main">
+							<main className={styles.main}>
 								{!data ? (
 									"There is nothing yet"
 								) : !hasSelected ? (

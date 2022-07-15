@@ -2,19 +2,20 @@ import React from "react";
 import { MediaButtons } from "./MediaButtons";
 import { MediaPlaying } from "./MediaPlaying";
 import { MediaProgress } from "./MediaProgress";
+import styles from "./selectedMedia.module.scss";
 
 interface ButtonGroupProps {
-    onClickPlay: Function;
+	onClickPlay: Function;
 }
 
 export const SelectedMedia: React.FC<ButtonGroupProps> = ({ onClickPlay }) => {
-    return (
-        <section className="selectedMedia-wrapper">
-            <MediaProgress />
+	return (
+		<section className={styles.wrapper}>
+			<MediaProgress />
 
-            <MediaPlaying />
+			<MediaPlaying />
 
-            <MediaButtons onClickPlay={onClickPlay} />
-        </section>
-    );
+			<MediaButtons onClickPlay={onClickPlay} />
+		</section>
+	);
 };

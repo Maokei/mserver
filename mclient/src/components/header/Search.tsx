@@ -1,6 +1,8 @@
 import React from "react";
 
 import { SearchIcon } from "../../assets/SearchIcon";
+import styles from "./search.module.scss";
+import headerStyles from "./header.module.scss";
 
 interface SearchProps {
 	onClick: () => void;
@@ -17,16 +19,16 @@ export const Search: React.FC<SearchProps> = ({
 	setKeywords,
 	onKeyDown,
 }) => {
-	const hiddenClass = hidden ? "hidden" : "";
+	const hiddenClass = hidden ? `${styles.hidden}` : "";
 
 	return (
 		<div
 			data-testid="search"
-			className="control column is-four-fifths search-wrapper"
+			className={`control column is-four-fifths ${styles.wrapper}`}
 		>
 			<button
 				data-testid="search-btn"
-				className="button icon search-btn"
+				className={`button ${headerStyles.icon} ${styles.btn}`}
 				onClick={onClick}
 			>
 				<SearchIcon />

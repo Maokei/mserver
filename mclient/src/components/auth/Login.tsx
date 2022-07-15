@@ -1,8 +1,6 @@
 import * as React from "react";
 import { ChangeEvent } from "react";
-
-// TODO
-// error handling for submitting form
+import styles from "./form.module.scss";
 
 export interface FormProps {
 	username: string;
@@ -28,14 +26,14 @@ const Login: React.FC<LoginType> = ({
 }) => {
 	const submitBtnClasses =
 		username.length < 3 || password.length < 3
-			? "submit-btn btn-disabled"
-			: "submit-btn";
+			? `${styles.submitBtn} ${styles.btnDisabled}`
+			: `${styles.submitBtn}`;
 
 	const submitDisabled = () => username.length < 3 || password.length < 3;
 
 	return (
-		<div className="form-wrapper">
-			<form className="login" onSubmit={handleLoginSubmit}>
+		<div className={styles.wrapper}>
+			<form className={styles.login} onSubmit={handleLoginSubmit}>
 				<input
 					type="text"
 					data-testid="username"
@@ -54,7 +52,7 @@ const Login: React.FC<LoginType> = ({
 						setPassword(e.target.value)
 					}
 				/>
-				<p className="message">{message}</p>
+				<p className={styles.message}>{message}</p>
 				<button
 					type="submit"
 					data-testid="submitButton"
