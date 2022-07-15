@@ -21,4 +21,10 @@
 		width: 0;
 		transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 	}
+
+	@media screen and (max-width: 768px) {
+		input {
+			width: 50vw;
+		}
+	}
 }

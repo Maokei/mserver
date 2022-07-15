@@ -31,10 +31,10 @@ export const Media: React.FC<MediaProps> = ({ songItem, handleToggleLike }) => {
 					alt={songItem.mediaTitle}
 				/>
 			</figure>
-			<p className={`${styles.title} title is-4`}>
+			<p className={`${styles.title} title is-4 is-size-6-mobile`}>
 				{songItem.mediaTitle}
 			</p>
-			<p className={`${styles.subtitle} subtitle is-6`}>
+			<p className={`${styles.subtitle} subtitle is-6 is-size-7-mobile`}>
 				{songItem.mediaSubtitle}
 			</p>
 			<button

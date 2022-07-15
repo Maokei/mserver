@@ -1,5 +1,5 @@
 .wrapper {
-	padding: 3vh 2.5vw;
+	padding: 0 2.5vw;
 
 	.divider {
 		position: relative;
@@ -29,6 +29,12 @@
 			grid-template-columns: repeat(12, 1fr);
 			align-items: center;
 			grid-gap: 1.125rem;
+		}
+
+		@media screen and (max-width: 768px) {
+			.item {
+				display: flex;
+			}
 		}
 
 		.title,

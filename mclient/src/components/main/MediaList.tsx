@@ -16,7 +16,7 @@ export const MediaList: React.FC<MediaPropsList> = ({
 			<div className={styles.divider} />
 			<div
 				data-testid="mediaList"
-				className={`${styles.mediaList} clips`}
+				className={`${styles.mediaList} clips is-size-7-mobile`}
 			>
 				{items.map((item) => (
 					<Media

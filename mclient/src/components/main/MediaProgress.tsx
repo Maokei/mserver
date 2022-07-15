@@ -5,19 +5,23 @@ export const MediaProgress = () => {
 
 	return (
 		<div className={`content ${styles.wrapper}`}>
-			<p id="timestamp">00:48</p>
+			<p id="timestamp" className={styles.timestamp}>
+				00:48
+			</p>
 
 			<progress
 				data-testid="progressbar"
 				id="progressbar"
-				className={`progress is-small ${styles.isOrange}`}
+				className={`progress is-small ${styles.progressbar} ${styles.isOrange}`}
 				value={currentValue}
 				max="100"
 			>
 				{currentValue}
 			</progress>
 
-			<p id="timestamp">03:54</p>
+			<p id="timestamp" className={styles.timestamp}>
+				03:54
+			</p>
 		</div>
 	);
 };

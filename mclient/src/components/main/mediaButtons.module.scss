@@ -30,4 +30,27 @@
 	.shuffle {
 		grid-column: 9 / span 1;
 	}
+
+	@media screen and (max-width: 768px) {
+		grid-row: 3 / -1;
+		display: flex;
+		gap: 10px;
+		margin-top: 1em;
+
+		.previous {
+			order: 2;
+		}
+		.play {
+			order: 3;
+		}
+		.next {
+			order: 4;
+		}
+		.shuffle {
+			order: 1;
+		}
+		.volume {
+			order: 5;
+		}
+	}
 }

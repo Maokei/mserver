@@ -1,18 +1,32 @@
 .wrapper {
 	grid-area: progressbar;
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	gap: 1em;
 
-	#timestamp {
+	.timestamp {
 		margin-bottom: 1.5rem;
 	}
 
-	#progressbar {
+	.progressbar {
 		height: 5px;
 	}
 
 	.isOrange::-webkit-progress-value {
 		background: linear-gradient(90deg, #ff611a 0%, #cb340d 82.68%);
+	}
+
+	@media screen and (max-width: 768px) {
+		// display: grid;
+		// justify-items: center;
+
+		.timestamp {
+			display: none;
+		}
+
+		// .progressbar {
+		// 	width: 80vw;
+		// }
 	}
 }

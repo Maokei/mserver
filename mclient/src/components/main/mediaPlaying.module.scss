@@ -12,6 +12,11 @@
 	p {
 		text-align: center;
 	}
+
+	@media screen and (max-width: 768px) {
+		grid-column: 1 / -1;
+		grid-row: 2 / 3;
+	}
 }
 
 .art {

@@ -22,25 +22,6 @@ body {
 	background-color: var(--color-dark);
 }
 
-.app {
-	overflow: hidden;
-}
-
-.main {
-	position: relative;
-	width: 100%;
-	height: calc(100vh - 137px);
-	left: 0px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-around;
-
-	background: linear-gradient(146.6deg, #1f2328 12.49%, #17191d 81%);
-	box-shadow: -8px -8px 20px rgba(42, 46, 53, 0.58886),
-		3px 8px 20px rgba(0, 0, 0, 0.353065);
-	border-radius: 37px 37px 0px 0px;
-}
-
 .icon {
 	width: 50px;
 	height: 50px;
