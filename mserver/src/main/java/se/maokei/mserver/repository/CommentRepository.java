@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import se.maokei.mserver.model.Comment;
 
 @Repository
-public interface CommentRepository extends ReactiveMongoRepository<Comment, Long> {
+public interface CommentRepository extends ReactiveMongoRepository<Comment, String> {
 
 }

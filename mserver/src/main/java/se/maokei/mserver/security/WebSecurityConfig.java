@@ -9,9 +9,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -34,24 +31,9 @@ public class WebSecurityConfig {
     return route(GET("/"), request -> ok().contentType(MediaType.TEXT_HTML).bodyValue(indexHtml));
   }
 
-  /*@Bean
-  public RouterFunction<ServerResponse> faviconRouter(@Value("classpath:/favicon.ico") final Resource favicon) {
-    return route(GET("/favicon.ico"), request -> ok().contentType(MediaType.ALL).bodyValue(favicon));
-  }*/
-
   @Bean
   public PasswordEncoder encoder() {
     return new BCryptPasswordEncoder();
-  }
-
-  @Bean
-  public MapReactiveUserDetailsService userDetailsService() {
-    UserDetails user = User.withDefaultPasswordEncoder()
-            .username("user")
-            .password("user")
-            .roles("USER")
-            .build();
-    return new MapReactiveUserDetailsService(user);
   }
 
   @Bean
