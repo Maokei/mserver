@@ -7,6 +7,7 @@ import { Header } from "./components/header/Header";
 import { MediaList } from "./components/main/MediaList";
 import { SongItem } from "./components/main/Media";
 import { SelectedMedia } from "./components/main/SelectedMedia";
+import { fetchLoginAPI } from "./lib/api";
 import dummyData from "./dummyData.json";
 import styles from "./App.module.scss";
 
@@ -40,19 +41,20 @@ function App() {
 		password: "pw1234",
 	};
 
-	const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (
-			username === tempToken.username &&
-			password === tempToken.password
-		) {
-			// redirect to /
+		try {
+			await fetchLoginAPI({ username, password });
+
+			// should redirect to dashboard
 			navigate("/");
+			// empty all fields
 			setUsername("");
 			setPassword("");
-		} else {
-			setMessage("Wrong username or password!");
+			setMessage("");
+		} catch (error) {
+			setMessage("Wrong username or password! Login Failed.");
 		}
 	};
 
