@@ -5,8 +5,12 @@ import React from "react";
 import Login from "../components/auth/Login";
 
 const Wrapper = () => {
-	const [password, setPassword] = React.useState("");
 	const [username, setUsername] = React.useState("");
+	const [email, setEmail] = React.useState("");
+	const [password, setPassword] = React.useState("");
+	const [confirmPassword, setConfirmPassword] = React.useState("");
+	const [message, setMessage] = React.useState("");
+	
 	return (<Login
 		handleLoginSubmit={() => console.log("login")}
 		username={username}
