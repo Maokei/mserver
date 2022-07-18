@@ -18,13 +18,14 @@ public class CommentRepositoryTest {
   public void saveCommentTest() {
     String text = "A comment for testing";
     Comment comment = Comment.builder()
-            .id(123L)
             .comment(text)
             .build();
-    commentRepository.save(comment);
-    commentRepository.findById(123L).subscribe(found -> {
-      System.out.println(found);
-      Assertions.assertEquals(text, found.getComment(), "Text is not the same.");
+    commentRepository.save(comment).subscribe(c -> {
+      String id = c.getId();
+      commentRepository.findById(id).subscribe(found -> {
+        System.out.println(found);
+        Assertions.assertEquals(text, found.getComment(), "Text is not the same.");
+      });
     });
   }
 }

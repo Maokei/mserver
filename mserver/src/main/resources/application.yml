@@ -12,9 +12,13 @@ app:
     iteration: 33
     keylength: 256
 
+
 spring:
   profiles:
     active: test
+  data:
+    mongodb:
+      auto-index-creation: true
 ---
 spring:
   config:

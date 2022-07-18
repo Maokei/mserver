@@ -1,17 +1,19 @@
 package se.maokei.mserver.model;
 
-
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.bson.types.Binary;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@Document(collection = "photos")
-public class Photo extends EntityMetadata {
+@Document
+public class Media extends EntityMetadata {
     private String title;
-    private Binary image;
+    private Integer views;
+    private String url;
+    private String userId;
 }
