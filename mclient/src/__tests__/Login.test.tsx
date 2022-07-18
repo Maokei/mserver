@@ -25,7 +25,7 @@ describe("Login", () => {
 	});
 
  test("should be able to type into input", () => {
-		const { getByTestId, getByPlaceholderText } = render(
+		render(
 			<Wrapper />
 		);
 		const testText = "123456";
