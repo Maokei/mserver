@@ -6,20 +6,19 @@ import Login from "../components/auth/Login";
 
 const Wrapper = () => {
 	const [username, setUsername] = React.useState("");
-	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
-	const [confirmPassword, setConfirmPassword] = React.useState("");
-	const [message, setMessage] = React.useState("");
 
-	return (<Login
-		handleLoginSubmit={() => console.log("login")}
-		username={username}
-		password={password}
-		setUsername={setUsername}
-		setPassword={setPassword}
-		message={""}
-/>);
-}
+	return (
+		<Login
+			handleLoginSubmit={() => console.log("login")}
+			username={username}
+			password={password}
+			setUsername={setUsername}
+			setPassword={setPassword}
+			message={""}
+		/>
+	);
+};
 
 describe("Login", () => {
 	it("should render input element", () => {
@@ -28,37 +27,30 @@ describe("Login", () => {
 		expect(inputEl).toBeInTheDocument();
 	});
 
- test("should be able to type into input", async () => {
-		render(
-			<Wrapper />
-		);
+	test("should be able to type into input", async () => {
+		render(<Wrapper />);
 		const testText = "123456";
 		const passwordInput = screen.getByTestId("password");
 
-		fireEvent.change(passwordInput, {target: {value: testText}})
-		await waitFor(() => expect(passwordInput).toHaveValue(testText))
+		fireEvent.change(passwordInput, { target: { value: testText } });
+		await waitFor(() => expect(passwordInput).toHaveValue(testText));
 
 		expect(passwordInput).toHaveDisplayValue(testText);
 	});
 
 	it("button should be enabled when username and password are filled", () => {
-		render(
-			<Login
-				handleLoginSubmit={() => console.log("login")}
-				username={""}
-				password={""}
-				setUsername={() => "test1234"}
-				setPassword={() => "12345"}
-				message={""}
-			/>
-		);
+		render(<Wrapper />);
 		const button = screen.getByTestId("submitButton");
 		expect(button).toBeDisabled();
 
+		const testUsername = "user";
+		const testPassword = "123456";
 		const usernameInput = screen.getByTestId("username");
 		const passwordInput = screen.getByTestId("password");
-		userEvent.type(usernameInput, "test1234");
-		userEvent.type(passwordInput, "123456");
+
+		fireEvent.change(usernameInput, { target: { value: testUsername } });
+		fireEvent.change(passwordInput, { target: { value: testPassword } });
+
 		expect(button).toBeEnabled();
 
 		userEvent.clear(usernameInput);
