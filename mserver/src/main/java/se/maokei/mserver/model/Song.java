@@ -7,8 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Song {
-    private String id;
+public class Song extends EntityMetadata {
     private String title;
     private String length;
 }
