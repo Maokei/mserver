@@ -10,7 +10,7 @@ const Wrapper = () => {
 	const [password, setPassword] = React.useState("");
 	const [confirmPassword, setConfirmPassword] = React.useState("");
 	const [message, setMessage] = React.useState("");
-	
+
 	return (<Login
 		handleLoginSubmit={() => console.log("login")}
 		username={username}
@@ -28,16 +28,15 @@ describe("Login", () => {
 		expect(inputEl).toBeInTheDocument();
 	});
 
- test("should be able to type into input", () => {
+ test("should be able to type into input", async () => {
 		render(
 			<Wrapper />
 		);
 		const testText = "123456";
 		const passwordInput = screen.getByTestId("password");
 
-		userEvent.type(passwordInput, testText);
-		//fireEvent.change(passwordInput, {target: {value: testText}})
-		waitFor(() => expect(passwordInput).toHaveValue(testText))
+		fireEvent.change(passwordInput, {target: {value: testText}})
+		await waitFor(() => expect(passwordInput).toHaveValue(testText))
 
 		expect(passwordInput).toHaveDisplayValue(testText);
 	});
