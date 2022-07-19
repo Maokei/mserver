@@ -7,6 +7,7 @@ import { Header } from "./components/header/Header";
 import { MediaList } from "./components/main/MediaList";
 import { SongItem } from "./components/main/Media";
 import { SelectedMedia } from "./components/main/SelectedMedia";
+import { fetchLoginAPI } from "./lib/api";
 import dummyData from "./dummyData.json";
 import styles from "./App.module.scss";
 
@@ -32,27 +33,23 @@ function App() {
 	const [username, setUsername] = React.useState("");
 	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
+	const [confirmPassword, setConfirmPassword] = React.useState("");
 	const [message, setMessage] = React.useState("");
-	// hardcoded token
-	const tempToken = {
-		email: "test@test.com",
-		username: "test1234",
-		password: "pw1234",
-	};
 
-	const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		if (
-			username === tempToken.username &&
-			password === tempToken.password
-		) {
-			// redirect to /
+		try {
+			await fetchLoginAPI({ username, password });
+
+			// should redirect to dashboard
 			navigate("/");
+			// empty all fields
 			setUsername("");
 			setPassword("");
-		} else {
-			setMessage("Wrong username or password!");
+			setMessage("");
+		} catch (error) {
+			setMessage("Wrong username or password! Login Failed.");
 		}
 	};
 
@@ -63,11 +60,26 @@ function App() {
 		const usernameReg = /^[a-zA-Z0-9]+$/;
 		const passwordReg = /^[A-Za-z]\w{7,14}$/;
 
+		// TODO
+		// get existed users if any from database
+		let savedUser = {
+			email: "test@test.com",
+			username: "test1234",
+			password: "pw1234",
+		};
+		if (localStorage.getItem("mserver-client") !== null) {
+			const info: any = localStorage.getItem("mserver-client");
+			savedUser = JSON.parse(info);
+		} else {
+			console.log("Invalid");
+		}
+
 		if (
 			emailRegex.test(email) &&
 			usernameReg.test(username) &&
 			passwordReg.test(password) &&
-			email !== tempToken.email
+			email !== savedUser.email &&
+			confirmPassword === password
 		) {
 			// redirect to /
 			navigate("/");
@@ -75,15 +87,16 @@ function App() {
 			// if the new credentials do not exist already store them in the database
 			localStorage.setItem(
 				"mserver-client",
-				JSON.stringify({ email, username, password })
+				JSON.stringify({ email, username, password, confirmPassword })
 			);
 
 			// empty form
 			setEmail("");
 			setUsername("");
 			setPassword("");
+			setConfirmPassword("");
+			setMessage("");
 		} else {
-			console.log(email, username, password);
 			setMessage("Invalid email, username or password!");
 		}
 	};
@@ -147,6 +160,8 @@ function App() {
 							setPassword={setPassword}
 							message={message}
 							handleSignupSubmit={handleSignupSubmit}
+							confirmPassword={confirmPassword}
+							setConfirmPassword={setConfirmPassword}
 						/>
 					}
 				/>
