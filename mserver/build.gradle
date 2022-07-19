@@ -34,8 +34,8 @@ dependencies {
 	implementation 'com.google.zxing:core:3.5.0'
 	implementation 'com.google.zxing:javase:3.5.0'
 
-	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.8'
-	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.8'
+	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.9'
+	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.9'
 	implementation 'commons-io:commons-io:2.11.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -44,7 +44,7 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.6'
-	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.5'
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.6'
 
 	testImplementation 'org.testcontainers:mongodb:1.17.3'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -52,14 +52,23 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-test {
+//test {
+//	useJUnitPlatform()
+//}
+
+tasks.named('test') {
 	useJUnitPlatform()
 }
 
-bootBuildImage {
+tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder:tiny'
 	environment = ['BP_NATIVE_IMAGE': 'true']
 }
+
+//bootBuildImage {
+//	builder = 'paketobuildpacks/builder:tiny'
+//	environment = ['BP_NATIVE_IMAGE': 'true']
+//}
 
 //nativeBuild {
 //	classpath processAotResources.outputs, compileAotJava.outputs

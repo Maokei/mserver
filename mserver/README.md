@@ -12,6 +12,7 @@ mserver/mserver/
 
 ## Run with docker
 ```
+docker run --rm -it $(docker build -q .)
 ```
 
 ## Run with docker-compose
