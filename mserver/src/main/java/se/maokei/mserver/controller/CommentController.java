@@ -7,6 +7,8 @@ import reactor.core.publisher.Mono;
 import se.maokei.mserver.model.Comment;
 import se.maokei.mserver.repository.CommentRepository;
 
+import javax.validation.Valid;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/comment")
@@ -14,7 +16,7 @@ public class CommentController {
   private CommentRepository commentRepository;
 
   @PostMapping
-  private Mono<Comment> createComment(@RequestBody Comment comment) {
+  private Mono<Comment> createComment(@Valid @RequestBody Comment comment) {
     return commentRepository.save(comment);
   }
 
