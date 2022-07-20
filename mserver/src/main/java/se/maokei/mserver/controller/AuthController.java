@@ -15,6 +15,8 @@ import se.maokei.mserver.dto.AuthResponse;
 import se.maokei.mserver.security.JwtUtility;
 import se.maokei.mserver.services.UserService;
 
+import javax.validation.Valid;
+
 @AllArgsConstructor
 @RestController
 //@RequestMapping("/auth")
@@ -26,7 +28,7 @@ public class AuthController {
   private UserService userService;
 
   @PostMapping("/login")
-  public Mono<ResponseEntity<AuthResponse>> login(@RequestBody AuthRequest ar) {
+  public Mono<ResponseEntity<AuthResponse>> login(@Valid @RequestBody AuthRequest ar) {
     LOGGER.debug("Login AuthRequest dto {}", ar);
     return userService.findByUsername(ar.getUsername())
             .filter(userDetails -> passwordEncoder.matches(ar.getPassword(), userDetails.getPassword()))

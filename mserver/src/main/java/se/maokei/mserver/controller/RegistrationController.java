@@ -3,10 +3,8 @@ package se.maokei.mserver.controller;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.dto.UserRegisterDto;
@@ -30,6 +28,5 @@ public class RegistrationController {
             //return Mono.just("New user registered");
         }).subscribe().defaultIfEmpty("");*/
         return userService.registerNewUser(dto);
-        //return Mono.just(new User());
     }
 }
