@@ -13,6 +13,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import se.maokei.mserver.model.Media;
+import se.maokei.mserver.repository.MediaRepository;
 import se.maokei.mserver.services.FileService;
 import se.maokei.mserver.services.StreamingService;
 
@@ -79,14 +81,14 @@ public class HelloWorld {
     public Mono<Resource> getAudio(@RequestHeader("Range") String range) {
         //@PathVariable String title,
         System.out.println(range);
-        return service.getAudio("song");
+        return service.getTestAudio("song");
     }
 
     @GetMapping(path = "/videoTest", produces = "video/mp4")
     public Mono<Resource> getVideo(@RequestHeader("Range") String range) {
         //@PathVariable String title,
         System.out.println(range);
-        return service.getVideo("video");
+        return service.getTestVideo("video");
     }
 
     /*public Mono<ResponseEntity<byte[]>> audioTwo(@RequestHeader(value = "Range", required = false) String httpRangeList) {
@@ -104,13 +106,30 @@ public class HelloWorld {
     //file upload test
     @Autowired
     FileService fileService;
+    @Autowired
+    MediaRepository mediaRepository;
 
-    @PostMapping("/image")
-    public Mono<String> uploadImage(@RequestPart("image") Mono<FilePart> fileMono) throws Exception {
-        return fileService.save(fileMono);
+    @GetMapping("/all")
+    public Flux<Media> listAll() throws Exception {
+        return mediaRepository.findAll();
     }
 
+    @GetMapping(value = "video/{foreignId}", produces = "video/mp4")
+    public Mono<Resource> getVideos(@PathVariable String foreignId, @RequestHeader("Range") String range) {
+        System.out.println("range in bytes() : " + range);
+        return service.getVideo(foreignId);
+    }
 
+    @GetMapping(path = "/videoReal/{id}", produces = "video/mp4")
+    public Mono<Resource> getRealVideo(@PathVariable String id, @RequestHeader(value = "Range") String range) {
+        System.out.println(id + " " + range);
+        return service.getVideo(id);
+    }
+
+    @PostMapping("/image")
+    public Mono<String> uploadImage(@Valid @RequestPart("image") Mono<FilePart> fileMono) throws Exception {
+        return fileService.save(fileMono);
+    }
 
     @PostMapping("/upload")
     public ResponseEntity<?> handleFileUpload( @RequestParam("file") Mono<FilePart> file) {
