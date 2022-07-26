@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Card, CardProps } from "../shared/Card";
 import { MediaPlaying } from "../main/MediaPlaying";
-import Button from "../shared/Button";
 import styles from "./dashboard.module.scss";
 
 type CardListProps = {
@@ -9,8 +7,6 @@ type CardListProps = {
 };
 
 const Dashboard: React.FC<CardListProps> = ({ items }) => {
-	const [isPlaying, setIsPlaying] = useState(false);
-
 	return (
 		<>
 			<main className={styles.container}>
@@ -39,20 +35,6 @@ const Dashboard: React.FC<CardListProps> = ({ items }) => {
 
 			<div className={styles.playingNow}>
 				<MediaPlaying />
-				<Button
-					btnClass={
-						!isPlaying ? `${styles.play}` : `${styles.hidden}`
-					}
-					children={<i className="fas fa-play"></i>}
-					onButtonClick={() => setIsPlaying(!isPlaying)}
-				/>
-				<Button
-					btnClass={
-						isPlaying ? `${styles.pause}` : `${styles.hidden}`
-					}
-					children={<i className="fas fa-pause"></i>}
-					onButtonClick={() => setIsPlaying(!isPlaying)}
-				/>
 			</div>
 		</>
 	);

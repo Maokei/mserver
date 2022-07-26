@@ -52,27 +52,11 @@
 }
 
 .playingNow {
-	border: 3px solid var(--color-grey);
-	// padding: 2em;
-	box-shadow: -8px -8px 20px rgba(42, 46, 53, 0.58886),
-		3px 8px 20px rgba(0, 0, 0, 0.353065);
-
-	.play,
-	.pause {
-		display: grid;
-		justify-self: center;
-		align-self: center;
-
-		width: 75px;
-		height: 75px;
-		background-color: var(--color-orange);
-
-		&:hover {
-			background-color: lighten(#ea5110, 5%);
-		}
-	}
-
-	.hidden {
-		display: none;
-	}
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	height: 10rem;
+	border-top: 3px solid var(--color-dark);
+	background-color: var(--color-dark);
 }

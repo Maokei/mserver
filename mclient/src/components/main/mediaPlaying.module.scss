@@ -1,61 +1,96 @@
 .wrapper {
-	position: fixed;
-	bottom: 0;
-	padding-left: 5vw;
+	margin: 1em auto;
+	padding: 2vw;
 	background-color: var(--color-dark);
-	width: 100vw;
-	height: 10rem;
-	border-radius: 105px;
+	width: 90vw;
+	height: 7rem;
+	border: 3px solid transparent;
+	border-radius: 30px 105px 105px 30px;
+	background-clip: padding-box;
+	box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.3);
 
 	grid-area: now-playing;
 
-	display: grid;
+	display: flex;
+	justify-content: space-between;
 	align-items: center;
-	justify-self: center;
-	grid-template-areas:
-		"medium-art medium-art ."
-		"medium-art medium-art medium-album"
-		"medium-art medium-art medium-title"
-		"medium-art medium-art medium-artist"
-		"medium-art medium-art .";
+	// justify-self: center;
+	// grid-template-areas:
+	// 	"medium-art medium-art ."
+	// 	"medium-art medium-art medium-album button"
+	// 	"medium-art medium-art medium-title button"
+	// 	"medium-art medium-art medium-artist button"
+	// 	"medium-art medium-art .";
 
-	p {
-		text-align: center;
+	&:before {
+		content: "";
+		position: absolute;
+		top: -0.8em;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: -1;
+		margin: 27px 16px;
+		border-radius: inherit;
+		background: linear-gradient(
+			to right,
+			rgba(0, 0, 0, 0.368),
+			var(--color-orange)
+		);
 	}
 
-	@media screen and (max-width: 768px) {
-		grid-column: 1 / -1;
-		grid-row: 2 / 3;
-	}
+	// @media screen and (max-width: 768px) {
+	// 	grid-column: 1 / -1;
+	// 	grid-row: 2 / 3;
+	// }
+}
+
+.mediaTextGroup {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .art {
-	grid-area: medium-art;
+	// grid-area: medium-art;
 	position: inherit;
-	width: 128px;
-	height: 128px;
-	border: 2px solid;
-	border-image-source: linear-gradient(
-		141.17deg,
-		#41464b 16.39%,
-		#1a1b1f 86.27%
-	);
+	border: 3px solid var(--color-grey);
 	border-radius: 100%;
 	box-shadow: 8px 8px 20px 0px rgba(0, 0, 0, 0.3),
 		-8px -8px 20px 0px rgba(122, 134, 151, 0.15);
 }
 
-.album {
-	grid-area: medium-album;
-}
+// .album {
+// 	grid-area: medium-album;
+// }
 
 .title {
-	grid-area: medium-title;
+	// grid-area: medium-title;
 	color: var(--color-orange);
 	filter: blur(0.75px);
 }
 
 .artist {
-	grid-area: medium-artist;
+	// grid-area: medium-artist;
 	color: var(--color-grey);
+}
+
+.play,
+.pause {
+	// grid-area: button;
+
+	width: 75px;
+	height: 75px;
+	background-color: var(--color-orange) !important;
+	box-shadow: -8px -8px 20px rgba(42, 46, 53, 0.58886),
+		3px 8px 20px rgba(0, 0, 0, 0.353065);
+
+	&:hover {
+		background-color: lighten(#ea5110, 5%);
+	}
+}
+
+.hidden {
+	display: none;
 }

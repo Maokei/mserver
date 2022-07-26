@@ -3,8 +3,11 @@
 	z-index: 10;
 	width: 100vw;
 	position: fixed;
+	top: 0;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	background-color: var(--color-dark);
 }
 
 .icon {
@@ -21,5 +24,7 @@
 	.header {
 		display: flex;
 		width: 100%;
+		height: 5.5em;
+		margin: 0 auto;
 	}
 }
