@@ -1,15 +1,3 @@
-:root {
-	--color-dark: #2a2e34;
-	--color-dark-lighten: lighten(var(var(--color-dark)));
-	--color-grey: #727579;
-	--color-orange: #ea5110;
-	--color-dark-orange: darken(#ea5110, 5%);
-	--greenSeaweed: rgba(2, 128, 144, 1);
-	--blueQueen: rgba(69, 105, 144, 1);
-	--subtitle: #999999;
-	--title: lighten(var(#999999, 20%));
-}
-
 html,
 body {
 	padding: 0;

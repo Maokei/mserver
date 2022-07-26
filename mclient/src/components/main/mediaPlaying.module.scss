@@ -1,13 +1,23 @@
 .wrapper {
+	position: fixed;
+	bottom: 0;
+	padding-left: 5vw;
+	background-color: var(--color-dark);
+	width: 100vw;
+	height: 10rem;
+	border-radius: 105px;
+
 	grid-area: now-playing;
 
 	display: grid;
+	align-items: center;
+	justify-self: center;
 	grid-template-areas:
-		"medium-art ."
-		"medium-art medium-album"
-		"medium-art medium-title"
-		"medium-art medium-artist"
-		"medium-art .";
+		"medium-art medium-art ."
+		"medium-art medium-art medium-album"
+		"medium-art medium-art medium-title"
+		"medium-art medium-art medium-artist"
+		"medium-art medium-art .";
 
 	p {
 		text-align: center;

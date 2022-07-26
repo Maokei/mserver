@@ -1,0 +1,78 @@
+.container {
+	padding: 1.2rem;
+	margin-top: 7rem;
+	margin-bottom: 10rem;
+	z-index: 10;
+	left: 0px;
+	display: flex;
+	flex-direction: column;
+	background: linear-gradient(146.6deg, #1f2328 12.49%, #17191d 81%);
+	box-shadow: -8px -8px 20px rgba(42, 46, 53, 0.58886),
+		3px 8px 20px rgba(0, 0, 0, 0.353065);
+	border-radius: 37px 37px 0px 0px;
+
+	.recentlyPlayed p,
+	.trending p {
+		color: var(--subtitle);
+	}
+
+	.trending p {
+		margin-top: 1.2em;
+	}
+
+	.cardsGroup {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 10px;
+
+		.card {
+			padding: 1em;
+			background-color: var(--color-dark-lighten);
+			box-shadow: -1px -5px 12px rgba(42, 46, 53, 0.58886);
+		}
+
+		img {
+			border-radius: 50%;
+		}
+
+		.album {
+			margin: 1em 0 0;
+			color: var(--title);
+			text-align: center;
+
+			p {
+				line-height: normal;
+			}
+		}
+	}
+
+	@media screen and (min-width: 768px) {
+		justify-content: space-around;
+	}
+}
+
+.playingNow {
+	border: 3px solid var(--color-grey);
+	// padding: 2em;
+	box-shadow: -8px -8px 20px rgba(42, 46, 53, 0.58886),
+		3px 8px 20px rgba(0, 0, 0, 0.353065);
+
+	.play,
+	.pause {
+		display: grid;
+		justify-self: center;
+		align-self: center;
+
+		width: 75px;
+		height: 75px;
+		background-color: var(--color-orange);
+
+		&:hover {
+			background-color: lighten(#ea5110, 5%);
+		}
+	}
+
+	.hidden {
+		display: none;
+	}
+}

@@ -1,5 +1,10 @@
 .header {
-	padding: 3vh 5vw;
+	margin: 3vh auto;
+	z-index: 10;
+	width: 100vw;
+	position: fixed;
+	display: flex;
+	justify-content: space-between;
 }
 
 .icon {
@@ -15,5 +20,6 @@
 @media screen and (max-width: 768px) {
 	.header {
 		display: flex;
+		width: 100%;
 	}
 }

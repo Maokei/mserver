@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import Dashboard from "./components/dashboard/Dashboard";
 import { Header } from "./components/header/Header";
 import { MediaList } from "./components/main/MediaList";
 import { SongItem } from "./components/main/Media";
@@ -102,9 +103,10 @@ function App() {
 	};
 
 	return (
-		<div className={styles.app}>
+		<div className={`${styles.app} container is-widescreen`}>
 			<Header />
 
+			{/* <section className={`${styles.section} section`}> */}
 			<Routes>
 				<Route path="/" element={<Layout />}>
 					<Route
@@ -165,7 +167,9 @@ function App() {
 						/>
 					}
 				/>
+				<Route path="dashboard" element={<Dashboard items={[]} />} />
 			</Routes>
+			{/* </section> */}
 		</div>
 	);
 }
