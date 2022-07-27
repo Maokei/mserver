@@ -57,8 +57,8 @@
 	@media screen and (min-width: 768px) {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-		width: 70%;
-		margin-left: 30%;
+		width: 73%;
+		margin-left: 25%;
 
 		.menu {
 			position: absolute;
@@ -95,6 +95,11 @@
 		.trending {
 			grid-column: 1 / -1;
 		}
+	}
+
+	@media screen and (min-width: 1216px) {
+		width: 70%;
+		margin-left: 30%;
 	}
 }
 
