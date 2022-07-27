@@ -31,16 +31,42 @@ export const MediaPlaying = () => {
 				</p>
 			</div>
 
-			<Button
-				btnClass={!isPlaying ? `${styles.play}` : `${styles.hidden}`}
-				children={<i className="fas fa-play"></i>}
-				onButtonClick={() => setIsPlaying(!isPlaying)}
-			/>
-			<Button
-				btnClass={isPlaying ? `${styles.pause}` : `${styles.hidden}`}
-				children={<i className="fas fa-pause"></i>}
-				onButtonClick={() => setIsPlaying(!isPlaying)}
-			/>
+			<div className={styles.btnGroup}>
+				<Button
+					btnClass={styles.previous}
+					children={<i className="fas fa-caret-left"></i>}
+					onButtonClick={() => console.log("previous")}
+				/>
+				<Button
+					btnClass={
+						!isPlaying ? `${styles.play}` : `${styles.hidden}`
+					}
+					children={<i className="fas fa-play"></i>}
+					onButtonClick={() => setIsPlaying(!isPlaying)}
+				/>
+				<Button
+					btnClass={
+						isPlaying ? `${styles.pause}` : `${styles.hidden}`
+					}
+					children={<i className="fas fa-pause"></i>}
+					onButtonClick={() => setIsPlaying(!isPlaying)}
+				/>
+				<Button
+					btnClass={styles.next}
+					children={<i className="fas fa-caret-right"></i>}
+					onButtonClick={() => console.log("next")}
+				/>
+				<Button
+					btnClass={styles.shuffle}
+					children={<i className="fas fa-random"></i>}
+					onButtonClick={() => console.log("shuffle")}
+				/>
+				<Button
+					btnClass={styles.volume}
+					children={<i className="fas fa-volume-up"></i>}
+					onButtonClick={() => console.log("volume")}
+				/>
+			</div>
 		</div>
 	);
 };

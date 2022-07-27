@@ -1,5 +1,6 @@
 import { Card, CardProps } from "../shared/Card";
 import { MediaPlaying } from "../main/MediaPlaying";
+import { MediaProgress } from "../main/MediaProgress";
 import styles from "./dashboard.module.scss";
 
 type CardListProps = {
@@ -10,6 +11,37 @@ const Dashboard: React.FC<CardListProps> = ({ items }) => {
 	return (
 		<>
 			<main className={styles.container}>
+				<aside className={styles.menu}>
+					<ul className="menuTop">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a href="/dashboard">Dashboard</a>
+						</li>
+						<li>
+							<a href="/create">Create Playlist</a>
+						</li>
+						<li>
+							<a href="/liked">Liked</a>
+						</li>
+					</ul>
+
+					<div className={styles.divider} />
+
+					<ul className="menuBottom">
+						<li>
+							<a href="/playlist1">Playlist 1</a>
+						</li>
+						<li>
+							<a href="/playlist2">Playlist 2</a>
+						</li>
+						<li>
+							<a href="/playlist3">Playlist 3</a>
+						</li>
+					</ul>
+				</aside>
+
 				<div className={styles.recentlyPlayed}>
 					<p className="title is-4 is-size-6-mobile">
 						Recently Played
@@ -34,6 +66,7 @@ const Dashboard: React.FC<CardListProps> = ({ items }) => {
 			</main>
 
 			<div className={styles.playingNow}>
+				<MediaProgress />
 				<MediaPlaying />
 			</div>
 		</>
