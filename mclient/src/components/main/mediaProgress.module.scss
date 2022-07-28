@@ -7,10 +7,19 @@
 
 	.timestamp {
 		margin-bottom: 1.5rem;
+		display: none;
 	}
 
 	.progressbar {
 		height: 5px;
+	}
+
+	.progressbar:hover {
+		cursor: pointer;
+	}
+
+	.shown {
+		display: block;
 	}
 
 	.isOrange::-webkit-progress-value {
