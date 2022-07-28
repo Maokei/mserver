@@ -17,7 +17,7 @@ const Dashboard: React.FC<CardListProps> = ({ items }) => {
 							<a href="/">Home</a>
 						</li>
 						<li>
-							<a href="/dashboard">Dashboard</a>
+							<a href="/library">Library</a>
 						</li>
 						<li>
 							<a href="/create">Create Playlist</a>
