@@ -3,6 +3,7 @@ import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
+import Dashboard from "./components/dashboard/Dashboard";
 import { Header } from "./components/header/Header";
 import { MediaList } from "./components/main/MediaList";
 import { SongItem } from "./components/main/Media";
@@ -102,39 +103,38 @@ function App() {
 	};
 
 	return (
-		<div className={styles.app}>
+		<div className={`${styles.app} container is-widescreen`}>
 			<Header />
 
 			<Routes>
 				<Route path="/" element={<Layout />}>
-					<Route
-						index
-						element={
-							<main className={styles.main}>
-								{!data ? (
-									"There is nothing yet"
-								) : !hasSelected ? (
-									<>
-										<MediaList
-											items={data}
-											handleToggleLike={handleToggleLike}
-										/>
-									</>
-								) : (
-									<>
-										<MediaList
-											items={data}
-											handleToggleLike={handleToggleLike}
-										/>
-										<SelectedMedia
-											onClickPlay={handlePlay}
-										/>
-									</>
-								)}
-							</main>
-						}
-					/>
+					<Route index element={<Dashboard items={[]} />} />
 				</Route>
+				<Route
+					path="/library"
+					element={
+						<main className={styles.container}>
+							{!data ? (
+								"There is nothing yet"
+							) : !hasSelected ? (
+								<>
+									<MediaList
+										items={data}
+										handleToggleLike={handleToggleLike}
+									/>
+								</>
+							) : (
+								<>
+									<MediaList
+										items={data}
+										handleToggleLike={handleToggleLike}
+									/>
+									<SelectedMedia onClickPlay={handlePlay} />
+								</>
+							)}
+						</main>
+					}
+				/>
 				<Route
 					path="login"
 					element={

@@ -1,51 +1,100 @@
 .wrapper {
+	margin: -30px auto;
+	padding: 2vw;
+	width: 90vw;
+	height: 7rem;
+	background: linear-gradient(var(--color-dark), var(--color-dark))
+			padding-box,
+		linear-gradient(to right, var(--color-dark), var(--color-orange))
+			border-box;
+	border: 3px solid transparent;
+	border-radius: 30px 105px 105px 30px;
+	box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.3);
+
 	grid-area: now-playing;
 
-	display: grid;
-	grid-template-areas:
-		"medium-art ."
-		"medium-art medium-album"
-		"medium-art medium-title"
-		"medium-art medium-artist"
-		"medium-art .";
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 
-	p {
-		text-align: center;
-	}
-
-	@media screen and (max-width: 768px) {
-		grid-column: 1 / -1;
-		grid-row: 2 / 3;
+	@media screen and (min-width: 768px) {
+		width: 95%;
 	}
 }
 
+.mediaTextGroup {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .art {
-	grid-area: medium-art;
 	position: inherit;
-	width: 128px;
-	height: 128px;
-	border: 2px solid;
-	border-image-source: linear-gradient(
-		141.17deg,
-		#41464b 16.39%,
-		#1a1b1f 86.27%
-	);
+	border: 3px solid var(--color-grey);
 	border-radius: 100%;
 	box-shadow: 8px 8px 20px 0px rgba(0, 0, 0, 0.3),
 		-8px -8px 20px 0px rgba(122, 134, 151, 0.15);
 }
 
-.album {
-	grid-area: medium-album;
-}
-
 .title {
-	grid-area: medium-title;
 	color: var(--color-orange);
 	filter: blur(0.75px);
 }
 
 .artist {
-	grid-area: medium-artist;
 	color: var(--color-grey);
+}
+
+.previous,
+.next,
+.shuffle,
+.volume {
+	display: none;
+}
+
+.play,
+.pause {
+	width: 75px;
+	height: 75px;
+	background-color: var(--color-orange) !important;
+	box-shadow: -8px -8px 20px rgba(42, 46, 53, 0.58886),
+		3px 8px 20px rgba(0, 0, 0, 0.353065);
+
+	&:hover {
+		background-color: lighten(#ea5110, 5%);
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.btnGroup {
+		display: flex;
+		gap: 1em;
+	}
+
+	.previous,
+	.next,
+	.shuffle,
+	.volume {
+		display: grid;
+		justify-self: center;
+		align-self: center;
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.play,
+	.pause,
+	.previous,
+	.next {
+		gap: 0;
+	}
+
+	.next {
+		margin-right: 7rem;
+	}
+}
+
+.hidden {
+	display: none;
 }
