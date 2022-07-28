@@ -7,7 +7,7 @@
 ## Run with java
 ```
 mserver/mserver/
-./gradlew runBoot
+./gradlew bootRun
 ```
 
 ## Run with docker
