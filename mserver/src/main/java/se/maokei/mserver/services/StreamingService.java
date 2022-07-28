@@ -20,19 +20,14 @@ public class StreamingService {
 
   private ResourceLoader resourceLoader;
 
-  public Mono<Resource> getTestAudio(String fileName) {
-    LOGGER.info("StreamingService streaming audio " + fileName);
-    return Mono.fromSupplier(() -> this.resourceLoader.getResource( String.format(AUDIO_FORMAT, fileName)));
-  }
-
-  public Mono<Resource> getTestVideo(String fileName) {
-    LOGGER.info("StreamingService streaming video " + fileName);
-    return Mono.fromSupplier(() -> this.resourceLoader.getResource( String.format(VIDEO_FORMAT, fileName)));
-  }
-
-  public Mono<Resource> getVideo(String foreignId) {
+  public Mono<Resource> getMedia(String foreignId) {
     LOGGER.info("StreamingService requested video id " + foreignId);
     return mediaRepository.findByForeignId(foreignId)
-        .flatMap(media -> Mono.fromSupplier(() -> resourceLoader.getResource(media.getLocation())));
+        .flatMap(
+            media -> Mono.fromSupplier(
+                () -> resourceLoader.getResource(media.getLocation()
+                )
+            )
+        );
   }
 }

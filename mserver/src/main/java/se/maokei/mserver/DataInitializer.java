@@ -26,8 +26,8 @@ class DataInitializer implements CommandLineRunner {
   private final MediaRepository mediaRepository;
   private final PasswordEncoder passwordEncoder;
   private ResourceLoader resourceLoader;
-  private static final String VIDEO_FORMAT = "classpath:videos/%s.mp4";
-  private static final String AUDIO_FORMAT = "classpath:audios/%s.mp3";
+  private static final String R_VIDEO_FORMAT = "classpath:videos/%s.mp4";
+  private static final String R_AUDIO_FORMAT = "classpath:audios/%s.mp3";
 
 
   @Override
@@ -48,43 +48,40 @@ class DataInitializer implements CommandLineRunner {
             .subscribe();
     userRepository.findAll().subscribe(System.out::println);
 
+    log.info("Initialization of testing data ...");
+    /* Video */
     Media netflixCyberpunkMedia = Media.builder()
-        .location("classpath:videos/netflix_cyberpunk.mp4")
+        .location("file:test_files/netflix_cyberpunk.mp4")
         .fileName("netflix_cyberpunk.mp4")
         .title("Cyberpunk trailer")
         .foreignId("c7192772-0c1c-11ed-861d-0242ac120001").build();
     Media videoMedia = Media.builder()
-        .location("classpath:videos/video.mp4")
+        .location("file:test_files/video.mp4")
         .fileName("video.mp4")
         .title("Toy story trailer")
         .foreignId("c7192772-0c1c-11ed-861d-0242ac120002").build();
+    /* Audio */
     Media audio = Media.builder()
-        .location("classpath:audios/song.mp3")
+        .location("file:test_files/audio.mp3")
         .fileName("song.mp3")
-        .title("Piano")
+        .title("HxH Piano")
         .foreignId("c7192772-0c1c-11ed-861d-0242ac120003").build();
     Media neverFade = Media.builder()
-        .location("classpath:audios/never_fade_away.mp3")
+        .location("file:test_files/never_fade_away.mp3")
         .fileName("never_fade_away.mp3")
         .title("Never fade away")
         .foreignId("c7192772-0c1c-11ed-861d-0242ac120004").build();
     Media duvet = Media.builder()
-        .location("classpath:audios/synthwave_duvet.mp3")
+        .location("file:test_files/synthwave_duvet.mp3")
         .fileName("synthwave_duvet.mp3")
         .title("Cyberpunk trailer")
         .foreignId("c7192772-0c1c-11ed-861d-0242ac120005").build();
-    Media plasticLove = Media.builder()
-        .location("classpath:audios/synthwave_plastic_love.webp")
-        .fileName("synthwave_plastic_love.webp")
-        .title("Plastic Love - synthwave remix")
-        .foreignId("c7192772-0c1c-11ed-861d-0242ac120006").build();
+
     mediaRepository.save(netflixCyberpunkMedia).subscribe();
     mediaRepository.save(videoMedia).subscribe();
     mediaRepository.save(audio).subscribe();
     mediaRepository.save(neverFade).subscribe();
     mediaRepository.save(duvet).subscribe();
-    mediaRepository.save(plasticLove).subscribe();
-
+    mediaRepository.findAll().subscribe(System.out::println);
   }
-
 }
