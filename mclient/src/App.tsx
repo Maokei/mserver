@@ -11,6 +11,7 @@ import { SelectedMedia } from "./components/main/SelectedMedia";
 import { fetchLoginAPI } from "./lib/api";
 import dummyData from "./dummyData.json";
 import styles from "./App.module.scss";
+import MediaPlayer from "./components/media/MediaPlayer";
 
 function App() {
 	const navigate = useNavigate();
@@ -135,6 +136,7 @@ function App() {
 						</main>
 					}
 				/>
+				<Route path="/library/player" element={<MediaPlayer />} />
 				<Route
 					path="login"
 					element={
