@@ -6,6 +6,7 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
+import se.maokei.mserver.model.Media;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -34,11 +35,17 @@ public class FileRepository {
     return newFile.toAbsolutePath().toString();
   }
 
-  public Mono<String> saveFile(Mono<FilePart> filePartMono) throws Exception {
+  public Mono<Media> saveFile(Mono<FilePart> filePartMono, Media media) throws Exception {
+    //basePath + File.separator + fp.filename()
     return filePartMono
         .doOnNext(fp -> LOGGER.info("FileRepository saving file: " + fp.filename()))
-        .flatMap(fp -> fp.transferTo(basePath.resolve(fp.filename()))
-            .then(Mono.just(basePath + File.separator + fp.filename())));
+        .flatMap(fp -> {
+          media.setLocation(basePath + File.separator + fp.filename());
+          return fp.transferTo(basePath.resolve(fp.filename()))
+              .then(
+                  Mono.just(media)
+              );
+        });
   }
 
   public FileSystemResource findFile(String location) {
