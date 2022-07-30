@@ -136,7 +136,7 @@ function App() {
 						</main>
 					}
 				/>
-				<Route path="/library/player" element={<MediaPlayer />} />
+				<Route path="/library/all" element={<MediaPlayer />} />
 				<Route
 					path="login"
 					element={
