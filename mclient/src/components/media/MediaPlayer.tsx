@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import MediaItem from "./MediaItem";
 import styles from "./mediaPlayer.module.scss";
 
 const MediaPlayer = () => {
@@ -32,13 +33,13 @@ const MediaPlayer = () => {
 
 	return (
 		<main className={styles.container}>
-			<p className="is-size-1 has-text-white mt-6">MediaPlayer</p>
+			<h1 className="is-size-1 has-text-white mt-6">Library</h1>
 			<div className={styles.test}>
 				{loading && <div>A moment please...</div>}
 				{error && (
 					<div>{`There is a problem fetching media data - ${error}`}</div>
 				)}
-				<ul>
+				<ul className={styles.mediaList}>
 					{data &&
 						data.map(
 							({
@@ -50,18 +51,15 @@ const MediaPlayer = () => {
 								title: string;
 								foreignId: string;
 							}) => (
-								<li key={id}>
-									<h3>{title}</h3>
-									<video
-										src={`http://localhost:8080/api/v1/media/${foreignId}`}
-										style={{
-											width: "720px",
-											height: "480px",
-										}}
-										controls
-										preload="none"
-									></video>
-								</li>
+								<MediaItem
+									key={id}
+									baseUrl={
+										"http://localhost:8080/api/v1/media"
+									}
+									id={id}
+									title={title}
+									foreignId={foreignId}
+								/>
 							)
 						)}
 				</ul>
