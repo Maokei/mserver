@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./mediaPlayer.module.scss";
 
-const MediaPlayer = (/* { foreignId }: { foreignId: string } */) => {
+const MediaPlayer = () => {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -51,8 +51,8 @@ const MediaPlayer = (/* { foreignId }: { foreignId: string } */) => {
 								foreignId: string;
 							}) => (
 								<li key={id}>
-									<p>{title}</p>
-									<audio
+									<h3>{title}</h3>
+									<video
 										src={`http://localhost:8080/api/v1/media/${foreignId}`}
 										style={{
 											width: "720px",
@@ -60,7 +60,7 @@ const MediaPlayer = (/* { foreignId }: { foreignId: string } */) => {
 										}}
 										controls
 										preload="none"
-									></audio>
+									></video>
 								</li>
 							)
 						)}
