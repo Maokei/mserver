@@ -1,4 +1,8 @@
+import { useState, useEffect } from "react";
 import styles from "./mediaItem.module.scss";
+import Pause from "./player/Pause";
+import Play from "./player/Play";
+import ProgressBar from "./player/ProgressBar";
 
 const MediaItem = ({
 	baseUrl,
@@ -11,6 +15,20 @@ const MediaItem = ({
 	title: string;
 	foreignId: string;
 }) => {
+	const [playing, setPlaying] = useState(false);
+	const [duration, setDuration] = useState();
+	const [currentTime, setCurrentTime] = useState();
+
+	useEffect(() => {
+		const mediaFile: HTMLElement | any =
+			document.getElementById("media-file");
+
+		setDuration(mediaFile.duration);
+		setCurrentTime(mediaFile.currentTime);
+
+		playing ? mediaFile?.play() : mediaFile?.pause();
+	}, [playing]);
+
 	return (
 		<>
 			<li key={id} className={`${styles.item} card`}>
@@ -33,20 +51,28 @@ const MediaItem = ({
 						</div>
 					</div>
 					<div className="content">
-						<video
-							src={`${baseUrl}/${foreignId}`}
-							controls
-							preload="none"
-						></video>
+						<video id="media-file">
+							<source src={`${baseUrl}/${foreignId}`} />
+							Your browser does not support the <code>
+								audio
+							</code>{" "}
+							element.
+						</video>
+						<div className="controls">
+							{playing ? (
+								<Pause handleClick={() => setPlaying(false)} />
+							) : (
+								<Play
+									handlePlayClick={() => setPlaying(true)}
+								/>
+							)}
+							<ProgressBar
+								duration={duration}
+								currentTime={currentTime}
+							/>
+						</div>
 					</div>
 				</div>
-				{/* <figure className="image is-4by3">
-					<img
-						src={"https://bulma.io/images/placeholders/96x96.png"}
-						alt={title}
-					/>
-				</figure>
-				<h3 className="title is-3 is-size-6-mobile">{title}</h3> */}
 			</li>
 		</>
 	);
