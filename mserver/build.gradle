@@ -34,7 +34,7 @@ dependencies {
 	implementation 'com.google.zxing:core:3.5.0'
 	implementation 'com.google.zxing:javase:3.5.0'
 
-	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.8'
+	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.11'
 	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.8'
 	implementation 'commons-io:commons-io:2.11.0'
 	compileOnly 'org.projectlombok:lombok'
