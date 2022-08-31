@@ -15,10 +15,10 @@ const Media = ({
     foreignId: string;
 }) => {
     const [songs, setSongs] = useState(dummyData);
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [isPlaying, setIsPlaying] = useState(false);
     const [currentSong, setCurrentSong] = useState(dummyData[1]);
 
-    const mediaElement = useRef(null);
+    const mediaElement = useRef<any>();
 
     useEffect(() => {
         if (isPlaying) {
@@ -66,11 +66,16 @@ const Media = ({
                         </div>
                     </div>
                     <div className="content">
-                        <video id="media-file">
-                            <source
+                        <video
+                            id="media-file"
+                            src={currentSong.mediaUrl}
+                            ref={mediaElement}
+                            onTimeUpdate={onPlaying}
+                        >
+                            {/* <source
                                 src={`${baseUrl}/${foreignId}`}
                                 onTimeUpdate={onPlaying}
-                            />
+                            /> */}
                             Your browser does not support the <code>audio</code>{" "}
                             element.
                         </video>

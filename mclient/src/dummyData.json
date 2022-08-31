@@ -4,6 +4,7 @@
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch1",
         "mediaSubtitle": "Guy Haley",
+        "mediaUrl": "https://beardbarnmusicbucket.s3.amazonaws.com/The+Wild+Horse",
         "like": true
     },
     {
@@ -11,6 +12,7 @@
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch2",
         "mediaSubtitle": "Guy Haley",
+        "mediaUrl": "https://res.cloudinary.com/shirlzzz9/video/upload/v1530003050/samples/elephants.mp4",
         "like": true
     },
     {
@@ -18,6 +20,7 @@
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch3",
         "mediaSubtitle": "Guy Haley",
+        "mediaUrl": "https://beardbarnmusicbucket.s3.amazonaws.com/The+Wild+Horse",
         "like": true
     },
     {
@@ -25,6 +28,7 @@
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch4",
         "mediaSubtitle": "Guy Haley",
+        "mediaUrl": "https://beardbarnmusicbucket.s3.amazonaws.com/The+Wild+Horse",
         "like": false
     },
     {
@@ -32,6 +36,7 @@
         "imgSrc": "https://bulma.io/images/placeholders/96x96.png",
         "mediaTitle": "Dark Imperium ch5",
         "mediaSubtitle": "Guy Haley",
+        "mediaUrl": "https://beardbarnmusicbucket.s3.amazonaws.com/The+Wild+Horse",
         "like": false
     }
 ]

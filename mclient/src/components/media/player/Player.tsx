@@ -11,6 +11,7 @@ export type PlayerProps = {
     isPlaying: boolean;
     setIsPlaying: (isPlaying: boolean) => any;
     currentSong: any;
+    // currentSong: { length:}
     setCurrentSong: any;
     songs: Song[];
     setSongs: any;
@@ -25,7 +26,15 @@ const Player = ({
     songs,
     mediaElement,
 }: PlayerProps) => {
-    const ref = React.useRef();
+    const playRef = React.useRef<any>();
+
+    const startTime = "00:00";
+    const endTime =
+        currentSong.length && currentSong.length > 0
+            ? Math.floor(currentSong.length / 60) +
+              ":" +
+              Math.floor(currentSong.length % 60)
+            : "00:00";
 
     const handlePlayPause = () => {
         setIsPlaying(!isPlaying);
@@ -33,12 +42,12 @@ const Player = ({
 
     const checkProgress = (e: any) => {
         // @ts-ignore
-        let width = ref.current?.clientWidth;
+        let width = playRef.current?.clientWidth;
         const offset = e.nativeEvent.offsetX;
 
-        const divprogress = (offset / width) * 100;
+        const divProgress = (offset / width) * 100;
         mediaElement.current.currentTime =
-            (divprogress / 100) * currentSong.length;
+            (divProgress / 100) * currentSong.length;
     };
 
     const skipToPrevious = () => {
@@ -75,7 +84,15 @@ const Player = ({
                 <p>{currentSong.mediaTitle}</p>
             </div>
             <div className={styles.progress}>
-                <div className={styles.progressWrapper} onClick={checkProgress}>
+                <div className={styles.timeStamp}>
+                    <p>{startTime}</p>
+                    <p>{endTime}</p>
+                </div>
+                <div
+                    className={styles.progressWrapper}
+                    ref={playRef}
+                    onClick={checkProgress}
+                >
                     <div
                         className={styles.progressBar}
                         style={{ width: `${currentSong.progress + "%"}` }}
@@ -90,14 +107,14 @@ const Player = ({
                 />
                 {isPlaying ? (
                     <Button
-                        btnClass={`play`}
-                        children={<i className="fas fa-play"></i>}
+                        btnClass={`pause`}
+                        children={<i className="fas fa-pause"></i>}
                         onButtonClick={handlePlayPause}
                     />
                 ) : (
                     <Button
-                        btnClass={`pause`}
-                        children={<i className="fas fa-pause"></i>}
+                        btnClass={`play`}
+                        children={<i className="fas fa-play"></i>}
                         onButtonClick={handlePlayPause}
                     />
                 )}
