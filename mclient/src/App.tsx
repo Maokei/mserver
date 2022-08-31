@@ -11,7 +11,8 @@ import { SelectedMedia } from "./components/main/SelectedMedia";
 import { fetchLoginAPI } from "./lib/api";
 import dummyData from "./dummyData.json";
 import styles from "./App.module.scss";
-import MediaPlayer from "./components/media/MediaPlayer";
+// import MediaPlayer from "./components/media/MediaPlayer";
+import MediaItem from "./components/media/MediaItem";
 
 function App() {
 	const navigate = useNavigate();
@@ -136,7 +137,7 @@ function App() {
 						</main>
 					}
 				/>
-				<Route path="/library/all" element={<MediaPlayer />} />
+				<Route path="/library/all" element={<MediaItem baseUrl={""} id={""} title={""} foreignId={""} />} />
 				<Route
 					path="login"
 					element={
