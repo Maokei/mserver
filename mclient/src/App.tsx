@@ -5,114 +5,114 @@ import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import { Header } from "./components/header/Header";
-import { MediaList } from "./components/main/MediaList";
-import { SongItem } from "./components/main/Media";
-import { SelectedMedia } from "./components/main/SelectedMedia";
+import Media from "./components/media/Media";
+// import { MediaList } from "./components/main/MediaList";
+// import { SongItem } from "./components/main/Media";
+// import { SelectedMedia } from "./components/main/SelectedMedia";
 import { fetchLoginAPI } from "./lib/api";
-import dummyData from "./dummyData.json";
+// import dummyData from "./dummyData.json";
 import styles from "./App.module.scss";
 // import MediaPlayer from "./components/media/MediaPlayer";
-import MediaItem from "./components/media/MediaItem";
 
 function App() {
-	const navigate = useNavigate();
+    const navigate = useNavigate();
 
-	const [data, setData] = React.useState<SongItem[]>(dummyData);
-	const hasSelected = React.useState<boolean>(false);
+    // const [data, setData] = React.useState<SongItem[]>(dummyData);
+    // const hasSelected = React.useState<boolean>(false);
 
-	const handleToggleLike = (id: number) => {
-		const mapped = data.map((item) => {
-			return item.id === Number(id)
-				? { ...item, like: !item.like }
-				: { ...item };
-		});
-		setData(mapped);
-	};
+    // const handleToggleLike = (id: number) => {
+    //     const mapped = data.map((item) => {
+    //         return item.id === Number(id)
+    //             ? { ...item, like: !item.like }
+    //             : { ...item };
+    //     });
+    //     setData(mapped);
+    // };
 
-	const handlePlay = () => {
-		console.log("play media...");
-	};
+    // const handlePlay = () => {
+    //     console.log("play media...");
+    // };
 
-	const [username, setUsername] = React.useState("");
-	const [email, setEmail] = React.useState("");
-	const [password, setPassword] = React.useState("");
-	const [confirmPassword, setConfirmPassword] = React.useState("");
-	const [message, setMessage] = React.useState("");
+    const [username, setUsername] = React.useState("");
+    const [email, setEmail] = React.useState("");
+    const [password, setPassword] = React.useState("");
+    const [confirmPassword, setConfirmPassword] = React.useState("");
+    const [message, setMessage] = React.useState("");
 
-	const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+    const handleLoginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-		try {
-			await fetchLoginAPI({ username, password });
+        try {
+            await fetchLoginAPI({ username, password });
 
-			// should redirect to dashboard
-			navigate("/");
-			// empty all fields
-			setUsername("");
-			setPassword("");
-			setMessage("");
-		} catch (error) {
-			setMessage("Wrong username or password! Login Failed.");
-		}
-	};
+            // should redirect to dashboard
+            navigate("/");
+            // empty all fields
+            setUsername("");
+            setPassword("");
+            setMessage("");
+        } catch (error) {
+            setMessage("Wrong username or password! Login Failed.");
+        }
+    };
 
-	const handleSignupSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-		e.preventDefault();
+    const handleSignupSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
 
-		const emailRegex = /\S+@\S+\.\S+/;
-		const usernameReg = /^[a-zA-Z0-9]+$/;
-		const passwordReg = /^[A-Za-z]\w{7,14}$/;
+        const emailRegex = /\S+@\S+\.\S+/;
+        const usernameReg = /^[a-zA-Z0-9]+$/;
+        const passwordReg = /^[A-Za-z]\w{7,14}$/;
 
-		// TODO
-		// get existed users if any from database
-		let savedUser = {
-			email: "test@test.com",
-			username: "test1234",
-			password: "pw1234",
-		};
-		if (localStorage.getItem("mserver-client") !== null) {
-			const info: any = localStorage.getItem("mserver-client");
-			savedUser = JSON.parse(info);
-		} else {
-			console.log("Invalid");
-		}
+        // TODO
+        // get existed users if any from database
+        let savedUser = {
+            email: "test@test.com",
+            username: "test1234",
+            password: "pw1234",
+        };
+        if (localStorage.getItem("mserver-client") !== null) {
+            const info: any = localStorage.getItem("mserver-client");
+            savedUser = JSON.parse(info);
+        } else {
+            console.log("Invalid");
+        }
 
-		if (
-			emailRegex.test(email) &&
-			usernameReg.test(username) &&
-			passwordReg.test(password) &&
-			email !== savedUser.email &&
-			confirmPassword === password
-		) {
-			// redirect to /
-			navigate("/");
+        if (
+            emailRegex.test(email) &&
+            usernameReg.test(username) &&
+            passwordReg.test(password) &&
+            email !== savedUser.email &&
+            confirmPassword === password
+        ) {
+            // redirect to /
+            navigate("/");
 
-			// if the new credentials do not exist already store them in the database
-			localStorage.setItem(
-				"mserver-client",
-				JSON.stringify({ email, username, password, confirmPassword })
-			);
+            // if the new credentials do not exist already store them in the database
+            localStorage.setItem(
+                "mserver-client",
+                JSON.stringify({ email, username, password, confirmPassword })
+            );
 
-			// empty form
-			setEmail("");
-			setUsername("");
-			setPassword("");
-			setConfirmPassword("");
-			setMessage("");
-		} else {
-			setMessage("Invalid email, username or password!");
-		}
-	};
+            // empty form
+            setEmail("");
+            setUsername("");
+            setPassword("");
+            setConfirmPassword("");
+            setMessage("");
+        } else {
+            setMessage("Invalid email, username or password!");
+        }
+    };
 
-	return (
-		<div className={`${styles.app} container is-widescreen`}>
-			<Header />
+    return (
+        <div className={`${styles.app} container is-widescreen`}>
+            <Header />
 
-			<Routes>
-				<Route path="/" element={<Layout />}>
-					<Route index element={<Dashboard items={[]} />} />
-				</Route>
-				<Route
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Dashboard items={[]} />} />
+                </Route>
+                {/* <Route
 					path="/library"
 					element={
 						<main className={styles.container}>
@@ -136,41 +136,46 @@ function App() {
 							)}
 						</main>
 					}
-				/>
-				<Route path="/library/all" element={<MediaItem baseUrl={""} id={""} title={""} foreignId={""} />} />
-				<Route
-					path="login"
-					element={
-						<Login
-							username={username}
-							password={password}
-							setUsername={setUsername}
-							setPassword={setPassword}
-							message={message}
-							handleLoginSubmit={handleLoginSubmit}
-						/>
-					}
-				/>
-				<Route
-					path="signup"
-					element={
-						<Signup
-							email={email}
-							username={username}
-							password={password}
-							setEmail={setEmail}
-							setUsername={setUsername}
-							setPassword={setPassword}
-							message={message}
-							handleSignupSubmit={handleSignupSubmit}
-							confirmPassword={confirmPassword}
-							setConfirmPassword={setConfirmPassword}
-						/>
-					}
-				/>
-			</Routes>
-		</div>
-	);
+				/> */}
+                <Route
+                    path="/library"
+                    element={
+                        <Media baseUrl={""} id={""} title={""} foreignId={""} />
+                    }
+                />
+                <Route
+                    path="login"
+                    element={
+                        <Login
+                            username={username}
+                            password={password}
+                            setUsername={setUsername}
+                            setPassword={setPassword}
+                            message={message}
+                            handleLoginSubmit={handleLoginSubmit}
+                        />
+                    }
+                />
+                <Route
+                    path="signup"
+                    element={
+                        <Signup
+                            email={email}
+                            username={username}
+                            password={password}
+                            setEmail={setEmail}
+                            setUsername={setUsername}
+                            setPassword={setPassword}
+                            message={message}
+                            handleSignupSubmit={handleSignupSubmit}
+                            confirmPassword={confirmPassword}
+                            setConfirmPassword={setConfirmPassword}
+                        />
+                    }
+                />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

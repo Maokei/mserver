@@ -1,12 +1,13 @@
 import React from "react";
 import Button from "../../shared/Button";
+import styles from "../media.module.scss";
 
 type Song = {
     id: number;
     mediaTitle: string;
 };
 
-export type Player = {
+export type PlayerProps = {
     isPlaying: boolean;
     setIsPlaying: (isPlaying: boolean) => any;
     currentSong: any;
@@ -23,7 +24,7 @@ const Player = ({
     setCurrentSong,
     songs,
     mediaElement,
-}: Player) => {
+}: PlayerProps) => {
     const ref = React.useRef();
 
     const handlePlayPause = () => {
@@ -69,21 +70,21 @@ const Player = ({
     };
 
     return (
-        <div className="player_container">
-            <div className="title">
+        <div className={styles.container}>
+            <div className={styles.title}>
                 <p>{currentSong.mediaTitle}</p>
             </div>
-            <div className="progress">
-                <div className="progress" onClick={checkProgress}>
+            <div className={styles.progress}>
+                <div className={styles.progressWrapper} onClick={checkProgress}>
                     <div
-                        className="seek_bar"
+                        className={styles.progressBar}
                         style={{ width: `${currentSong.progress + "%"}` }}
                     ></div>
                 </div>
             </div>
-            <div className="controls">
+            <div className={styles.controls}>
                 <Button
-                    btnClass="previous"
+                    btnClass={`previous`}
                     children={<i className="fas fa-caret-left"></i>}
                     onButtonClick={skipToPrevious}
                 />
@@ -101,7 +102,7 @@ const Player = ({
                     />
                 )}
                 <Button
-                    btnClass="next"
+                    btnClass={`next`}
                     children={<i className="fas fa-caret-right"></i>}
                     onButtonClick={skipToNext}
                 />

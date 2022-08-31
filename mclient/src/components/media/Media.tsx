@@ -1,12 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import styles from "./mediaItem.module.scss";
+import styles from "./media.module.scss";
 import Player from "./player/Player";
 import dummyData from "../../dummyData.json";
-// import Pause from "./player/Pause";
-// import Play from "./player/Play";
-// import ProgressBar from "./player/ProgressBar";
 
-const MediaItem = ({
+const Media = ({
     baseUrl,
     id,
     title,
@@ -20,31 +17,23 @@ const MediaItem = ({
     const [songs, setSongs] = useState(dummyData);
     const [isPlaying, setIsPlaying] = useState(true);
     const [currentSong, setCurrentSong] = useState(dummyData[1]);
-    const [duration, setDuration] = useState();
-    const [currentTime, setCurrentTime] = useState();
 
-    const mediaElement = useRef<HTMLAudioElement>(null);
-
-    // useEffect(() => {
-    //     const mediaFile: HTMLElement | any =
-    //         document.getElementById("media-file");
-
-    //     setDuration(mediaFile.duration);
-    //     setCurrentTime(mediaFile.currentTime);
-
-    //     // isPlaying ? mediaFile?.play() : mediaFile?.pause();
-    // }, [isPlaying]);
+    const mediaElement = useRef(null);
 
     useEffect(() => {
         if (isPlaying) {
-            mediaElement?.current?.play();
+            // @ts-ignore
+            mediaElement.current?.play();
         } else {
+            // @ts-ignore
             mediaElement?.current?.pause();
         }
     }, [isPlaying]);
 
     const onPlaying = () => {
+        // @ts-ignore
         const duration = mediaElement.current?.duration;
+        // @ts-ignore
         const ct = mediaElement.current?.currentTime;
 
         setCurrentSong({
@@ -86,14 +75,6 @@ const MediaItem = ({
                             element.
                         </video>
                         <div className="controls">
-                            {/* {playing ? (
-								<Pause handleClick={() => setPlaying(false)} />
-							) : (
-								<Play
-									handlePlayClick={() => setPlaying(true)}
-								/>
-							)} */}
-
                             <Player
                                 mediaElement={mediaElement}
                                 songs={songs}
@@ -103,10 +84,6 @@ const MediaItem = ({
                                 currentSong={currentSong}
                                 setCurrentSong={setCurrentSong}
                             />
-                            {/* <ProgressBar
-								duration={duration}
-								currentTime={currentTime}
-							/> */}
                         </div>
                     </div>
                 </div>
@@ -115,4 +92,4 @@ const MediaItem = ({
     );
 };
 
-export default MediaItem;
+export default Media;
