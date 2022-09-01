@@ -79,7 +79,7 @@ const Player = ({
     };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.playerContainer}>
             <div className={styles.title}>
                 <p>{currentSong.mediaTitle}</p>
             </div>

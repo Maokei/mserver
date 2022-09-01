@@ -47,17 +47,19 @@ const Media = ({
     return (
         <>
             <li key={id} className={`${styles.item} card`}>
-                <div className="card-image">
-                    <figure className="image is-4by3">
-                        <img
-                            src={
-                                "https://bulma.io/images/placeholders/1280x960.png"
-                            }
-                            alt={title}
-                        />
-                    </figure>
-                </div>
                 <div className="card-content">
+                    {!currentSong.mediaUrl.includes("mp4") ? (
+                        <div className="card-image">
+                            <figure className="image is-4by3">
+                                <img
+                                    src={
+                                        "https://bulma.io/images/placeholders/1280x960.png"
+                                    }
+                                    alt={title}
+                                />
+                            </figure>
+                        </div>
+                    ) : null}
                     <div className="media">
                         <div className="media-content">
                             <p className="title is-4 is-size-6-mobile">
@@ -65,20 +67,22 @@ const Media = ({
                             </p>
                         </div>
                     </div>
-                    <div className="content">
-                        <video
-                            id="media-file"
-                            src={currentSong.mediaUrl}
-                            ref={mediaElement}
-                            onTimeUpdate={onPlaying}
-                        >
-                            {/* <source
+                    <div className={`${styles.contentContainer} content`}>
+                        {currentSong.mediaUrl.includes("mp4") && (
+                            <video
+                                id="media-file"
+                                src={currentSong.mediaUrl}
+                                ref={mediaElement}
+                                onTimeUpdate={onPlaying}
+                            >
+                                {/* <source
                                 src={`${baseUrl}/${foreignId}`}
                                 onTimeUpdate={onPlaying}
                             /> */}
-                            Your browser does not support the <code>audio</code>{" "}
-                            element.
-                        </video>
+                                Your browser does not support the{" "}
+                                <code>audio</code> element.
+                            </video>
+                        )}
                         <div className="controls">
                             <Player
                                 mediaElement={mediaElement}

@@ -1,9 +1,21 @@
-.container {
-    width: 50%;
+.item {
+    margin-top: 7rem;
+    list-style: none;
+    background-color: var(--color-dark-lighten);
+}
+
+.contentContainer {
+    video {
+        border-radius: 10px;
+    }
+}
+
+.playerContainer {
+    width: 100%;
     padding: 1rem;
-    border: 1px solid rgb(141, 141, 141);
+    border: 1px solid 8px 8px 20px 0px var(--border-shadow);
     border-radius: 10px;
-    color: rgb(218, 218, 218);
+    color: var(--subtitle);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,6 +29,8 @@
 
     .title {
         font-size: inherit;
+        font-weight: 600;
+        color: var(--title);
     }
 
     .progress {
@@ -37,7 +51,7 @@
             .progressBar {
                 width: 0;
                 height: 100%;
-                background-color: rgb(24, 128, 3);
+                background-color: var(--greenSeaweed);
                 border-radius: 30px;
             }
         }
