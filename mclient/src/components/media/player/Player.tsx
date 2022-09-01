@@ -2,38 +2,41 @@ import React from "react";
 import Button from "../../shared/Button";
 import styles from "../media.module.scss";
 
-type Song = {
+type ClipProps = {
     id: number;
     mediaTitle: string;
 };
 
 export type PlayerProps = {
     isPlaying: boolean;
-    setIsPlaying: (isPlaying: boolean) => any;
-    currentSong: any;
-    // currentSong: { length:}
-    setCurrentSong: any;
-    songs: Song[];
-    setSongs: any;
+    setIsPlaying: (isPlaying: boolean) => void;
+    currentMedia: {
+        length: any;
+        mediaTitle: string;
+        progress: number;
+    };
+    setCurrentMedia: any;
+    clips: ClipProps[];
+    setClips: any;
     mediaElement: any;
 };
 
 const Player = ({
     isPlaying,
     setIsPlaying,
-    currentSong,
-    setCurrentSong,
-    songs,
+    currentMedia,
+    setCurrentMedia,
+    clips,
     mediaElement,
 }: PlayerProps) => {
     const playRef = React.useRef<any>();
 
     const startTime = "00:00";
     const endTime =
-        currentSong.length && currentSong.length > 0
-            ? Math.floor(currentSong.length / 60) +
+        currentMedia.length && currentMedia.length > 0
+            ? Math.floor(currentMedia.length / 60) +
               ":" +
-              Math.floor(currentSong.length % 60)
+              Math.floor(currentMedia.length % 60)
             : "00:00";
 
     const handlePlayPause = () => {
@@ -41,38 +44,37 @@ const Player = ({
     };
 
     const checkProgress = (e: any) => {
-        // @ts-ignore
         let width = playRef.current?.clientWidth;
         const offset = e.nativeEvent.offsetX;
 
         const divProgress = (offset / width) * 100;
         mediaElement.current.currentTime =
-            (divProgress / 100) * currentSong.length;
+            (divProgress / 100) * currentMedia.length;
     };
 
     const skipToPrevious = () => {
-        const index = songs.findIndex(
-            (song) => song.mediaTitle === currentSong.mediaTitle
+        const index = clips.findIndex(
+            (item) => item.mediaTitle === currentMedia.mediaTitle
         );
 
         if (index === 0) {
-            setCurrentSong(songs[songs.length - 1]);
+            setCurrentMedia(clips[clips.length - 1]);
         } else {
-            setCurrentSong(songs[index - 1]);
+            setCurrentMedia(clips[index - 1]);
         }
 
         mediaElement.currentTime = 0;
     };
 
     const skipToNext = () => {
-        const index = songs.findIndex(
-            (song) => song.mediaTitle === currentSong.mediaTitle
+        const index = clips.findIndex(
+            (item) => item.mediaTitle === currentMedia.mediaTitle
         );
 
-        if (index === songs.length - 1) {
-            setCurrentSong(songs[0]);
+        if (index === clips.length - 1) {
+            setCurrentMedia(clips[0]);
         } else {
-            setCurrentSong(songs[index + 1]);
+            setCurrentMedia(clips[index + 1]);
         }
 
         mediaElement.currentTime = 0;
@@ -81,7 +83,9 @@ const Player = ({
     return (
         <div className={styles.playerContainer}>
             <div className={styles.title}>
-                <p>{currentSong.mediaTitle}</p>
+                <p className={`title is-4 is-size-6-mobile ${styles.title}`}>
+                    {currentMedia.mediaTitle}
+                </p>
             </div>
             <div className={styles.progress}>
                 <div className={styles.timeStamp}>
@@ -95,7 +99,7 @@ const Player = ({
                 >
                     <div
                         className={styles.progressBar}
-                        style={{ width: `${currentSong.progress + "%"}` }}
+                        style={{ width: `${currentMedia.progress + "%"}` }}
                     ></div>
                 </div>
             </div>
