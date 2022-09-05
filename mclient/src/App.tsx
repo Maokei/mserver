@@ -137,12 +137,7 @@ function App() {
 						</main>
 					}
 				/> */}
-                <Route
-                    path="/library"
-                    element={
-                        <Media baseUrl={""} id={""} title={""} foreignId={""} />
-                    }
-                />
+                <Route path="/library" element={<Media />} />
                 <Route
                     path="login"
                     element={
