@@ -6,19 +6,17 @@ import Signup from "./components/auth/Signup";
 import Dashboard from "./components/dashboard/Dashboard";
 import { Header } from "./components/header/Header";
 import Media from "./components/media/Media";
-// import { MediaList } from "./components/main/MediaList";
+import MediaList from "./components/media/MediaList";
 // import { SongItem } from "./components/main/Media";
 // import { SelectedMedia } from "./components/main/SelectedMedia";
 import { fetchLoginAPI } from "./lib/api";
-// import dummyData from "./dummyData.json";
 import styles from "./App.module.scss";
-// import MediaPlayer from "./components/media/MediaPlayer";
 
 function App() {
     const navigate = useNavigate();
 
-    // const [data, setData] = React.useState<SongItem[]>(dummyData);
-    // const hasSelected = React.useState<boolean>(false);
+    const [data, setData] = React.useState([]);
+    const hasSelected = React.useState<boolean>(false);
 
     // const handleToggleLike = (id: number) => {
     //     const mapped = data.map((item) => {
@@ -29,9 +27,9 @@ function App() {
     //     setData(mapped);
     // };
 
-    // const handlePlay = () => {
-    //     console.log("play media...");
-    // };
+    const handlePlay = () => {
+        console.log("play media...");
+    };
 
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");
@@ -112,32 +110,32 @@ function App() {
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Dashboard items={[]} />} />
                 </Route>
-                {/* <Route
-					path="/library"
-					element={
-						<main className={styles.container}>
-							{!data ? (
-								"There is nothing yet"
-							) : !hasSelected ? (
-								<>
-									<MediaList
-										items={data}
-										handleToggleLike={handleToggleLike}
-									/>
-								</>
-							) : (
-								<>
-									<MediaList
-										items={data}
-										handleToggleLike={handleToggleLike}
-									/>
-									<SelectedMedia onClickPlay={handlePlay} />
-								</>
-							)}
-						</main>
-					}
-				/> */}
-                <Route path="/library" element={<Media />} />
+                <Route
+                    path="/library"
+                    element={
+                        <main className={styles.container}>
+                            {!data ? (
+                                "There is nothing yet"
+                            ) : !hasSelected ? (
+                                <>
+                                    <MediaList
+                                    // items={data}
+                                    // handleToggleLike={handleToggleLike}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <MediaList
+                                    // items={data}
+                                    // handleToggleLike={handleToggleLike}
+                                    />
+                                    {/* <SelectedMedia onClickPlay={handlePlay} /> */}
+                                </>
+                            )}
+                        </main>
+                    }
+                />
+                <Route path="/mediaPlayer" element={<Media />} />
                 <Route
                     path="login"
                     element={

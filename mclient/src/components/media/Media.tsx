@@ -53,20 +53,22 @@ const Media = () => {
     // }, [isPlaying]);
     useEffect(() => {
         const mediaFile: any = document.getElementById("media-file");
-        // var playPromise = mediaFile.play();
+        var playPromise = mediaFile.play();
 
-        // if (playPromise !== undefined) {
-        //     playPromise.then(_ => {
-        //       // Automatic playback started!
-        //       // Show playing UI.
-        //       // We can now safely pause video...
-        //       mediaFile.pause();
-        //     })
-        //     .catch((error: any) => {
-        //         console.log(error)
-        //     });
-        //   }
-        isPlaying ? mediaFile.play() : mediaFile.pause();
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    if (isPlaying) {
+                        mediaFile.play();
+                    } else {
+                        mediaFile.pause();
+                    }
+                })
+                .catch((error: any) => {
+                    console.log(error);
+                });
+        }
+        // isPlaying ? mediaFile.play() : mediaFile.pause();
     }, [isPlaying]);
 
     const onPlaying = () => {
@@ -119,14 +121,13 @@ const Media = () => {
                             // </video>
                             <video
                                 // src={currentMedia.location}
-                                preload="auto"
                                 id="media-file"
                                 ref={mediaElement}
-                                // onTimeUpdate={onPlaying}
+                                onTimeUpdate={onPlaying}
                             >
                                 <source
                                     src={`http://localhost:8080/api/v1/media/${foreignId}`}
-                                    onTimeUpdate={onPlaying}
+                                    type="video/mp4"
                                 />
                                 Your browser does not support the{" "}
                                 <code>video</code> element.
@@ -134,13 +135,13 @@ const Media = () => {
                         ) : (
                             <audio
                                 // src={currentMedia.location}
-                                preload="auto"
                                 id="media-file"
                                 ref={mediaElement}
-                                // onTimeUpdate={onPlaying}
+                                onTimeUpdate={onPlaying}
                             >
                                 <source
                                     src={`http://localhost:8080/api/v1/media/${foreignId}`}
+                                    type="audio/mp3"
                                 />
                                 Your browser does not support the{" "}
                                 <code>audio</code> element.

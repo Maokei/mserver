@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import Media from "./Media";
 import styles from "./mediaList.module.scss";
 
 const MediaList = () => {
