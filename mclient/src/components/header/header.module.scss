@@ -21,6 +21,14 @@
         -8px -8px 20px 0px rgba(122, 134, 151, 0.1);
 }
 
+.backBtn {
+    svg {
+        display: grid;
+        align-self: center;
+        justify-self: center;
+    }
+}
+
 @media screen and (min-width: 768px) {
     .header {
         height: 7rem;

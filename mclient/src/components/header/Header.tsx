@@ -1,7 +1,9 @@
 import React, { ChangeEvent } from "react";
+import { Link } from "react-router-dom";
 import { Search } from "./Search";
 import { ShowMore } from "./ShowMore";
 import styles from "./header.module.scss";
+import { BackIcon } from "../../assets/back-vector";
 
 export const Header = () => {
     const [inputTexts, setInputTexts] = React.useState<string>("");
@@ -39,17 +41,25 @@ export const Header = () => {
 
     return (
         <header className={`${styles.header}`}>
-            {/* <div data-testid="back-btn" className="icon">
-                <BackIcon />
-            </div> */}
-
-            <Search
-                hidden={isHidden}
-                onClick={toggleSearchbar}
-                value={inputTexts}
-                setKeywords={setInputTexts}
-                onKeyDown={handleKeyDown}
-            />
+            {window.location.pathname === "/" ||
+            window.location.pathname === "/library" ? (
+                <Search
+                    hidden={isHidden}
+                    onClick={toggleSearchbar}
+                    value={inputTexts}
+                    setKeywords={setInputTexts}
+                    onKeyDown={handleKeyDown}
+                />
+            ) : (
+                <div
+                    data-testid="back-btn"
+                    className={`icon ${styles.backBtn}`}
+                >
+                    <Link to="/">
+                        <BackIcon />
+                    </Link>
+                </div>
+            )}
 
             <ShowMore
                 dropdownRef={ref}
