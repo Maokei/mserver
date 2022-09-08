@@ -1,5 +1,12 @@
 .wrapper {
-	display: flex;
-	justify-content: flex-end;
-	z-index: 100;
+    grid-column: 11 / 12;
+    justify-self: end;
+    z-index: 100;
+}
+
+@media screen and (min-width: 1600px) {
+    .wrapper {
+        grid-column: 10 / 11;
+        justify-self: start;
+    }
 }
