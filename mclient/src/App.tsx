@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Layout from "./components/Layout";
+import Home from "./components/home/Home";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
-import Dashboard from "./components/dashboard/Dashboard";
 import { Header } from "./components/header/Header";
 import Media from "./components/media/Media";
 import MediaList from "./components/media/MediaList";
@@ -108,7 +108,7 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Layout />}>
-                    <Route index element={<Dashboard items={[]} />} />
+                    <Route index element={<Home items={[]} />} />
                 </Route>
                 <Route
                     path="/library"
