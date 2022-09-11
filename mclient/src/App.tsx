@@ -107,6 +107,8 @@ function App() {
         <div className={`${styles.app} container is-widescreen`}>
             <Header />
 
+            {error && <p>{error}</p>}
+
             {loading ? (
                 <p>Loading ...</p>
             ) : (

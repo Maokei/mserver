@@ -1,15 +1,5 @@
 import styles from "../home/home.module.scss";
-
-export type ItemProps = {
-    id: number;
-    imgSrc: string;
-    title: string;
-};
-
-export type CardProps = {
-    id: string;
-    item: ItemProps;
-};
+import { ItemProps } from "../../types";
 
 export const Card = (item: ItemProps) => {
     return (

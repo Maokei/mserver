@@ -4,7 +4,18 @@ type MediaDataProviderProps = {
     children: React.ReactNode;
 };
 
-const MediaDataContext = React.createContext({});
+type MediaDataProps = {
+    id: string;
+    title: string;
+};
+
+type MediaDataContextProps = {
+    data: MediaDataProps[];
+    loading: boolean;
+    error: any;
+};
+
+const MediaDataContext = React.createContext({} as MediaDataContextProps);
 
 export function useMediaData() {
     return React.useContext(MediaDataContext);

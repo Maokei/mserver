@@ -1,15 +1,16 @@
 import { useMediaData } from "../../context/mediaDataContext";
-import { Card, CardProps } from "../shared/Card";
 import { MediaPlaying } from "../main/MediaPlaying";
 import { MediaProgress } from "../main/MediaProgress";
+import { Card } from "../shared/Card";
+import { CardProps } from "../../types";
 import styles from "./home.module.scss";
 
 type CardListProps = {
     items: CardProps[];
 };
 
-const Home: React.FC<CardListProps> = ({ items }) => {
-    const { data, loading, error }: any = useMediaData();
+const Home: React.FC<CardListProps> = () => {
+    const { data, loading, error } = useMediaData();
 
     return (
         <>
@@ -44,11 +45,17 @@ const Home: React.FC<CardListProps> = ({ items }) => {
                         Recently Played
                     </p>
 
-                    <div className={styles.cardsGroup}>
-                        {data.map((item: any, index: number) => (
-                            <Card key={index} {...item} />
-                        ))}
-                    </div>
+                    {error && <p>{error}</p>}
+                    {loading ? (
+                        <p>Loading ...</p>
+                    ) : (
+                        <div className={styles.cardsGroup}>
+                            {data &&
+                                data.map((item) => (
+                                    <Card key={item.id} {...item} />
+                                ))}
+                        </div>
+                    )}
                 </div>
             </main>
 
