@@ -11,11 +11,12 @@ import MediaList from "./components/media/MediaList";
 // import { SelectedMedia } from "./components/main/SelectedMedia";
 import { fetchLoginAPI } from "./lib/api";
 import styles from "./App.module.scss";
+import { useMediaData } from "./context/mediaDataContext";
 
 function App() {
     const navigate = useNavigate();
+    const { data, loading, error }: any = useMediaData();
 
-    const [data, setData] = React.useState([]);
     const hasSelected = React.useState<boolean>(false);
 
     // const handleToggleLike = (id: number) => {
@@ -106,67 +107,71 @@ function App() {
         <div className={`${styles.app} container is-widescreen`}>
             <Header />
 
-            <Routes>
-                <Route path="/" element={<Layout />}>
-                    <Route index element={<Home items={[]} />} />
-                </Route>
-                <Route
-                    path="/library"
-                    element={
-                        <main className={styles.container}>
-                            {!data ? (
-                                "There is nothing yet"
-                            ) : !hasSelected ? (
-                                <>
-                                    <MediaList
-                                    // items={data}
-                                    // handleToggleLike={handleToggleLike}
-                                    />
-                                </>
-                            ) : (
-                                <>
-                                    <MediaList
-                                    // items={data}
-                                    // handleToggleLike={handleToggleLike}
-                                    />
-                                    {/* <SelectedMedia onClickPlay={handlePlay} /> */}
-                                </>
-                            )}
-                        </main>
-                    }
-                />
-                <Route path="/mediaPlayer" element={<Media />} />
-                <Route
-                    path="login"
-                    element={
-                        <Login
-                            username={username}
-                            password={password}
-                            setUsername={setUsername}
-                            setPassword={setPassword}
-                            message={message}
-                            handleLoginSubmit={handleLoginSubmit}
-                        />
-                    }
-                />
-                <Route
-                    path="signup"
-                    element={
-                        <Signup
-                            email={email}
-                            username={username}
-                            password={password}
-                            setEmail={setEmail}
-                            setUsername={setUsername}
-                            setPassword={setPassword}
-                            message={message}
-                            handleSignupSubmit={handleSignupSubmit}
-                            confirmPassword={confirmPassword}
-                            setConfirmPassword={setConfirmPassword}
-                        />
-                    }
-                />
-            </Routes>
+            {loading ? (
+                <p>Loading ...</p>
+            ) : (
+                <Routes>
+                    <Route path="/" element={<Layout />}>
+                        <Route index element={<Home items={[]} />} />
+                    </Route>
+                    <Route
+                        path="/library"
+                        element={
+                            <main className={styles.container}>
+                                {!data ? (
+                                    "There is nothing yet"
+                                ) : !hasSelected ? (
+                                    <>
+                                        <MediaList
+                                        // items={data}
+                                        // handleToggleLike={handleToggleLike}
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <MediaList
+                                        // items={data}
+                                        // handleToggleLike={handleToggleLike}
+                                        />
+                                        {/* <SelectedMedia onClickPlay={handlePlay} /> */}
+                                    </>
+                                )}
+                            </main>
+                        }
+                    />
+                    <Route path="/mediaPlayer" element={<Media />} />
+                    <Route
+                        path="login"
+                        element={
+                            <Login
+                                username={username}
+                                password={password}
+                                setUsername={setUsername}
+                                setPassword={setPassword}
+                                message={message}
+                                handleLoginSubmit={handleLoginSubmit}
+                            />
+                        }
+                    />
+                    <Route
+                        path="signup"
+                        element={
+                            <Signup
+                                email={email}
+                                username={username}
+                                password={password}
+                                setEmail={setEmail}
+                                setUsername={setUsername}
+                                setPassword={setPassword}
+                                message={message}
+                                handleSignupSubmit={handleSignupSubmit}
+                                confirmPassword={confirmPassword}
+                                setConfirmPassword={setConfirmPassword}
+                            />
+                        }
+                    />
+                </Routes>
+            )}
         </div>
     );
 }

@@ -1,3 +1,4 @@
+import { useMediaData } from "../../context/mediaDataContext";
 import { Card, CardProps } from "../shared/Card";
 import { MediaPlaying } from "../main/MediaPlaying";
 import { MediaProgress } from "../main/MediaProgress";
@@ -8,6 +9,8 @@ type CardListProps = {
 };
 
 const Home: React.FC<CardListProps> = ({ items }) => {
+    const { data, loading, error }: any = useMediaData();
+
     return (
         <>
             <main className={styles.container}>
@@ -42,18 +45,8 @@ const Home: React.FC<CardListProps> = ({ items }) => {
                     </p>
 
                     <div className={styles.cardsGroup}>
-                        {[1, 2, 3, 4, 5].map((item, index) => (
-                            <Card key={index} />
-                        ))}
-                    </div>
-                </div>
-
-                <div className={styles.trending}>
-                    <p className="title is-4 is-size-6-mobile">Trending</p>
-
-                    <div className={styles.cardsGroup}>
-                        {[1, 2, 3, 4, 5, 6].map((item, index) => (
-                            <Card key={index} />
+                        {data.map((item: any, index: number) => (
+                            <Card key={index} {...item} />
                         ))}
                     </div>
                 </div>
