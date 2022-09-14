@@ -1,6 +1,6 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.2'
-	id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
 	id 'java'
 	id 'org.springframework.experimental.aot' version '0.12.1'
 }
@@ -43,7 +43,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
-	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.8'
+	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.9'
 	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.8'
 
 	testImplementation 'org.testcontainers:mongodb:1.17.3'
