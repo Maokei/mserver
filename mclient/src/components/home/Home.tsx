@@ -1,15 +1,16 @@
 import { useMediaData } from "../../context/mediaDataContext";
-import { MediaPlaying } from "../main/MediaPlaying";
-import { MediaProgress } from "../main/MediaProgress";
+// import { MediaPlaying } from "../main/MediaPlaying";
+// import { MediaProgress } from "../main/MediaProgress";
+import Player from "../player/Player";
 import { Card } from "../shared/Card";
-import { CardProps } from "../../types";
+// import { CardProps } from "../../types";
 import styles from "./home.module.scss";
 
-type CardListProps = {
-    items: CardProps[];
-};
+// type CardListProps = {
+//     items: CardProps[];
+// };
 
-const Home: React.FC<CardListProps> = () => {
+const Home = () => {
     const { data, loading, error } = useMediaData();
 
     return (
@@ -59,10 +60,20 @@ const Home: React.FC<CardListProps> = () => {
                 </div>
             </main>
 
-            <div className={styles.playingNow}>
+            <Player
+                id={""}
+                isFull={false}
+                setId={function (e: string): void {
+                    throw new Error("Function not implemented.");
+                }}
+                setIsFull={function (e: boolean): void {
+                    throw new Error("Function not implemented.");
+                }}
+            />
+            {/* <div className={styles.playingNow}>
                 <MediaProgress />
                 <MediaPlaying />
-            </div>
+            </div> */}
         </>
     );
 };
