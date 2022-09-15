@@ -10,13 +10,24 @@ type MediaProps = {
 };
 
 const Player = ({ id, setId, setIsFull, isFull }: MediaProps) => {
-    const [isPlaying, setIsPlaying] = React.useState<boolean>(true);
+    const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
     const [volume, setVolume] = React.useState<string>("1");
     const [isMuted, setIsMuted] = React.useState<boolean>(false);
 
-    const handlePlayPause = () => {
-        setIsPlaying(!isPlaying);
-    };
+    const mediaTag = React.useRef<any>(null);
+
+    React.useEffect(() => {
+        if (id !== "") {
+            if (isPlaying) {
+                console.log(mediaTag.current);
+                mediaTag.current.play();
+            } else {
+                mediaTag.current.pause();
+            }
+        } else {
+            console.log("id is empty");
+        }
+    }, [id, isPlaying]);
 
     const skipToPrevious = () => {
         console.log("previous");
@@ -68,13 +79,13 @@ const Player = ({ id, setId, setIsFull, isFull }: MediaProps) => {
                         <Button
                             btnClass={`pause`}
                             children={<i className="fas fa-pause"></i>}
-                            onButtonClick={handlePlayPause}
+                            onButtonClick={() => setIsPlaying(!isPlaying)}
                         />
                     ) : (
                         <Button
                             btnClass={`play`}
                             children={<i className="fas fa-play"></i>}
-                            onButtonClick={handlePlayPause}
+                            onButtonClick={() => setIsPlaying(!isPlaying)}
                         />
                     )}
                     <Button
@@ -85,11 +96,19 @@ const Player = ({ id, setId, setIsFull, isFull }: MediaProps) => {
                 </div>
 
                 <div className="volumeContainer">
-                    <Button
-                        btnClass={`volume`}
-                        children={<i className="fas fa-volume-up"></i>}
-                        onButtonClick={() => setIsMuted(!isMuted)}
-                    />
+                    {isMuted ? (
+                        <Button
+                            btnClass={`volume`}
+                            children={<i className="fas fa-volume-up"></i>}
+                            onButtonClick={() => setIsMuted(!isMuted)}
+                        />
+                    ) : (
+                        <Button
+                            btnClass={`volume`}
+                            children={<i className="fas fa-volume-off"></i>}
+                            onButtonClick={() => setIsMuted(!isMuted)}
+                        />
+                    )}
                     <input
                         type="range"
                         step="0.01"

@@ -2,6 +2,8 @@ export type ItemProps = {
     id: string;
     // imgSrc: string;
     title: string;
+    mediaId: string;
+    setId: (e: string) => void;
 };
 
 export type CardProps = {

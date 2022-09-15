@@ -28,9 +28,9 @@ function App() {
     //     setData(mapped);
     // };
 
-    const handlePlay = () => {
-        console.log("play media...");
-    };
+    // const handlePlay = () => {
+    //     console.log("play media...");
+    // };
 
     const [username, setUsername] = React.useState("");
     const [email, setEmail] = React.useState("");

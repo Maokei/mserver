@@ -1,3 +1,4 @@
+import React from "react";
 import { useMediaData } from "../../context/mediaDataContext";
 // import { MediaPlaying } from "../main/MediaPlaying";
 // import { MediaProgress } from "../main/MediaProgress";
@@ -12,6 +13,8 @@ import styles from "./home.module.scss";
 
 const Home = () => {
     const { data, loading, error } = useMediaData();
+
+    const [id, setId] = React.useState<string>("");
 
     return (
         <>
@@ -53,7 +56,13 @@ const Home = () => {
                         <div className={styles.cardsGroup}>
                             {data &&
                                 data.map((item) => (
-                                    <Card key={item.id} {...item} />
+                                    <Card
+                                        key={item.id}
+                                        id={id}
+                                        setId={setId}
+                                        title={item.title}
+                                        mediaId={item.id}
+                                    />
                                 ))}
                         </div>
                     )}
@@ -61,11 +70,9 @@ const Home = () => {
             </main>
 
             <Player
-                id={""}
+                id={id}
                 isFull={false}
-                setId={function (e: string): void {
-                    throw new Error("Function not implemented.");
-                }}
+                setId={setId}
                 setIsFull={function (e: boolean): void {
                     throw new Error("Function not implemented.");
                 }}
