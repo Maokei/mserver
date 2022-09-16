@@ -4,10 +4,12 @@ import styles from "./player.module.scss";
 
 type MediaProps = {
     id: string;
+    isFull: boolean;
     setId: (e: string) => void;
+    setIsFull: (e: boolean) => void;
 };
 
-const Player = ({ id, setId }: MediaProps) => {
+const Player = ({ id, setId, setIsFull, isFull }: MediaProps) => {
     const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
     const [volume, setVolume] = React.useState<string>("1");
     const [isMuted, setIsMuted] = React.useState<boolean>(false);

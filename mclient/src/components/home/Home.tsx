@@ -33,13 +33,13 @@ const Home = () => {
 
                     <ul className="menuBottom">
                         <li>
-                            <a href="/beats">Beats</a>
+                            <a href="/music">Music</a>
                         </li>
                         <li>
-                            <a href="/ambient">Ambient</a>
+                            <a href="/video">Video</a>
                         </li>
                         <li>
-                            <a href="/synthetic">Synthetic</a>
+                            <a href="/podcast">Podcast</a>
                         </li>
                     </ul>
                 </aside>
@@ -69,14 +69,7 @@ const Home = () => {
                 </div>
             </main>
 
-            <Player
-                id={id}
-                isFull={false}
-                setId={setId}
-                setIsFull={function (e: boolean): void {
-                    throw new Error("Function not implemented.");
-                }}
-            />
+            <Player id={id} setId={setId} />
             {/* <div className={styles.playingNow}>
                 <MediaProgress />
                 <MediaPlaying />
