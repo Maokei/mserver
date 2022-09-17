@@ -1,4 +1,5 @@
 import React from "react";
+import { useMediaData } from "../../context/mediaDataContext";
 import Button from "../shared/Button";
 import styles from "./player.module.scss";
 
@@ -8,6 +9,8 @@ type MediaProps = {
 };
 
 const Player = ({ id, setId }: MediaProps) => {
+    const { data, loading, error } = useMediaData();
+
     const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
     const [volume, setVolume] = React.useState<string>("1");
     const [isMuted, setIsMuted] = React.useState<boolean>(false);
@@ -40,22 +43,43 @@ const Player = ({ id, setId }: MediaProps) => {
     };
 
     return (
-        <div>
+        <div className={styles.wrapper}>
+            <div className={styles.mediaContainer}>
+                {data &&
+                    data.map(
+                        (item) => (
+                            // id === item.id && (
+                            <div key={item.id} className={styles.mediaItem}>
+                                <img
+                                    src={
+                                        "https://bulma.io/images/placeholders/128x128.png"
+                                    }
+                                    alt={item.title}
+                                />
+                                <div>
+                                    <h1>{item.title}</h1>
+                                    <h3>{"Author/Album"}</h3>
+                                </div>
+                            </div>
+                        )
+                        // )
+                    )}
+            </div>
             <div className={styles.playerContainer}>
-                <div className="progressBar">
-                    <p className="PcurrentTime">
+                <div className={styles.progressBar}>
+                    <p className={styles.currentTime}>
                         {/* {calculateDuration(currentTime)} */}
                         1:00
                     </p>
                     <input
                         type="range"
-                        className="currentProgress"
+                        className={styles.currentProgress}
                         defaultValue="0"
                         // ref={progressBar}
                         // onChange={changeRange}
                     />
 
-                    <p className="Pduration">
+                    <p className={styles.duration}>
                         {/* {(duration && !isNaN(duration)) && 
                       calculateDuration(duration)} */}
                         3:00
@@ -92,30 +116,29 @@ const Player = ({ id, setId }: MediaProps) => {
                         onButtonClick={skipToNext}
                     />
                 </div>
-
-                <div className="volumeContainer">
-                    {isMuted ? (
-                        <Button
-                            btnClass={`volume`}
-                            children={<i className="fas fa-volume-up"></i>}
-                            onButtonClick={() => setIsMuted(!isMuted)}
-                        />
-                    ) : (
-                        <Button
-                            btnClass={`volume`}
-                            children={<i className="fas fa-volume-off"></i>}
-                            onButtonClick={() => setIsMuted(!isMuted)}
-                        />
-                    )}
-                    <input
-                        type="range"
-                        step="0.01"
-                        onChange={(e) => setVolume(e.target.value)}
-                        value={volume}
-                        max="1"
-                        min="0"
+            </div>
+            <div className={styles.volumeContainer}>
+                {isMuted ? (
+                    <Button
+                        btnClass={`volume`}
+                        children={<i className="fas fa-volume-up"></i>}
+                        onButtonClick={() => setIsMuted(!isMuted)}
                     />
-                </div>
+                ) : (
+                    <Button
+                        btnClass={`volume`}
+                        children={<i className="fas fa-volume-off"></i>}
+                        onButtonClick={() => setIsMuted(!isMuted)}
+                    />
+                )}
+                <input
+                    type="range"
+                    step="0.01"
+                    onChange={(e) => setVolume(e.target.value)}
+                    value={volume}
+                    max="1"
+                    min="0"
+                />
             </div>
         </div>
     );

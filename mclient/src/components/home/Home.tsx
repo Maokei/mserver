@@ -1,15 +1,8 @@
 import React from "react";
 import { useMediaData } from "../../context/mediaDataContext";
-// import { MediaPlaying } from "../main/MediaPlaying";
-// import { MediaProgress } from "../main/MediaProgress";
 import Player from "../player/Player";
 import { Card } from "../shared/Card";
-// import { CardProps } from "../../types";
 import styles from "./home.module.scss";
-
-// type CardListProps = {
-//     items: CardProps[];
-// };
 
 const Home = () => {
     const { data, loading, error } = useMediaData();
@@ -70,10 +63,6 @@ const Home = () => {
             </main>
 
             <Player id={id} setId={setId} />
-            {/* <div className={styles.playingNow}>
-                <MediaProgress />
-                <MediaPlaying />
-            </div> */}
         </>
     );
 };
