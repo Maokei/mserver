@@ -47,22 +47,21 @@ const Player = ({ id, setId }: MediaProps) => {
             <div className={styles.mediaContainer}>
                 {data &&
                     data.map(
-                        (item) => (
-                            // id === item.id && (
-                            <div key={item.id} className={styles.mediaItem}>
-                                <img
-                                    src={
-                                        "https://bulma.io/images/placeholders/128x128.png"
-                                    }
-                                    alt={item.title}
-                                />
-                                <div>
-                                    <h1>{item.title}</h1>
-                                    <h3>{"Author/Album"}</h3>
+                        (item) =>
+                            id === item.id && (
+                                <div key={item.id} className={styles.mediaItem}>
+                                    <img
+                                        src={
+                                            "https://bulma.io/images/placeholders/128x128.png"
+                                        }
+                                        alt={item.title}
+                                    />
+                                    <div>
+                                        <h1>{item.title}</h1>
+                                        <h3>{"Author/Album"}</h3>
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                        // )
+                            )
                     )}
             </div>
             <div className={styles.playerContainer}>

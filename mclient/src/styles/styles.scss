@@ -45,3 +45,9 @@ button.pause {
         background-color: lighten(#ea5110, 5%) !important;
     }
 }
+
+@media only screen and (max-width: 575px) {
+    button.shuffle {
+        display: none;
+    }
+}
