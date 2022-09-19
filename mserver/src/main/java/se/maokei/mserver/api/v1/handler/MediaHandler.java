@@ -5,7 +5,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -19,11 +18,6 @@ import se.maokei.mserver.services.StreamingService;
 public class MediaHandler {
   private final StreamingService streamingService;
   private final MediaRepository mediaRepository;
-
-  public Mono<ServerResponse> hello(ServerRequest request) {
-    return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON)
-        .body(BodyInserters.fromValue(new Media()));
-  }
 
   public Mono<ServerResponse> listAllMedia(ServerRequest req) {
     Flux<Media> mediaFlux = mediaRepository.findAll();

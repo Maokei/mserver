@@ -24,10 +24,9 @@ public class PublicController {
             throw new RuntimeException(String.join("", FAVICON_PATH, " not found"));
         }
     }
-    // Your code before
+
     @GetMapping(path="/favicon.ico", produces="image/x-icon")
     public byte[] favicon() {
         return IN_MEMORY_FAVICON;
     }
-    // Your code after
 }
