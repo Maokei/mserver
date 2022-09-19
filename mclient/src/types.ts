@@ -3,6 +3,7 @@ export type ItemProps = {
     // imgSrc: string;
     title: string;
     mediaId: string;
+    media: string;
     setId: (e: string) => void;
 };
 

@@ -55,6 +55,7 @@ const Home = () => {
                                         setId={setId}
                                         title={item.title}
                                         mediaId={item.id}
+                                        media={item.foreignId}
                                     />
                                 ))}
                         </div>

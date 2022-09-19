@@ -7,6 +7,7 @@ type MediaDataProviderProps = {
 type MediaDataProps = {
     id: string;
     title: string;
+    foreignId: string;
 };
 
 type MediaDataContextProps = {

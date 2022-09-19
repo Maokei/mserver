@@ -60,6 +60,9 @@ const Player = ({ id, setId }: MediaProps) => {
                                         <h1>{item.title}</h1>
                                         <h3>{"Author/Album"}</h3>
                                     </div>
+                                    <audio
+                                        src={`http://localhost:8080/api/v1/media/${item.foreignId}`}
+                                    ></audio>
                                 </div>
                             )
                     )}
