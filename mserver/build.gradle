@@ -34,6 +34,9 @@ dependencies {
 	implementation 'com.google.zxing:core:3.5.0'
 	implementation 'com.google.zxing:javase:3.5.0'
 
+	//implementation 'org.apache.tika:tika-core:2.4.1'
+	implementation 'net.jthink:jaudiotagger:3.0.1'
+
 	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.11'
 	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.11'
 	implementation 'commons-io:commons-io:2.11.0'
