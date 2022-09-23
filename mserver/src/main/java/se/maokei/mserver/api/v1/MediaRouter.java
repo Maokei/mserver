@@ -10,7 +10,6 @@ import se.maokei.mserver.api.v1.handler.MediaHandler;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.path;
 
-
 @Tag(name = "Media API", description = "Api to access and manage audio and video media")
 @Configuration(proxyBeanMethods = false)
 public class MediaRouter {
