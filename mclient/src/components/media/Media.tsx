@@ -87,7 +87,10 @@ const Media = () => {
         <>
             <li className={`${styles.item} card`}>
                 <div className="card-content">
-                    {currentMedia && !currentMedia.location.includes("mp4") ? (
+                    {error && <p className="error">{error}</p>}
+                    {!loading &&
+                    currentMedia &&
+                    !currentMedia.location.includes("mp4") ? (
                         <div className={`card-image ${styles.imageContainer}`}>
                             <figure className="image is-4by3">
                                 <img
