@@ -2,19 +2,18 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styles from "./modal.module.scss";
 
-export type ModalProps = {
-    modalName: string;
+type labelTextProps = {
+    labelText: string;
 };
 
-const Modal = ({
-    isShowing,
-    hide,
-    modalName,
-}: {
+export type ModalProps = {
     isShowing: boolean;
     hide: () => void;
     modalName: string;
-}) =>
+    labelText: string[];
+};
+
+const Modal = ({ isShowing, hide, modalName, labelText }: ModalProps) =>
     isShowing
         ? ReactDOM.createPortal(
               <React.Fragment>
@@ -38,54 +37,41 @@ const Modal = ({
                                   <span aria-hidden="true">&times;</span>
                               </button>
                           </div>
+
                           <h4 className="title is-4">{modalName}</h4>
-                          <div className={styles.albumArtWrapper}>
-                              <img
-                                  src="https://bulma.io/images/placeholders/128x128.png"
-                                  alt="placeholder"
-                              />
-                              <div className={styles.iconGroup}>
-                                  <span className="icon">
-                                      <i className="fas fa-trash"></i>
-                                  </span>
-                                  <span className="icon">
-                                      <i className="fas fa-upload"></i>
-                                  </span>
-                              </div>
-                          </div>
-                          <div className={`field ${styles.inputField}`}>
-                              <label className="label">Name</label>
-                              <div className="control">
-                                  <input
-                                      className="input"
-                                      type="text"
-                                      placeholder="Text input"
-                                  />
-                              </div>
-                              <p className="help">This is a help text</p>
-                          </div>
 
-                          <div className={`field ${styles.inputField}`}>
-                              <label className="label">Artist</label>
-                              <div className="control">
-                                  <input
-                                      className="input"
-                                      type="text"
-                                      placeholder="Text input"
+                          {modalName.includes("Edit media") && (
+                              <div className={styles.albumArtWrapper}>
+                                  <img
+                                      src="https://bulma.io/images/placeholders/128x128.png"
+                                      alt="placeholder"
                                   />
+                                  <div className={styles.iconGroup}>
+                                      <span className="icon">
+                                          <i className="fas fa-trash"></i>
+                                      </span>
+                                      <span className="icon">
+                                          <i className="fas fa-upload"></i>
+                                      </span>
+                                  </div>
                               </div>
-                          </div>
+                          )}
 
-                          <div className={`field ${styles.inputField}`}>
-                              <label className="label">Album</label>
-                              <div className="control">
-                                  <input
-                                      className="input"
-                                      type="text"
-                                      placeholder="Text input"
-                                  />
+                          {labelText.map((label, index) => (
+                              <div
+                                  key={index}
+                                  className={`field ${styles.inputField}`}
+                              >
+                                  <label className="label">{label}</label>
+                                  <div className="control">
+                                      <input
+                                          className="input"
+                                          type="text"
+                                          placeholder={label}
+                                      />
+                                  </div>
                               </div>
-                          </div>
+                          ))}
 
                           <div className={`field is-grouped`}>
                               <p className="control">

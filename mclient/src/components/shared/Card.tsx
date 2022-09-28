@@ -15,7 +15,8 @@ export const Card = ({ id, title, setId, mediaId, media }: ItemProps) => {
                     <Modal
                         isShowing={isShowing}
                         hide={toggle}
-                        modalName="Edit info"
+                        modalName="Edit media info"
+                        labelText={["Name", "Artist", "Album"]}
                     />
                     <button
                         className={`button ${styles.editButton} ${styles.defaultButton}`}
