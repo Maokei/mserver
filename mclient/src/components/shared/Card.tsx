@@ -12,10 +12,13 @@ export const Card = ({ id, title, setId, mediaId, media }: ItemProps) => {
         <>
             {mediaId === id && (
                 <div className={`${styles.card} card`}>
-                    <Modal isShowing={isShowing} hide={toggle} />
+                    <Modal
+                        isShowing={isShowing}
+                        hide={toggle}
+                        modalName="Edit info"
+                    />
                     <button
                         className={`button ${styles.editButton} ${styles.defaultButton}`}
-                        data-target="modal-js-example"
                         onClick={toggle}
                     >
                         <EditVector />
