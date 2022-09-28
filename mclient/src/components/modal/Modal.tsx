@@ -2,10 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import styles from "./modal.module.scss";
 
-type labelTextProps = {
-    labelText: string;
-};
-
 export type ModalProps = {
     isShowing: boolean;
     hide: () => void;
