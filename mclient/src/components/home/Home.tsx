@@ -37,6 +37,7 @@ const Home = () => {
                                 labelText={["URL"]}
                                 fileType="Audio"
                                 isAudio={true}
+                                isVideo={true}
                             />
                         </li>
                     </ul>

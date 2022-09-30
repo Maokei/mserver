@@ -1,6 +1,5 @@
 export type ItemProps = {
     id: string;
-    // imgSrc: string;
     title: string;
     mediaId: string;
     media: string;
