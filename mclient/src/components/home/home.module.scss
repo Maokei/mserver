@@ -39,8 +39,39 @@
             box-shadow: -1px -5px 12px rgba(42, 46, 53, 0.58886);
         }
 
+        .defaultButton {
+            background: #247ba0;
+            color: #fff;
+        }
+
+        .editButton {
+            position: absolute;
+            top: 1em;
+            right: 1em;
+            background-color: var(--color-dark-lighten);
+            border: none;
+
+            svg {
+                fill: var(--subtitle);
+            }
+        }
+
+        .editContainer,
+        img:hover,
+        .album p:hover {
+            cursor: pointer;
+        }
+
+        .cardImage {
+            margin-top: 2rem;
+        }
+
         img {
             border-radius: 50%;
+
+            // &:hover {
+            //     cursor: pointer;
+            // }
         }
 
         .album {
@@ -50,6 +81,10 @@
 
             p {
                 line-height: normal;
+
+                // &:hover {
+                //     cursor: pointer;
+                // }
             }
         }
     }
