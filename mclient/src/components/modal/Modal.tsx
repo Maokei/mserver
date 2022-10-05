@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { ModalProps } from "../../types";
 import styles from "./modal.module.scss";
 
-export type ModalProps = {
-    isShowing: boolean;
-    hide: () => void;
-    modalName: string;
-    labelText: string[];
-};
-
-const Modal = ({ isShowing, hide, modalName, labelText }: ModalProps) =>
+const Modal = ({
+    isShowing,
+    hide,
+    modalName,
+    labelText,
+    isAudio,
+    isVideo,
+    fileType,
+}: ModalProps) =>
     isShowing
         ? ReactDOM.createPortal(
               <React.Fragment>
@@ -68,6 +70,15 @@ const Modal = ({ isShowing, hide, modalName, labelText }: ModalProps) =>
                                   </div>
                               </div>
                           ))}
+
+                          {isAudio || isVideo ? (
+                              <label
+                                  className={`checkbox ${styles.filetypeLabel}`}
+                              >
+                                  <input type="checkbox" />
+                                  <p className={styles.fileType}>{fileType}</p>
+                              </label>
+                          ) : null}
 
                           <div className={`field is-grouped`}>
                               <p className="control">

@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { ShowMoreIcon } from "../../assets/union-vector";
+import useModal from "../../hooks/useModal";
+import Modal from "../modal/Modal";
 import headerStyle from "./header.module.scss";
 import styles from "./showMore.module.scss";
 
@@ -15,7 +17,12 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
     state,
     setState,
 }) => {
+    const { isShowing, toggle } = useModal();
     const dropdownActiveClass = state ? "is-active" : "";
+    const toggleDownload = () => {
+        toggle();
+        setState(!state);
+    };
 
     return (
         <div
@@ -60,6 +67,22 @@ export const ShowMore: React.FC<ShowMoreProps> = ({
                         <Link to={"/library"} onClick={() => setState(!state)}>
                             Library
                         </Link>
+                    </div>
+                    <div className="dropdown-item">
+                        <button
+                            className={styles.downloadButton}
+                            onClick={toggleDownload}
+                        >
+                            Download
+                        </button>
+                        <Modal
+                            isShowing={isShowing}
+                            hide={toggle}
+                            modalName="Download Youtube clip"
+                            labelText={["URL"]}
+                            fileType="Audio"
+                            isAudio={true}
+                        />
                     </div>
                     <div
                         data-testid="dropdown-item-test"
