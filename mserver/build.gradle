@@ -26,6 +26,9 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+
 	implementation 'com.auth0:java-jwt:4.0.0'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
@@ -33,6 +36,9 @@ dependencies {
 
 	implementation 'com.google.zxing:core:3.5.0'
 	implementation 'com.google.zxing:javase:3.5.0'
+
+	//implementation 'org.apache.tika:tika-core:2.4.1'
+	implementation 'net.jthink:jaudiotagger:3.0.1'
 
 	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.11'
 	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.11'
@@ -44,7 +50,7 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.11'
-	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.10'
+	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.4.11'
 
 	testImplementation 'org.testcontainers:mongodb:1.17.4'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
@@ -52,11 +58,11 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 }
 
-test {
+tasks.named('test') {
 	useJUnitPlatform()
 }
 
-bootBuildImage {
+tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder:tiny'
 	environment = ['BP_NATIVE_IMAGE': 'true']
 }

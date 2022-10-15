@@ -15,16 +15,16 @@ services:
     depends_on:
       - mongo_db
     networks:
-      - my-network
+      - mserver-network
   mongo_db:
     image: mongo:latest
     container_name: mserver-mongodb
     restart: always
     networks:
-      - my-network
+      - mserver-network
     ports:
       - 27017:27017
 
 networks:
-  my-network:
+  mserver-network:
     driver: bridge

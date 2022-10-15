@@ -20,6 +20,6 @@ public class Media extends EntityMetadata {
     private String fileName;
     @JsonIgnore
     private byte[] content;
-    //@JsonIgnore
+    @JsonIgnore
     private String location;
 }
