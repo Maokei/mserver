@@ -1,29 +1,17 @@
-:root {
-	--color-dark: #2a2e34;
-	--color-dark-lighten: lighten(var(var(--color-dark)));
-	--color-grey: #727579;
-	--color-orange: #ea5110;
-	--color-dark-orange: darken(#ea5110, 5%);
-	--greenSeaweed: rgba(2, 128, 144, 1);
-	--blueQueen: rgba(69, 105, 144, 1);
-	--subtitle: #999999;
-	--title: lighten(var(#999999, 20%));
-}
-
 .app {
-	overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 .container {
-	padding: 1.2rem;
-	margin-top: 7rem;
-	margin-bottom: 10rem;
-	z-index: 10;
-	left: 0px;
-	display: flex;
-	flex-direction: column;
-	background: linear-gradient(146.6deg, #1f2328 12.49%, #17191d 81%);
-	box-shadow: -8px -8px 20px rgba(42, 46, 53, 0.58886),
-		3px 8px 20px rgba(0, 0, 0, 0.353065);
-	border-radius: 37px 37px 0px 0px;
+    padding: 1.2rem;
+    margin-top: 7rem;
+    margin-bottom: 10rem;
+    z-index: 10;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(146.6deg, #1f2328 12.49%, #17191d 81%);
+    box-shadow: -8px -8px 20px rgba(42, 46, 53, 0.58886),
+        3px 8px 20px rgba(0, 0, 0, 0.353065);
+    border-radius: 37px 37px 0px 0px;
 }

@@ -32,7 +32,7 @@ export const MediaPlaying = () => {
 			</div>
 
 			<div className={styles.btnGroup}>
-				<Button
+				{/* <Button
 					btnClass={styles.previous}
 					children={<i className="fas fa-caret-left"></i>}
 					onButtonClick={() => console.log("previous")}
@@ -55,7 +55,7 @@ export const MediaPlaying = () => {
 					btnClass={styles.next}
 					children={<i className="fas fa-caret-right"></i>}
 					onButtonClick={() => console.log("next")}
-				/>
+				/> */}
 				<Button
 					btnClass={styles.shuffle}
 					children={<i className="fas fa-random"></i>}

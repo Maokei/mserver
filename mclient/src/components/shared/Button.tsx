@@ -1,22 +1,22 @@
 import { ReactNode } from "react";
 
 const Button = ({
-	btnClass,
-	children,
-	onButtonClick,
+    btnClass,
+    children,
+    onButtonClick,
 }: {
-	btnClass: string;
-	children: ReactNode;
-	onButtonClick: React.MouseEventHandler<HTMLButtonElement>;
+    btnClass: string;
+    children: ReactNode;
+    onButtonClick: React.MouseEventHandler<HTMLButtonElement>;
 }) => {
-	return (
-		<button
-			className={`button is-dark icon ${btnClass}`}
-			onClick={onButtonClick}
-		>
-			{children}
-		</button>
-	);
+    return (
+        <button
+            className={`button is-dark icon ${btnClass}`}
+            onClick={onButtonClick}
+        >
+            {children}
+        </button>
+    );
 };
 
 export default Button;

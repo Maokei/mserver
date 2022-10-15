@@ -1,0 +1,72 @@
+.item {
+    margin-top: 7rem;
+    list-style: none;
+    background-color: var(--color-dark-lighten);
+}
+
+.imageContainer {
+    margin-bottom: 10px;
+
+    img {
+        border-radius: 5px;
+    }
+}
+
+.contentContainer {
+    video {
+        border-radius: 10px;
+        margin-bottom: -9rem;
+    }
+}
+
+.playerContainer {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid 8px 8px 20px 0px var(--border-shadow);
+    border-radius: 10px;
+    color: var(--subtitle);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: black;
+
+    > * {
+        padding: 1rem 0;
+        color: rgb(202, 202, 202);
+    }
+
+    .title {
+        color: var(--title);
+    }
+
+    .progress {
+        width: 100%;
+
+        .timeStamp {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progressWrapper {
+            min-width: 100%;
+            background-color: rgba(119, 119, 119, 0.781);
+            height: 5px;
+            border-radius: 30px;
+            cursor: pointer;
+
+            .progressBar {
+                width: 0;
+                height: 100%;
+                background-color: var(--greenSeaweed);
+                border-radius: 30px;
+            }
+        }
+    }
+
+    .controls {
+        font-size: inherit;
+        display: flex;
+        align-items: center;
+    }
+}
