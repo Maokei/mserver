@@ -25,7 +25,8 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
 
   @Override
   public Mono<SecurityContext> load(ServerWebExchange swe) {
-    return Mono.justOrEmpty(swe.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION))
+    final String token =  !swe.getRequest().getQueryParams().containsKey("token") ? swe.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION) : "Bearer " + swe.getRequest().getQueryParams().getFirst("token");
+    return Mono.justOrEmpty(token)
             .filter(authHeader -> authHeader.startsWith("Bearer "))
             .flatMap(authHeader -> {
               String authToken = authHeader.substring(7);
