@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -28,6 +29,7 @@ public class MediaHandler {
         .body(mediaFlux, Media.class);
   }
 
+  @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
   public Mono<ServerResponse> getMedia(ServerRequest req) {
     final String foreignId = req.pathVariable("foreignId");
     return ServerResponse.ok()
