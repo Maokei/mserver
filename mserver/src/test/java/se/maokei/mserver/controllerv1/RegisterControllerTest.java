@@ -8,6 +8,8 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.dto.UserRegisterDto;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+
 @SpringBootTest
 @AutoConfigureWebTestClient
 public class RegisterControllerTest {
@@ -40,6 +42,19 @@ public class RegisterControllerTest {
                 .uri(REGISTER_URL)
                 .body(Mono.just(dto), UserRegisterDto.class)
                 .exchange()
-                .expectStatus().isBadRequest();
+                .expectStatus()
+                .isBadRequest()
+                .expectHeader()
+                .contentType(APPLICATION_JSON)
+                .expectBody()
+                .json("[\"Passwords don't match\"]");
+    }
+
+    public void registerAlreadyExistingEmail() {
+
+    }
+
+    public void registerUserAlreadyExistingUsername() {
+
     }
 }
