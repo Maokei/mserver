@@ -21,7 +21,7 @@ public class RegistrationController {
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
     private UserService userService;
 
-    @PostMapping("/api/v1/register")
+    @PostMapping("/register")
     public Mono<User> registerAccount(@Valid @RequestBody UserRegisterDto dto) {
         LOGGER.debug("User account registration dto: {}", dto);
         /*return userService.registerNewUser(dto).flatMap(usr -> {
