@@ -3,6 +3,7 @@ package se.maokei.mserver;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 @Component
+@Profile("!test")
 class DataInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
@@ -34,7 +36,7 @@ class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String[] args) throws Exception {
         log.info("Starting data initialization  ...");
-        
+
         User userOne = User.builder().password(passwordEncoder.encode("password")).username("cat").email("cat@gmail.com").roles(List.of(Role.ROLE_ADMIN)).enabled(true).build();
 
         addInitUser(userOne).subscribe();

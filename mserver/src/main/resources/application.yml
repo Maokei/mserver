@@ -15,7 +15,7 @@ app:
 
 spring:
   profiles:
-    active: dev
+    active: test
   data:
     mongodb:
       auto-index-creation: true
@@ -28,9 +28,8 @@ management:
 ---
 spring:
   config:
-    active:
-      on-profile:
-        - dev
+    activate:
+      on-profile: dev
   data:
     mongodb:
       host: localhost
@@ -58,3 +57,4 @@ spring:
   mongodb:
     embedded:
       version: 4.4.1
+---
