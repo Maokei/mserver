@@ -7,7 +7,7 @@
 ## Run with java
 ```
 mserver/mserver/
-./gradlew runBoot
+./gradlew bootRun
 ```
 
 ## Run with docker
@@ -25,3 +25,8 @@ Swagger generated documentation:
 
 ## Testing page
 Browse too `http://localhost:8080`
+
+## Media
+Two possible requests
+- Status: 200 OK.
+- Status: 206 Partial Content.

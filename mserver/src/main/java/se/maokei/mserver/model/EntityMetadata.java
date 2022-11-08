@@ -7,13 +7,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.io.Serial;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 public abstract class EntityMetadata {
-  @Serial
   private static final long serialVersionUID = 1L;
   @Id
   private String id;

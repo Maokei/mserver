@@ -1,5 +1,24 @@
 .wrapper {
-	display: flex;
-	justify-content: flex-end;
-	z-index: 10;
+    grid-column: 11 / 12;
+    justify-self: end;
+    z-index: 100;
+
+    .downloadButton {
+        background: transparent;
+        color: #485fc7;
+        border: none;
+        padding: 0;
+
+        &:hover {
+            color: var(--color-dark);
+            cursor: pointer;
+        }
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    .wrapper {
+        grid-column: 10 / 11;
+        justify-self: start;
+    }
 }

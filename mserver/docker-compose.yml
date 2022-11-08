@@ -1,30 +1,28 @@
 version: "3.9"
 
 services:
-  app:
-    build: .
-    container_name: mserver-app
+  mongo:
+    image: mongo:latest
     restart: always
     environment:
-      #- SPRING_DATA_MONGODB_HOST=mongo_db
-      #- SPRING_DATA_MONGODB_PORT=27017
-      #- SPRING_DATA_MONGODB_DATABASE=testdb
-      - SPRING_DATA_MONGODB_URI=mongodb://mongo_db:27017/testdb
-    ports:
-      - 8080:8080
-    depends_on:
-      - mongo_db
-    networks:
-      - my-network
-  mongo_db:
-    image: mongo:latest
-    container_name: mserver-mongodb
-    restart: always
-    networks:
-      - my-network
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - 27017:27017
-
+    networks:
+      - our-net
+  mongo-express:
+    image: mongo-express:latest
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+    depends_on:
+      - mongo
+    networks:
+      - our-net
 networks:
-  my-network:
-    driver: bridge
+  our-net:

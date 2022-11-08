@@ -24,7 +24,7 @@ export const Search: React.FC<SearchProps> = ({
 	return (
 		<div
 			data-testid="search"
-			className={`control column is-four-fifths ${styles.wrapper}`}
+			className={`control column is-four-fifths-mobile ${styles.wrapper}`}
 		>
 			<button
 				data-testid="search-btn"

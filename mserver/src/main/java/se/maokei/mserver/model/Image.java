@@ -7,10 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Document
-public class Image extends EntityMetadata {
-    private byte[] content;
-    private String name;
-    private String location;
+public class Image extends Media {
+  private String pixels;
 }

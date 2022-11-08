@@ -9,45 +9,78 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.model.EntityMetadata;
 import se.maokei.mserver.model.Image;
+import se.maokei.mserver.model.Media;
 import se.maokei.mserver.repository.FileRepository;
 import se.maokei.mserver.repository.ImageDbRepository;
+import se.maokei.mserver.repository.MediaRepository;
+
+import java.util.UUID;
 
 @AllArgsConstructor
 @Service
 public class FileService {
-    private final Logger LOGGER = LoggerFactory.getLogger(getClass());
-    private FileRepository fileRepository;
-    private ImageDbRepository imageDbRepository;
+  private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+  private FileRepository fileRepository;
+  private MediaRepository mediaRepository;
+  private ImageDbRepository imageDbRepository;
 
-    public Mono<String> save(Mono<FilePart> fileMono) throws Exception {
-        Mono<String> location = fileRepository.saveFile(fileMono);
+  public Mono<String> save(Mono<FilePart> fileMono) throws Exception {
+    Mono<Media> mediaMono = fileMono.flatMap(f -> {
+      String name = f.filename();
+      String fId = UUID.randomUUID().toString();
+      LOGGER.info("FileService, save:  {} {}", name, fId);
+      Media media = Media.builder().fileName(name).foreignId(fId).build();
+      return Mono.just(media);
+    });
+    return mediaMono.flatMap(m -> {
+      try {
+        return fileRepository.saveFile(fileMono, m);
+      } catch (Exception e) {
+        return Mono.error(new RuntimeException(e));
+      }
+    }).doOnNext(mediaRepository::save).flatMap(m -> {
+      String location = m.getLocation();
+      return Mono.just(location);
+    });
+    /*mediaMono.flatMap(m -> {
+      try {
+        fileRepository.saveFile(fileMono, m);
+      } catch (Exception e) {
+        throw new RuntimeException(e);
+      }
+    })*/
+
+        /*Mono<String> location = fileRepository.saveFile(fileMono);
         return location.flatMap(locRes -> {
+            LOGGER.info("FileService, saving: {}", locRes);
             Image img = new Image();
             img.setLocation(locRes);
             img.setName("test");
             return imageDbRepository.save(img);
-        }).flatMap(res -> Mono.just(res.getId()));
-    }
+        }).flatMap(res -> Mono.just(res.getId()));*/
+  }
 
-    public String save(byte[] bytes, String imageName) throws Exception {
-        String location = fileRepository.saveFile(bytes, imageName);
-        Image img = new Image();
-        img.setLocation(location);
-        img.setName("test");
-        return imageDbRepository.save(img).subscribe(EntityMetadata::getId).toString();
-    }
+  public String save(byte[] bytes, String fileName) throws Exception {
+    //String location = fileRepository.saveFile(bytes, fileName);
+    String location = "classpath:videos/video.mp4";
+    String fId = UUID.randomUUID().toString();
+    Media media = Media.builder().fileName(fileName).foreignId(fId).location(location).build();
+    mediaRepository.save(media).subscribe();
+    //return imageDbRepository.save(media).subscribe(EntityMetadata::getId).toString();
+    return location + " " + fId;
+  }
 
-    public FileSystemResource find(String imageId) {
+  public FileSystemResource find(String imageId) {
         /*Image image = imageDbRepository.findById(imageId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));*/
-        //return fileRepository.findFile(image.getLocation());
-        return (FileSystemResource) imageDbRepository.findById(imageId).subscribe(res -> fileRepository.findFile(res.getLocation()));
-    }
+    //return fileRepository.findFile(image.getLocation());
+    return (FileSystemResource) imageDbRepository.findById(imageId).subscribe(res -> fileRepository.findFile(res.getLocation()));
+  }
 
-    public Mono<FileSystemResource> monoFind(String imageId) {
-        return imageDbRepository.findById(imageId).flatMap(
-            metadata -> fileRepository.findFileMono(metadata.getLocation()
-            )
-        );
-    }
+  public Mono<FileSystemResource> monoFind(String imageId) {
+    return imageDbRepository.findById(imageId).flatMap(
+        metadata -> fileRepository.findFileMono(metadata.getLocation()
+        )
+    );
+  }
 }

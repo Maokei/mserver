@@ -1,52 +1,60 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import React from "react";
 
 import Login from "../components/auth/Login";
 
-describe("input", () => {
-	it("accepts user typing", async () => {
+const Wrapper = () => {
+	const [username, setUsername] = React.useState("");
+	const [password, setPassword] = React.useState("");
+
+	return (
+		<Login
+			handleLoginSubmit={() => console.log("login")}
+			username={username}
+			password={password}
+			setUsername={setUsername}
+			setPassword={setPassword}
+			message={""}
+		/>
+	);
+};
+
+describe("Login", () => {
+	it("should render input element", () => {
 		render(<input type="text" data-testid="username" name="username" />);
-		const input = screen.getByTestId("username");
-		await userEvent.type(input, "Hello,{enter}World!");
+		const inputEl = screen.getByTestId("username");
+		expect(inputEl).toBeInTheDocument();
 	});
-});
 
-it("input value", () => {
-	render(
-		<Login
-			handleLoginSubmit={() => console.log("login")}
-			username={""}
-			password={""}
-			setUsername={() => console.log("test1234")}
-			setPassword={() => console.log("12345")}
-			message={""}
-		/>
-	);
-	const passwordInput = screen.getByTestId("password");
-	userEvent.type(passwordInput, "123456");
-});
+	test("should be able to type into input", async () => {
+		render(<Wrapper />);
+		const testText = "123456";
+		const passwordInput = screen.getByTestId("password");
 
-it("button state in form", () => {
-	render(
-		<Login
-			handleLoginSubmit={() => console.log("login")}
-			username={""}
-			password={""}
-			setUsername={() => console.log("test1234")}
-			setPassword={() => console.log("12345")}
-			message={""}
-		/>
-	);
-	const button = screen.getByTestId("submitButton");
-	expect(button).toBeDisabled();
+		fireEvent.change(passwordInput, { target: { value: testText } });
+		await waitFor(() => expect(passwordInput).toHaveValue(testText));
 
-	const usernameInput = screen.getByTestId("username");
-	const passwordInput = screen.getByTestId("password");
-	userEvent.type(usernameInput, "test1234");
-	userEvent.type(passwordInput, "123456");
-	expect(button).toBeEnabled();
+		expect(passwordInput).toHaveDisplayValue(testText);
+	});
 
-	userEvent.clear(usernameInput);
-	userEvent.clear(passwordInput);
-	expect(button).toBeDisabled();
+	it("button should be enabled when username and password are filled", () => {
+		render(<Wrapper />);
+		const button = screen.getByTestId("submitButton");
+		expect(button).toBeDisabled();
+
+		const testUsername = "user";
+		const testPassword = "123456";
+		const usernameInput = screen.getByTestId("username");
+		const passwordInput = screen.getByTestId("password");
+
+		fireEvent.change(usernameInput, { target: { value: testUsername } });
+		fireEvent.change(passwordInput, { target: { value: testPassword } });
+
+		expect(button).toBeEnabled();
+
+		userEvent.clear(usernameInput);
+		userEvent.clear(passwordInput);
+		expect(button).toBeDisabled();
+	});
 });

@@ -5,8 +5,10 @@ import styles from "./form.module.scss";
 
 interface SignupProps extends FormProps {
 	email: string;
+	confirmPassword: string;
 	message: string;
 	setEmail: Function;
+	setConfirmPassword: Function;
 	handleSignupSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
@@ -17,11 +19,16 @@ const Signup: React.FC<SignupProps> = ({
 	setUsername,
 	password,
 	setPassword,
+	confirmPassword,
+	setConfirmPassword,
 	message,
 	handleSignupSubmit,
 }) => {
 	const submitBtnClasses =
-		email.length < 3 || username.length < 3 || password.length < 3
+		email.length < 3 ||
+		username.length < 3 ||
+		password.length < 3 ||
+		confirmPassword.length < 3
 			? `${styles.submitBtn} ${styles.btnDisabled}`
 			: `${styles.submitBtn}`;
 
@@ -56,6 +63,15 @@ const Signup: React.FC<SignupProps> = ({
 					value={password}
 					onChange={(e: ChangeEvent<HTMLInputElement>) =>
 						setPassword(e.target.value)
+					}
+				/>
+				<input
+					type="password"
+					data-testid="confirm-password"
+					placeholder="Confirm Password"
+					value={confirmPassword}
+					onChange={(e: ChangeEvent<HTMLInputElement>) =>
+						setConfirmPassword(e.target.value)
 					}
 				/>
 				<p className={styles.message}>{message}</p>
