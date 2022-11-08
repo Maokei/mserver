@@ -35,10 +35,10 @@ class DataInitializer implements CommandLineRunner {
     public void run(String[] args) throws Exception {
         log.info("Starting data initialization  ...");
         User userOne = User.builder().password(passwordEncoder.encode("password")).username("cat").email("cat@gmail.com").roles(List.of(Role.ROLE_ADMIN)).enabled(true).build();
-        userRepository.save(userOne).subscribe();
-        userRepository.save(new User("user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER))).subscribe();
+        addInitUser(userOne).subscribe();
+        addInitUser(new User("user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER))).subscribe();
         //username:password-> admin:admin
-        userRepository.save(new User("admin", passwordEncoder.encode("password"), "admin@gmail.com", true, List.of(Role.ROLE_ADMIN))).subscribe();
+        addInitUser(new User("admin", passwordEncoder.encode("password"), "admin@gmail.com", true, List.of(Role.ROLE_ADMIN))).subscribe();
         userRepository.findAll().subscribe(System.out::println);
 
         log.info("Initialization of testing data ...");
@@ -66,6 +66,13 @@ class DataInitializer implements CommandLineRunner {
         return mediaRepository.findByForeignId(media.getForeignId())
                 .switchIfEmpty(mediaRepository.save(media).doFinally(c -> {
                     log.info("Init media added: " +  media.getTitle());
+                }));
+    }
+
+    private Mono<User> addInitUser(User user) {
+        return userRepository.findByEmail(user.getEmail())
+                .switchIfEmpty(userRepository.save(user).doFinally(c -> {
+                    log.info("Init user added: " +  user.getUsername());
                 }));
     }
 }
