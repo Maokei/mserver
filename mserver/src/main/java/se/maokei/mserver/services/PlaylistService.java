@@ -12,7 +12,7 @@ import se.maokei.mserver.repository.PlaylistRepository;
 public class PlaylistService {
   private final PlaylistRepository playlistRepository;
   public void getAllPlaylists() {
-
+    
   }
 
   public void getPlaylist(int id) {
