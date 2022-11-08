@@ -53,7 +53,7 @@ public class JwtUtility {
   }
 
   private String doGenerateToken(Map<String, Object> claims, String username) {
-    long expirationTimeLong = Long.parseLong(expirationTime); //in second
+    long expirationTimeLong = Long.parseLong(expirationTime); //seconds
     final Date createdDate = new Date();
     final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong * 1000);
 
