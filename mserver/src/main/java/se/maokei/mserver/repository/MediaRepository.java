@@ -8,4 +8,5 @@ import se.maokei.mserver.model.Media;
 @Repository
 public interface MediaRepository extends ReactiveMongoRepository<Media, String> {
   Mono<Media> findByForeignId(String foreignId);
+  Mono<Media> findByLocation(String location);
 }

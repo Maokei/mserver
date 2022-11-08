@@ -15,7 +15,7 @@ app:
 
 spring:
   profiles:
-    active: test
+    active: dev
   data:
     mongodb:
       auto-index-creation: true
@@ -31,9 +31,15 @@ spring:
     active:
       on-profile:
         - dev
-  mongodb:
-    embedded:
-      version: 4.4.1
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: mserver
+      auto-index-creation: true
+      authentication-database: admin
+      username: root
+      password: example
 ---
 spring:
   config:
