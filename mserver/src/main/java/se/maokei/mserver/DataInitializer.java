@@ -34,14 +34,18 @@ class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String[] args) throws Exception {
         log.info("Starting data initialization  ...");
+        
         User userOne = User.builder().password(passwordEncoder.encode("password")).username("cat").email("cat@gmail.com").roles(List.of(Role.ROLE_ADMIN)).enabled(true).build();
+
         addInitUser(userOne).subscribe();
         addInitUser(new User("user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER))).subscribe();
         //username:password-> admin:admin
         addInitUser(new User("admin", passwordEncoder.encode("password"), "admin@gmail.com", true, List.of(Role.ROLE_ADMIN))).subscribe();
+
         userRepository.findAll().subscribe(System.out::println);
 
         log.info("Initialization of testing data ...");
+
         // Video
         Media netflixCyberpunkMedia = Media.builder().location("file:test_files/netflix_cyberpunk.mp4").fileName("netflix_cyberpunk.mp4").title("Cyberpunk: Edgerunners trailer").foreignId("c7192772-0c1c-11ed-861d-0242ac120001").build();
         Media videoMedia = Media.builder().location("file:test_files/video.mp4").fileName("video.mp4").title("Toy story trailer").foreignId("c7192772-0c1c-11ed-861d-0242ac120002").build();
