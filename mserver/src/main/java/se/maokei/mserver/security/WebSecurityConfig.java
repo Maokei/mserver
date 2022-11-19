@@ -62,43 +62,4 @@ public class WebSecurityConfig {
             .securityContextRepository(securityContextRepository)
             .build();
   }
-
-  /*
-  @Bean
-  public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
-    return http
-            .exceptionHandling()
-            .authenticationEntryPoint((swe, e) ->
-                    Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED))
-            ).accessDeniedHandler((swe, e) ->
-                    Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN))
-            ).and()
-            .csrf().disable()
-            .formLogin().disable()
-            .httpBasic().disable()
-            .authenticationManager(authenticationManager)
-            .securityContextRepository(securityContextRepository)
-            .authorizeExchange()
-            .pathMatchers(HttpMethod.OPTIONS).permitAll()
-
-            .pathMatchers("/index.html").permitAll()
-            .pathMatchers("/static/index.html").permitAll()
-
-            .pathMatchers("/static/favicon.ico").permitAll()
-            .pathMatchers("/favicon.ico").permitAll()
-
-            .pathMatchers("/swagger-ui.html").permitAll()
-            .pathMatchers("/webjars/swagger-ui/**").permitAll()
-            .pathMatchers("v3/api-docs/swagger-config").permitAll()
-
-            .pathMatchers("/login").permitAll()
-            .pathMatchers("/hello").permitAll()
-            .pathMatchers("/ping").permitAll()
-            .pathMatchers("/musicTest").permitAll()
-            .pathMatchers("/audioTest").permitAll()
-            .pathMatchers("/videoTest").permitAll()
-            .pathMatchers("/comment").permitAll()
-            .anyExchange().authenticated()
-            .and().build();
-  }*/
 }

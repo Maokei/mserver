@@ -15,12 +15,12 @@ import javax.validation.Valid;
 public class CommentController {
   private CommentRepository commentRepository;
 
-  @PostMapping
+  @PostMapping("/comment")
   private Mono<Comment> createComment(@Valid @RequestBody Comment comment) {
     return commentRepository.save(comment);
   }
 
-  @GetMapping
+  @GetMapping("/comment")
   private Flux<Comment> getAllComments() {
     return commentRepository.findAll();
   }

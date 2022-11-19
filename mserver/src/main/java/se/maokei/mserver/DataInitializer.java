@@ -9,10 +9,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.model.Media;
+import se.maokei.mserver.model.Playlist;
 import se.maokei.mserver.model.Role;
 import se.maokei.mserver.model.User;
 import se.maokei.mserver.repository.CommentRepository;
 import se.maokei.mserver.repository.MediaRepository;
+import se.maokei.mserver.repository.PlaylistRepository;
 import se.maokei.mserver.repository.UserRepository;
 import se.maokei.mserver.services.FileService;
 
@@ -27,6 +29,7 @@ class DataInitializer implements CommandLineRunner {
     private final CommentRepository commentRepository;
     private final FileService fileService;
     private final MediaRepository mediaRepository;
+    private final PlaylistRepository playlistRepository;
     private final PasswordEncoder passwordEncoder;
     private ResourceLoader resourceLoader;
     private static final String R_VIDEO_FORMAT = "classpath:videos/%s.mp4";
@@ -64,8 +67,18 @@ class DataInitializer implements CommandLineRunner {
         addInitMedia(neverFade).subscribe();
         addInitMedia(duvet).subscribe();
         addInitMedia(daycore).subscribe();
-
         mediaRepository.findAll().subscribe(res -> System.out.println("Media: " + res.getTitle()));
+
+        Playlist p = new Playlist();
+        p.setPlaylistName("Fun list");
+        addInitPlaylist(p).subscribe();
+    }
+
+    private Mono<Playlist> addInitPlaylist(Playlist playlist) {
+        return mediaRepository.findByForeignId("c7192772-0c1c-11ed-861d-0242ac120005").map(t-> {
+            playlist.addMediaId(t);
+            return t;
+        }).then(this.playlistRepository.save(playlist));
     }
 
     private Mono<Media> addInitMedia(Media media) {
