@@ -12,14 +12,17 @@ import org.jaudiotagger.tag.Tag;
 import org.jaudiotagger.tag.TagException;
 import org.jaudiotagger.tag.images.Artwork;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
+import se.maokei.mserver.model.Media;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
 
 @Service
-public class MediaMetadata {
+public class MediaMetadataService {
 
   public void setMetadata() throws FieldDataInvalidException {
     /*File mp3File = new File("test_files/synthwave_duvet.mp3");
@@ -28,11 +31,13 @@ public class MediaMetadata {
     tag.setField(FieldKey.ARTIST,"Kings of Leon");*/
     //f.commit();
   }
-  public void getMetadata() {
+  public Mono<Tag> getMetadata(Media media ) {
+    //AudioFile f = AudioFileIO.read(mp3File);
 
+    return Mono.empty();
   }
 
-  public void getArtwork() {
+  public void getArtwork(Media media) {
 
   }
 
@@ -40,7 +45,7 @@ public class MediaMetadata {
 
   }
   public static void main(String[] args) throws CannotReadException, TagException, InvalidAudioFrameException, ReadOnlyFileException, IOException {
-    File mp3File = new File("test_files/never_fade_away.mp3");
+    File mp3File = new File("test_files/audio.mp3");
     Path path = Path.of("test_files/never_fade_away.mp3");
     System.out.println(Files.exists(path));
     AudioFile f = AudioFileIO.read(mp3File);
