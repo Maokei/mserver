@@ -17,7 +17,6 @@ import se.maokei.mserver.model.User;
 import se.maokei.mserver.repository.UserRepository;
 
 import java.util.List;
-
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @SpringBootTest
 @AutoConfigureWebTestClient

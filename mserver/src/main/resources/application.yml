@@ -15,7 +15,7 @@ app:
 
 spring:
   profiles:
-    active: dev
+    active: test
   data:
     mongodb:
       auto-index-creation: true
