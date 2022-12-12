@@ -49,7 +49,7 @@ dependencies {
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
-	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.5.2'
+	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:4.2.0'
 	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.5.2'
 
 	testImplementation 'org.testcontainers:mongodb:1.17.5'
