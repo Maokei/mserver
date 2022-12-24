@@ -16,7 +16,7 @@ spring:
     mongodb:
       auto-index-creation: true
   profiles:
-    active: test
+    active: dev
 management:
   endpoints:
     web:
@@ -37,6 +37,21 @@ spring:
       authentication-database: admin
       username: root
       password: example
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      host: mongo
+      port: 27017
+      database: mserver
+      auto-index-creation: true
+      authentication-database: admin
+      username: root
+      password: example
+      #uri: mongodb://root:example@mongo:27017/mserver
 ---
 spring:
   config:
