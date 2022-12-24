@@ -6,13 +6,16 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
+import se.maokei.mserver.BaseIT;
 import se.maokei.mserver.dto.UserRegisterDto;
+
+import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
-public class RegisterControllerTest {
+public class RegisterControllerTest extends BaseIT {
     private static final String REGISTER_URL = "/api/v1/register";
     @Autowired
     private WebTestClient webTestClient;
@@ -20,10 +23,11 @@ public class RegisterControllerTest {
     @Test
     public void registerNewUser() {
         UserRegisterDto dto = new UserRegisterDto();
-        dto.setUsername("BigCat");
+        String username = String.valueOf(UUID.randomUUID());
+        dto.setUsername(username);
         dto.setPassword("12345e");
         dto.setMatchingPassword("12345e");
-        dto.setEmail("bigcat@gmail.com");
+        dto.setEmail(username + "@gmail.com");
         webTestClient.post()
                 .uri(REGISTER_URL)
                 .body(Mono.just(dto), UserRegisterDto.class)

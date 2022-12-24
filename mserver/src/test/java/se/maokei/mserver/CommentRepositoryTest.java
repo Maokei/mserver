@@ -3,13 +3,12 @@ package se.maokei.mserver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-
+import org.springframework.boot.test.context.SpringBootTest;
 import se.maokei.mserver.model.Comment;
 import se.maokei.mserver.repository.CommentRepository;
 
-@DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
+//@DataMongoTest(excludeAutoConfiguration = EmbeddedMongoAutoConfiguration.class)
+@SpringBootTest
 public class CommentRepositoryTest {
   @Autowired
   private CommentRepository commentRepository;

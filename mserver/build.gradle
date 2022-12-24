@@ -1,8 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.7.5'
-	id 'io.spring.dependency-management' version '1.1.0'
 	id 'java'
-	id 'org.springframework.experimental.aot' version '0.12.1'
+	id 'org.springframework.boot' version '3.0.1'
+	id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'se.maokei'
@@ -20,16 +19,21 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+	set('testcontainersVersion', "1.17.6")
+}
+
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 
-	implementation 'com.auth0:java-jwt:4.2.0'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
@@ -40,22 +44,26 @@ dependencies {
 	//implementation 'org.apache.tika:tika-core:2.4.1'
 	implementation 'net.jthink:jaudiotagger:3.0.1'
 
-	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.12'
-	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.12'
+	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.6.14'
+	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.6.14'
+
 	implementation 'commons-io:commons-io:2.11.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
-	implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.5.2'
-	testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.5.2'
-
-	testImplementation 'org.testcontainers:mongodb:1.17.5'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:mongodb'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+	}
 }
 
 tasks.named('test') {

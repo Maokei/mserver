@@ -1,5 +1,7 @@
 package se.maokei.mserver.api.v1.controller;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
@@ -9,8 +11,6 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.services.FileService;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
