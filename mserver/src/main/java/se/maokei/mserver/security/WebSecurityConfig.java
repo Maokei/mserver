@@ -3,6 +3,7 @@ package se.maokei.mserver.security;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
@@ -22,6 +23,7 @@ import static org.springframework.web.reactive.function.server.ServerResponse.ok
 @AllArgsConstructor
 @EnableWebFluxSecurity
 @EnableReactiveMethodSecurity
+@Configuration
 public class WebSecurityConfig {
   private AuthenticationManager authenticationManager;
   private SecurityContextRepository securityContextRepository;
@@ -36,9 +38,9 @@ public class WebSecurityConfig {
     return new BCryptPasswordEncoder();
   }
 
-  @Bean
+  /*@Bean
   public WebSecurityCustomizer ignoringCustomizer() {
-    return (web) -> web.ignoring().antMatchers(
+    return (web) -> web.ignoring().and().
             "/resources/**",
             "/static/**",
             "/css/**",
@@ -49,7 +51,7 @@ public class WebSecurityConfig {
             "/favicon.ico",
             "/swagger-ui.html"
     );
-  }
+  }*/
 
   @Bean
   public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {

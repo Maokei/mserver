@@ -13,6 +13,8 @@ mserver/mserver/
 ## Run with docker
 ```
 docker run --rm -it $(docker build -q .)
+# multi stage Dockerfile
+docker run --rm -it $(docker build -q -f Dockerfile-multi .)
 ```
 
 ## Run with docker-compose

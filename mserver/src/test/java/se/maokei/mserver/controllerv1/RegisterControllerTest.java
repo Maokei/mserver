@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
+import se.maokei.mserver.BaseIT;
 import se.maokei.mserver.dto.UserRegisterDto;
 
 import java.util.UUID;
@@ -14,7 +15,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @SpringBootTest
 @AutoConfigureWebTestClient
-public class RegisterControllerTest {
+public class RegisterControllerTest extends BaseIT {
     private static final String REGISTER_URL = "/api/v1/register";
     @Autowired
     private WebTestClient webTestClient;

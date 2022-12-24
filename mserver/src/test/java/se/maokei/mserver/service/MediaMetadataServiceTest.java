@@ -6,15 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import se.maokei.mserver.model.Media;
 import se.maokei.mserver.model.MediaUtils;
-import se.maokei.mserver.repository.MediaRepository;
 import se.maokei.mserver.services.MediaMetadataService;
 
 import java.io.File;
 
 @SpringBootTest
 public class MediaMetadataServiceTest {
-    @Autowired
-    MediaRepository mediaRepository;
     @Autowired
     private MediaMetadataService mediaMetadataService;
 

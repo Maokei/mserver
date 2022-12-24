@@ -20,10 +20,10 @@ import se.maokei.mserver.services.FileService;
 
 import java.util.List;
 
+@Profile("!test")
 @AllArgsConstructor
 @Slf4j
 @Component
-@Profile("!test")
 class DataInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;

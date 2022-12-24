@@ -4,7 +4,6 @@ springdoc:
     enabled: true
 # swagger-ui custom path
 # springdoc.swagger-ui.path=/swagger-ui.html
-
 app:
   jjwt:
     secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
@@ -12,13 +11,12 @@ app:
     iteration: 33
     keylength: 256
 
-
 spring:
-  profiles:
-    active: dev
   data:
     mongodb:
       auto-index-creation: true
+  profiles:
+    active: test
 management:
   endpoints:
     web:
@@ -45,16 +43,4 @@ spring:
     activate:
       on-profile:
         - test
-  #if set embedded mongo does not work
-  #data:
-  #  mongodb:
-  #    uri: mongodb://localhost:27017/testdb
-    #  authentication-database: admin
-    #  username: admin
-    #  password: admin
-    #  database: testdb
-    #  port: 27017
-  mongodb:
-    embedded:
-      version: 4.4.1
 ---

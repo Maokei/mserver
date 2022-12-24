@@ -1,13 +1,12 @@
 package se.maokei.mserver.api.v1.controller;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.model.Comment;
 import se.maokei.mserver.repository.CommentRepository;
-
-import javax.validation.Valid;
 
 @AllArgsConstructor
 @RestController

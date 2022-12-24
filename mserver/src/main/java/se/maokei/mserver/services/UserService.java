@@ -1,5 +1,6 @@
 package se.maokei.mserver.services;
 
+import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,6 @@ import se.maokei.mserver.model.Role;
 import se.maokei.mserver.model.User;
 import se.maokei.mserver.repository.UserRepository;
 
-import javax.annotation.PostConstruct;
 import java.util.*;
 
 @AllArgsConstructor

@@ -1,12 +1,11 @@
 package se.maokei.mserver.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import se.maokei.mserver.validation.PasswordMatches;
 import se.maokei.mserver.validation.ValidEmail;
-
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Data
 @PasswordMatches
