@@ -1,12 +1,13 @@
-package se.maokei.mserver.services;
+package se.maokei.mserver.services.watch;
 
-import java.io.File;
-import java.io.IOException;
 import org.apache.commons.io.FileDeleteStrategy;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
 import org.apache.commons.io.monitor.FileAlterationMonitor;
 import org.apache.commons.io.monitor.FileAlterationObserver;
+
+import java.io.File;
+import java.io.IOException;
 public class IOTester {
   public static void main(String[] args) {
     try {

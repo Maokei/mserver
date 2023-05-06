@@ -6,7 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.model.Media;
 import se.maokei.mserver.model.Playlist;
@@ -23,7 +22,7 @@ import java.util.List;
 @Profile("!test")
 @AllArgsConstructor
 @Slf4j
-@Component
+//@Component
 class DataInitializer implements CommandLineRunner {
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;

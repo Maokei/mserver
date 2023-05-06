@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
-import se.maokei.mserver.services.StreamingService;
 
 import java.security.Principal;
 
@@ -17,10 +16,6 @@ import java.security.Principal;
 @RestController
 @Tag(name = "Test API", description = "API for testing purpose")
 public class HelloWorld {
-    private StreamingService streamingService;
-    public HelloWorld(StreamingService streamingService) {
-        this.streamingService = streamingService;
-    }
 
     @GetMapping("/ping")
     public Mono<String> ping(Mono<Principal> principal) {

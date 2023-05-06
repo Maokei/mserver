@@ -5,12 +5,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import se.maokei.mserver.model.Media;
 import se.maokei.mserver.model.Playlist;
 import se.maokei.mserver.repository.MediaRepository;
 import se.maokei.mserver.repository.PlaylistRepository;
-
-import java.util.List;
 
 @Service
 @Transactional

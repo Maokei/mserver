@@ -1,11 +1,9 @@
 package se.maokei.mserver.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.micrometer.core.annotation.Timed;
+import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import se.maokei.mserver.model.Photo;
 import se.maokei.mserver.services.PhotoService;
@@ -13,9 +11,10 @@ import se.maokei.mserver.services.PhotoService;
 import java.io.IOException;
 import java.util.Base64;
 
+@RequiredArgsConstructor
+@RestController
 public class PhotoController {
-    @Autowired
-    PhotoService photoService;
+    private final PhotoService photoService;
 
     @PostMapping("/photos/add")
     public String addPhoto(@RequestParam("title") String title,
@@ -25,6 +24,7 @@ public class PhotoController {
         return "redirect:/photos/" + id;
     }
 
+    @Timed
     @GetMapping("/photos/{id}")
     public String getPhoto(@PathVariable String id, Model model) {
         Photo photo = photoService.getPhoto(id);

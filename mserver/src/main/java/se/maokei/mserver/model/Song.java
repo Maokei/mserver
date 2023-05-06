@@ -6,8 +6,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Song extends EntityMetadata {
-    private String title;
+public class Song {
     private String length;
 }
