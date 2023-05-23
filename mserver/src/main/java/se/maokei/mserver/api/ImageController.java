@@ -13,7 +13,7 @@ import java.util.Base64;
 
 @RequiredArgsConstructor
 @RestController
-public class PhotoController {
+public class ImageController {
     private final PhotoService photoService;
 
     @PostMapping("/photos/add")
