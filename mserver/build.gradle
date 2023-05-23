@@ -47,7 +47,7 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.7.0'
 	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.7.0'
 
-	implementation 'commons-io:commons-io:2.11.0'
+	implementation 'commons-io:commons-io:2.12.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
