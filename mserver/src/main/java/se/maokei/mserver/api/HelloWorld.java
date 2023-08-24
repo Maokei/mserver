@@ -17,11 +17,6 @@ import java.security.Principal;
 @Tag(name = "Test API", description = "API for testing purpose")
 public class HelloWorld {
 
-    @GetMapping("/ping")
-    public Mono<String> ping(Mono<Principal> principal) {
-        return Mono.just("alive");
-    }
-
     @PreAuthorize("hasRole('ROLE_USER')")
     @GetMapping("/protected")
     public Mono<String> protectedPing(Mono<Principal> principal) {
