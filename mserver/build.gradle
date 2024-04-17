@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.1.2'
-	id 'io.spring.dependency-management' version '1.1.0'
+	id 'io.spring.dependency-management' version '1.1.2'
 }
 
 group = 'se.maokei'
@@ -38,8 +38,8 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-	implementation 'com.google.zxing:core:3.5.1'
-	implementation 'com.google.zxing:javase:3.5.1'
+	implementation 'com.google.zxing:core:3.5.2'
+	implementation 'com.google.zxing:javase:3.5.2'
 
 	//implementation 'org.apache.tika:tika-core:2.4.1'
 	implementation 'net.jthink:jaudiotagger:3.0.1'
@@ -47,7 +47,7 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-webflux-core:1.7.0'
 	implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.7.0'
 
-	implementation 'commons-io:commons-io:2.12.0'
+	implementation 'commons-io:commons-io:2.13.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
