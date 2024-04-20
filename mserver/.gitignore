@@ -38,3 +38,6 @@ out/
 
 ### mac
 .DS_Store
+
+### upload test folder
+src/main/resources/upload

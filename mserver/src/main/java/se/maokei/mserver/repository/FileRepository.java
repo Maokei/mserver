@@ -22,7 +22,7 @@ import java.util.Date;
 public class FileRepository {
   private final Logger LOGGER = LoggerFactory.getLogger(getClass());
   String RESOURCE_DIR = FileRepository.class.getResource("/").getPath();
-  private final Path basePath = Paths.get("./src/main/resources/upload/");
+  private final Path BASE_PATH = Paths.get("./src/main/resources/upload/");
 
   /**
    * saveFile
@@ -36,17 +36,20 @@ public class FileRepository {
   }
 
   public Mono<Media> saveFile(Mono<FilePart> filePartMono, Media media) throws Exception {
-    //basePath + File.separator + fp.filename()
     return filePartMono
         .doOnNext(fp -> LOGGER.info("FileRepository saving file: " + fp.filename()))
         .flatMap(fp -> {
-          media.setLocation(basePath + File.separator + fp.filename());
-          return fp.transferTo(basePath.resolve(fp.filename()))
+          media.setLocation(BASE_PATH + File.separator + fp.filename());
+          return fp.transferTo(BASE_PATH.resolve(fp.filename()))
               .then(
                   Mono.just(media)
               );
         });
   }
+
+  /*public Mono<Media> saveFile(Mono<File> monoFile, Mono<Media> monoMedia) {
+
+  }*/
 
   public FileSystemResource findFile(String location) {
     try {

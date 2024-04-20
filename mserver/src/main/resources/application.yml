@@ -37,6 +37,11 @@ spring:
       authentication-database: admin
       username: root
       password: example
+logging:
+  level:
+    org:
+      springframework:
+        data: debug
 ---
 spring:
   config:

@@ -55,6 +55,21 @@ public class RegisterControllerTest extends BaseIT {
     }
 
     public void registerAlreadyExistingEmail() {
+        final String EMAIL = "test@gmail.com";
+        String username1 = String.valueOf(UUID.randomUUID());
+        String username2 = String.valueOf(UUID.randomUUID());
+        UserRegisterDto dto = new UserRegisterDto();
+
+        dto.setUsername(username1);
+        dto.setPassword("12345e");
+        dto.setMatchingPassword("12345e");
+        dto.setEmail(EMAIL);
+        webTestClient.post()
+                .uri(REGISTER_URL)
+                .body(Mono.just(dto), UserRegisterDto.class)
+                .exchange()
+                .expectStatus().isOk();
+
 
     }
 

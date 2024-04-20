@@ -3,6 +3,7 @@ package se.maokei.mserver.security;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -32,10 +33,10 @@ public class WebSecurityConfig {
   @Bean
   public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
     return http
-            .exceptionHandling().and()
-            .csrf().disable()
-            .formLogin().disable()
-            .httpBasic().disable()
+            .exceptionHandling(Customizer.withDefaults())
+            .csrf(ServerHttpSecurity.CsrfSpec::disable)
+            .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+            .httpBasic(httpBasicSpec -> httpBasicSpec.disable())
             .authenticationManager(authenticationManager)
             .securityContextRepository(securityContextRepository)
             .build();
