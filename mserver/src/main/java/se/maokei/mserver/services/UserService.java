@@ -35,8 +35,6 @@ public class UserService {
   }
 
   public Mono<User> findByUsername(String username) {
-    /*System.out.println("findByUsername: " + username);
-    return Mono.justOrEmpty(data.get(username));*/
     return userRepository.findByUsername(username);
   }
 

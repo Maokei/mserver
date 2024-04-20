@@ -1,6 +1,7 @@
 package se.maokei.mserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +11,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @Builder
 @Document
+@Schema(
+    name = "Media"
+)
 public class Media extends EntityMetadata {
     private String foreignId;
     private String title;
