@@ -7,8 +7,6 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
-import se.maokei.mserver.model.EntityMetadata;
-import se.maokei.mserver.model.Image;
 import se.maokei.mserver.model.Media;
 import se.maokei.mserver.repository.FileRepository;
 import se.maokei.mserver.repository.ImageDbRepository;

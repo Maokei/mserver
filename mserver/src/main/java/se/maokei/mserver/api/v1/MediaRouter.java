@@ -14,7 +14,7 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 @Configuration(proxyBeanMethods = false)
 public class MediaRouter {
   @Bean
-  public RouterFunction<ServerResponse> route(MediaHandler mediaHandler) {
+  public RouterFunction<ServerResponse> mediaRoutes(MediaHandler mediaHandler) {
     return RouterFunctions
         .route().nest(
             path("/api/v1/media"), builder -> builder

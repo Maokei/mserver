@@ -1,4 +1,4 @@
-package se.maokei.mserver.services;
+package se.maokei.mserver.services.watch;
 
 import org.apache.commons.io.monitor.FileAlterationListener;
 import org.apache.commons.io.monitor.FileAlterationListenerAdaptor;
@@ -10,8 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 
 public class DirectoryMonitoringExample {
-
-  private static final Logger LOG = LoggerFactory.getLogger(DirectoryMonitoringExample.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(DirectoryMonitoringExample.class);
 
   private static final int POLL_INTERVAL = 500;
 
@@ -24,17 +23,17 @@ public class DirectoryMonitoringExample {
       @Override
       public void onFileCreate(File file) {
         System.out.println("created " + file.getName());
-        LOG.debug("File: " + file.getName() + " created");
+        LOGGER.debug("File: " + file.getName() + " created");
       }
 
       @Override
       public void onFileDelete(File file) {
-        LOG.debug("File: " + file.getName() + " deleted");
+        LOGGER.debug("File: " + file.getName() + " deleted");
       }
 
       @Override
       public void onFileChange(File file) {
-        LOG.debug("File: " + file.getName() + " changed");
+        LOGGER.debug("File: " + file.getName() + " changed");
       }
     };
     observer.addListener(listener);
