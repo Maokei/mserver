@@ -12,6 +12,10 @@ app:
     keylength: 256
 
 spring:
+  docker:
+    compose:
+      enabled: false
+      file: compose.yaml
   data:
     mongodb:
       auto-index-creation: true
@@ -28,6 +32,10 @@ spring:
   config:
     activate:
       on-profile: dev
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/mserver
+    username:
+    password:
   data:
     mongodb:
       host: localhost
