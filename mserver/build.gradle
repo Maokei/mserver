@@ -1,12 +1,16 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.1.5'
-	id 'io.spring.dependency-management' version '1.1.3'
+	id 'org.springframework.boot' version '3.2.5'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'org.graalvm.buildtools.native' version '0.9.28'
 }
 
 group = 'se.maokei'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '20'
+
+java {
+	sourceCompatibility = '21'
+}
 
 configurations {
 	compileOnly {
@@ -20,16 +24,21 @@ repositories {
 }
 
 ext {
-	set('testcontainersVersion', "1.17.6")
+  set('springShellVersion', "3.2.4")
 }
-
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'org.springframework.shell:spring-shell-starter'
+	implementation 'org.flywaydb:flyway-core'
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+
+	runtimeOnly 'org.postgresql:postgresql'
+	runtimeOnly 'org.postgresql:r2dbc-postgresql'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
@@ -52,18 +61,22 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql'
+	testImplementation 'org.testcontainers:r2dbc'
 	testImplementation 'org.testcontainers:mongodb'
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
-	}
+  imports {
+    mavenBom "org.springframework.shell:spring-shell-dependencies:${springShellVersion}"
+  }
 }
 
 tasks.named('test') {
