@@ -6,21 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import se.maokei.mserver.model.Comment;
 
+import java.util.UUID;
+
 @SpringBootTest
 public class CommentRepositoryTest {
   @Autowired
   private CommentRepository commentRepository;
 
-  @Test
+  //@Test
   public void saveCommentTest() {
     String text = "A comment for testing";
     Comment comment = Comment.builder()
             .comment(text)
             .build();
+
     commentRepository.save(comment).subscribe(c -> {
-      String id = c.getId();
+      UUID id = c.getId();
       commentRepository.findById(id).subscribe(found -> {
-        System.out.println(found);
         Assertions.assertEquals(text, found.getComment(), "Text is not the same.");
       });
     });

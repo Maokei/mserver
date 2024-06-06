@@ -25,7 +25,6 @@ import se.maokei.mserver.security.JwtUtility;
 import se.maokei.mserver.services.UserService;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
 @AllArgsConstructor

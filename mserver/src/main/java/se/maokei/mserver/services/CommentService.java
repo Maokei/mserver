@@ -8,6 +8,7 @@ import se.maokei.mserver.repository.CommentRepository;
 @Service
 public class CommentService {
     private CommentRepository commentRepository;
+
     public void createComment() {
 
     }

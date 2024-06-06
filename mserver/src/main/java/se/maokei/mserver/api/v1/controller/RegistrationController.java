@@ -34,7 +34,7 @@ public class RegistrationController {
     private UserService userService;
 
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "")
+            @ApiResponse(responseCode = "200", description = "Register a new User")
     })
     @PostMapping("/register")
     public Mono<ResponseEntity<?>> registerAccount(@Valid @RequestBody UserRegisterDto dto) {

@@ -68,14 +68,14 @@ public class FileService {
     return location + " " + fId;
   }
 
-  public FileSystemResource find(String imageId) {
+  public FileSystemResource find(UUID imageId) {
         /*Image image = imageDbRepository.findById(imageId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));*/
     //return fileRepository.findFile(image.getLocation());
     return (FileSystemResource) imageDbRepository.findById(imageId).subscribe(res -> fileRepository.findFile(res.getLocation()));
   }
 
-  public Mono<FileSystemResource> monoFind(String imageId) {
+  public Mono<FileSystemResource> monoFind(UUID imageId) {
     return imageDbRepository.findById(imageId).flatMap(
         metadata -> fileRepository.findFileMono(metadata.getLocation()
         )

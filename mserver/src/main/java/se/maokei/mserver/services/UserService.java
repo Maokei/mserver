@@ -29,9 +29,9 @@ public class UserService {
   public void init() {
     data = new HashMap<>();
     //username:password -> user:user
-    data.put("user", new User("user", passwordEncoder.encode("password"), "user@gmail.com",true, List.of(Role.ROLE_USER)));
+    data.put("user", new User(UUID.randomUUID(), "user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER), false));
     //username:password-> admin:admin
-    data.put("admin", new User("admin", passwordEncoder.encode("password"), "admin@gmail.com",true, List.of(Role.ROLE_ADMIN)));
+    data.put("admin", new User(UUID.randomUUID(), "admin", passwordEncoder.encode("password"), "admin@gmail.com",true, List.of(Role.ROLE_ADMIN), false));
   }
 
   public Mono<User> findByUsername(String username) {
@@ -57,7 +57,7 @@ public class UserService {
         return Mono.error(new UserAlreadyExistException("User with email already exists: " + found.getEmail()));
       }
       return Mono.just(newUser);
-    }).switchIfEmpty(userRepository.insert(newUser))
+    }).switchIfEmpty(userRepository.save(newUser))
             .doOnError(Mono::error)
             .publishOn(Schedulers.boundedElastic())
             .doFinally(signal -> {
@@ -69,7 +69,7 @@ public class UserService {
     });
   }
 
-  public Mono<User> updateUserPassword(String userId, User user) {
+  public Mono<User> updateUserPassword(UUID userId, User user) {
     return userRepository.findById(userId)
             .flatMap(dbUser -> {
               dbUser.setPassword(user.getPassword());

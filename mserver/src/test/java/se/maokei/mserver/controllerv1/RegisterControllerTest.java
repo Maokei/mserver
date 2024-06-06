@@ -54,6 +54,7 @@ public class RegisterControllerTest extends BaseIT {
                 .json("[\"Passwords don't match\"]");
     }
 
+    //TODO @Test
     public void registerAlreadyExistingEmail() {
         final String EMAIL = "test@gmail.com";
         String username1 = String.valueOf(UUID.randomUUID());
@@ -73,6 +74,7 @@ public class RegisterControllerTest extends BaseIT {
 
     }
 
+    //TODO @Test
     public void registerUserAlreadyExistingUsername() {
 
     }

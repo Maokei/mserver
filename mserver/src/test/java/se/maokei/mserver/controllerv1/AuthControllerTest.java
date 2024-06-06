@@ -17,6 +17,7 @@ import se.maokei.mserver.model.User;
 import se.maokei.mserver.repository.UserRepository;
 
 import java.util.List;
+import java.util.UUID;
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -32,8 +33,8 @@ public class AuthControllerTest extends BaseIT {
 
     @BeforeAll
     public void setup() {
-        User admin = new User("admin", passwordEncoder.encode("password"), "admin@gmail.com", true, List.of(Role.ROLE_ADMIN));
-        User user = new User("user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER));
+        User admin = new User(UUID.randomUUID(), "admin", passwordEncoder.encode("password"), "admin@gmail.com", true, List.of(Role.ROLE_ADMIN), false);
+        User user = new User(UUID.randomUUID(), "user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER), false);
         this.userRepository.save(admin).subscribe();
         this.userRepository.save(user).subscribe();
     }

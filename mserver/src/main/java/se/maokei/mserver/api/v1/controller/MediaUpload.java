@@ -14,6 +14,7 @@ import se.maokei.mserver.services.FileService;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
@@ -48,7 +49,7 @@ public class MediaUpload {
   }
 
   @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
-  public Mono<FileSystemResource> downloadImage(@PathVariable String imageId) throws Exception {
+  public Mono<FileSystemResource> downloadImage(@PathVariable UUID imageId) throws Exception {
     return fileService.monoFind(imageId);
   }
 }

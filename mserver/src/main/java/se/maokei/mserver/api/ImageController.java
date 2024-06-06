@@ -10,27 +10,30 @@ import se.maokei.mserver.services.PhotoService;
 
 import java.io.IOException;
 import java.util.Base64;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
 public class ImageController {
     private final PhotoService photoService;
 
-    @PostMapping("/photos/add")
+    @PostMapping("/image")
     public String addPhoto(@RequestParam("title") String title,
                            @RequestParam("image") MultipartFile image, Model model)
             throws IOException {
         String id = photoService.addPhoto(title, image);
-        return "redirect:/photos/" + id;
+        return "redirect:/image/" + id;
     }
 
     @Timed
-    @GetMapping("/photos/{id}")
-    public String getPhoto(@PathVariable String id, Model model) {
+    @GetMapping("/image/{id}")
+    public String getPhoto(@PathVariable UUID id, Model model) {
         Photo photo = photoService.getPhoto(id);
         model.addAttribute("title", photo.getTitle());
-        model.addAttribute("image",
-                Base64.getEncoder().encodeToString(photo.getImage().getData()));
+        //TODO fix base64
+        //model.addAttribute("image",
+        //        Base64.getEncoder().encodeToString(photo.getImage().getData()));
+        model.addAttribute("image", "todo");
         return "photos";
     }
 }
