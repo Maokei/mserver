@@ -10,10 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,32 +18,21 @@ import java.util.UUID;
 @Setter
 @ToString
 @Builder
-@Table
-public class User extends EntityMetadata implements UserDetails, Persistable<UUID> {
+@Table("users")
+public class User implements UserDetails, Persistable<UUID> {
     @Id
     private UUID id;
-    //@Indexed(unique = true)
     private String username;
     @JsonIgnore
     private String password;
-    //@Indexed(unique = true)
     private String email;
     @JsonIgnore
     private Boolean enabled;
     @JsonIgnore
     private List<Role> roles;
     @Transient
+    @JsonIgnore
     private boolean isNew;
-
-    /*public User(UUID id, String username, String password, String email, Boolean enabled, List<Role> roles, boolean isNew) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.enabled = enabled;
-        this.roles = roles;
-        this.isNew = isNew;
-    }*/
 
     @JsonIgnore
     @Override
@@ -62,16 +48,6 @@ public class User extends EntityMetadata implements UserDetails, Persistable<UUI
             authorities.add(new SimpleGrantedAuthority(r.toString()));
         }
         return authorities;
-    }
-
-    @Override
-    public String getPassword() {
-        return "";
-    }
-
-    @Override
-    public String getUsername() {
-        return "";
     }
 
     @JsonIgnore
@@ -93,12 +69,9 @@ public class User extends EntityMetadata implements UserDetails, Persistable<UUI
     }
 
     @Override
-    public UUID getId() {
-        return this.id;
-    }
-
-    @Override
     public boolean isNew() {
-        return this.isNew;
+        boolean result = Objects.isNull(id);
+        this.id = result ? UUID.randomUUID() : this.id;
+        return result;
     }
 }

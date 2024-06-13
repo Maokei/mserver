@@ -8,4 +8,3 @@ CREATE TABLE IF NOT EXISTS comment (
 );
 INSERT INTO "comment" ("id", "user_id", "comment")
 VALUES ('545183b5-e7e5-4380-8bb0-d3853da3be85', '74e95ef3-0e8d-4f75-9205-0c43c6e280dc', 'First');
-/* '545183b5-e7e5-4380-8bb0-d3853da3be85',  */

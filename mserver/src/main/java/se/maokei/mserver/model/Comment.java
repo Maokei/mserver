@@ -1,6 +1,9 @@
 package se.maokei.mserver.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+
+import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -8,5 +11,14 @@ import lombok.*;
 @Setter
 @Builder
 public class Comment extends EntityMetadata {
+  @Schema(name = "user_id", description = "User that created comment")
+  private UUID user_id;
+  @Schema(name = "comment", description = "Comment text")
   private String comment;
+
+  public record CommentDto(UUID id, UUID user_id, String comment) {
+    public Comment toComment() {
+      return Comment.builder().user_id(id).user_id(user_id).comment(comment).build();
+    }
+  }
 }
