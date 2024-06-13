@@ -19,6 +19,11 @@ public class CommentController {
     return commentRepository.save(comment);
   }
 
+  @PutMapping("/comment")
+  private Mono<Comment> updateComment(@Valid @RequestBody Comment comment) {
+    return commentRepository.save(comment);
+  }
+
   @GetMapping("/comment")
   private Flux<Comment> getAllComments() {
     return commentRepository.findAll();
