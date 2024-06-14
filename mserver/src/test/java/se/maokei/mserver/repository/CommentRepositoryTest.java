@@ -71,7 +71,10 @@ public class CommentRepositoryTest {
             .doOnNext(u -> commentRepository.save(u))
             .doOnNext(f -> commentRepository.findById(f.getId()));
     StepVerifier.create(setup).assertNext(
-            a -> Assertions.assertEquals(text2, a.getComment(), "Comment was not updated")
+            a -> {
+              Assertions.assertEquals(text2, a.getComment(), "Comment was not updated");
+              Assertions.assertNotNull(a.getId());
+            }
     ).verifyComplete();
   }
 }
