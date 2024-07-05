@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.model.Media;
 import se.maokei.mserver.repository.FileRepository;
-import se.maokei.mserver.repository.ImageDbRepository;
 import se.maokei.mserver.repository.MediaRepository;
 
 import java.util.UUID;
@@ -20,14 +19,13 @@ public class FileService {
   private final Logger LOGGER = LoggerFactory.getLogger(getClass());
   private FileRepository fileRepository;
   private MediaRepository mediaRepository;
-  private ImageDbRepository imageDbRepository;
 
   public Mono<String> save(Mono<FilePart> fileMono) throws Exception {
     Mono<Media> mediaMono = fileMono.flatMap(f -> {
       String name = f.filename();
       String fId = UUID.randomUUID().toString();
       LOGGER.info("FileService, save:  {} {}", name, fId);
-      Media media = Media.builder().fileName(name).foreignId(fId).build();
+      Media media = Media.builder().filename(name).foreignId(fId).build();
       return Mono.just(media);
     });
     return mediaMono.flatMap(m -> {
@@ -62,23 +60,22 @@ public class FileService {
     //String location = fileRepository.saveFile(bytes, fileName);
     String location = "classpath:videos/video.mp4";
     String fId = UUID.randomUUID().toString();
-    Media media = Media.builder().fileName(fileName).foreignId(fId).location(location).build();
+    Media media = Media.builder().filename(fileName).foreignId(fId).location(location).build();
     mediaRepository.save(media).subscribe();
     //return imageDbRepository.save(media).subscribe(EntityMetadata::getId).toString();
     return location + " " + fId;
   }
 
-  public FileSystemResource find(UUID imageId) {
+  public FileSystemResource findImageById(UUID imageId) {
         /*Image image = imageDbRepository.findById(imageId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));*/
     //return fileRepository.findFile(image.getLocation());
-    return (FileSystemResource) imageDbRepository.findById(imageId).subscribe(res -> fileRepository.findFile(res.getLocation()));
+    return (FileSystemResource) mediaRepository.findById(imageId).subscribe(res -> fileRepository.findFile(res.getLocation()));
   }
 
-  public Mono<FileSystemResource> monoFind(UUID imageId) {
-    return imageDbRepository.findById(imageId).flatMap(
-        metadata -> fileRepository.findFileMono(metadata.getLocation()
-        )
+  public Mono<FileSystemResource> monoFind(Mono<UUID> imageId) {
+    return mediaRepository.findById(imageId).flatMap(
+        metadata -> fileRepository.findFileMono(metadata.getLocation())
     );
   }
 }
