@@ -2,6 +2,7 @@ package se.maokei.mserver.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
+@Table("comments")
 public class Comment extends EntityMetadata {
   @Schema(name = "user_id", description = "User that created comment")
   private UUID user_id;

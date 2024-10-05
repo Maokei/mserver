@@ -50,6 +50,6 @@ public class MediaUpload {
 
   @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
   public Mono<FileSystemResource> downloadImage(@PathVariable UUID imageId) throws Exception {
-    return fileService.monoFind(imageId);
+    return fileService.monoFind(Mono.just(imageId));
   }
 }

@@ -16,7 +16,7 @@ import java.util.Date;
 
 /* *
  * FileRepository
- * <p>Writing files to disk</p>
+ * <p>Writes files to disk</p>
  * */
 @Repository
 public class FileRepository {

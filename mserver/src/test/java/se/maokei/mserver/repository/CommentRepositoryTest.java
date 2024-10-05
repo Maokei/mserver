@@ -11,6 +11,7 @@ import reactor.test.StepVerifier;
 
 import se.maokei.mserver.TestcontainersConfiguration;
 import se.maokei.mserver.model.Comment;
+import se.maokei.mserver.model.EntityMetadata;
 
 import java.util.UUID;
 
@@ -44,15 +45,12 @@ public class CommentRepositoryTest {
             .user_id(userId)
             .build();
 
-    Mono<UUID> setup = commentRepository.save(comment).map(c -> c.getId());
-    var composite = Mono.from(setup).doOnNext(commentRepository::findById);
+    Mono<UUID> setup = commentRepository.save(comment).map(EntityMetadata::getId);
+    Mono<Comment> mono = Mono.from(setup).flatMap(id -> commentRepository.findById(id));
 
-    //TODO fix test
-    //Mono<Comment> found = commentRepository.findById(id);
-    //var composite = Mono.from(setup).thenMany(found);
-    /*StepVerifier.create(composite).consumeNextWith(c -> {
+    StepVerifier.create(mono).consumeNextWith(c -> {
       Assertions.assertEquals(text, c.getComment(), "Text is not the same.");
-    }).verifyComplete();*/
+    }).verifyComplete();
   }
 
   @Test
@@ -66,10 +64,10 @@ public class CommentRepositoryTest {
             .build();
 
     Mono<Comment> setup = commentRepository.save(comment)
-            .doOnNext(s -> commentRepository.findById(s.getId()))
+            .doOnNext(s -> commentRepository.findById(s.getId()).subscribe())
             .doOnNext(m -> m.setComment(text2))
-            .doOnNext(u -> commentRepository.save(u))
-            .doOnNext(f -> commentRepository.findById(f.getId()));
+            .doOnNext(u -> commentRepository.save(u).subscribe())
+            .doOnNext(f -> commentRepository.findById(f.getId()).subscribe());
     StepVerifier.create(setup).assertNext(
             a -> {
               Assertions.assertEquals(text2, a.getComment(), "Comment was not updated");

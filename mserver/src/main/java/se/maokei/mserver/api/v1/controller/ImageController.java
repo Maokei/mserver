@@ -1,15 +1,15 @@
-package se.maokei.mserver.api;
+package se.maokei.mserver.api.v1.controller;
 
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import se.maokei.mserver.model.Media;
 import se.maokei.mserver.model.Photo;
 import se.maokei.mserver.services.PhotoService;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -28,7 +28,7 @@ public class ImageController {
     @Timed
     @GetMapping("/image/{id}")
     public String getPhoto(@PathVariable UUID id, Model model) {
-        Photo photo = photoService.getPhoto(id);
+        Media photo = photoService.getPhoto(id);
         model.addAttribute("title", photo.getTitle());
         //TODO fix base64
         //model.addAttribute("image",

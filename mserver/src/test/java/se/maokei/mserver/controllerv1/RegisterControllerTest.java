@@ -4,30 +4,32 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
-import se.maokei.mserver.BaseIT;
+import se.maokei.mserver.TestcontainersConfiguration;
 import se.maokei.mserver.dto.UserRegisterDto;
 
 import java.util.UUID;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 
+@Import(TestcontainersConfiguration.class)
 @SpringBootTest
 @AutoConfigureWebTestClient
-public class RegisterControllerTest extends BaseIT {
+public class RegisterControllerTest {
     private static final String REGISTER_URL = "/api/v1/register";
     @Autowired
     private WebTestClient webTestClient;
 
     @Test
     public void registerNewUser() {
+        String username = "test1";
         UserRegisterDto dto = new UserRegisterDto();
-        String username = String.valueOf(UUID.randomUUID());
         dto.setUsername(username);
         dto.setPassword("12345e");
         dto.setMatchingPassword("12345e");
-        dto.setEmail(username + "@gmail.com");
+        dto.setEmail(username + "@email.com");
         webTestClient.post()
                 .uri(REGISTER_URL)
                 .body(Mono.just(dto), UserRegisterDto.class)

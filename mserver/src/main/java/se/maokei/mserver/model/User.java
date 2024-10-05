@@ -1,6 +1,7 @@
 package se.maokei.mserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -22,14 +23,16 @@ import java.util.*;
 public class User implements UserDetails, Persistable<UUID> {
     @Id
     private UUID id;
+    @NotBlank(message = "Username cannot be empty")
     private String username;
     @JsonIgnore
     private String password;
+    @NotBlank(message = "Email cannot be empty")
     private String email;
     @JsonIgnore
-    private Boolean enabled;
+    private List<@NotBlank(message = "Roles should not be empty") Role> roles;
     @JsonIgnore
-    private List<Role> roles;
+    private Boolean enabled;
     @Transient
     @JsonIgnore
     private boolean isNew;
@@ -38,6 +41,15 @@ public class User implements UserDetails, Persistable<UUID> {
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public User(String username, String password, String email, List<Role> roles, Boolean enabled, boolean isNew) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+        this.enabled = enabled;
+        this.isNew = isNew;
     }
 
     @JsonIgnore
@@ -59,7 +71,7 @@ public class User implements UserDetails, Persistable<UUID> {
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return this.enabled;
     }
 
     @JsonIgnore

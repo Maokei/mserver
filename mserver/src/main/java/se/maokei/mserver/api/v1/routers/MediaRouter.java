@@ -1,4 +1,4 @@
-package se.maokei.mserver.api.v1;
+package se.maokei.mserver.api.v1.routers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.context.annotation.Bean;

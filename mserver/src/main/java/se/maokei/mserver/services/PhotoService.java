@@ -3,8 +3,8 @@ package se.maokei.mserver.services;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import se.maokei.mserver.model.Photo;
-import se.maokei.mserver.repository.PhotoRepository;
+import se.maokei.mserver.model.Media;
+import se.maokei.mserver.repository.MediaRepository;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -15,11 +15,14 @@ import java.util.UUID;
  * PhotoService
  * */
 public class PhotoService { //TODO rename to ImageService
-    private PhotoRepository photoRepo;
+    private MediaRepository repo;
 
     public String addPhoto(String title, MultipartFile file) throws IOException {
-        Photo photo = new Photo();
-        photo.setTitle(title);
+        Media media = Media.builder()
+                .title(title)
+                .filename(file.getName())
+                .size(file.getSize())
+                .build();
         //TODO fix this service
         /*
         photo.setImage(
@@ -28,10 +31,12 @@ public class PhotoService { //TODO rename to ImageService
                         file.getBytes())
         );*/
         //photo = photoRepo.insert(photo); return photo.getId();
+        media.setContent(file.getBytes());
+        repo.save(media);
         return "";
     }
 
-    public Photo getPhoto(UUID id) {
-        return photoRepo.findById(id).block();
+    public Media getPhoto(UUID id) {
+        return repo.findById(id).block();
     }
 }

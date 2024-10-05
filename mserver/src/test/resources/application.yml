@@ -1,0 +1,12 @@
+app:
+  jjwt:
+    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+    expiration: 28800
+    iteration: 33
+    keylength: 256
+logging:
+  level:
+    org:
+      springframework:
+        r2dbc:
+          core: DEBUG

@@ -1,8 +1,16 @@
 # MServer
 
 ## Requirements
-- Java17
+- Java21
 - Docker
+
+## Build
+```
+./gradlew tasks
+./gradlew build
+# Without running tests
+./gradlew build -x test
+```
 
 ## Run with java
 ```

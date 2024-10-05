@@ -25,12 +25,11 @@ import se.maokei.mserver.services.StreamingService;
 @OpenAPIDefinition(info = @Info(
         title = "Media API",
         description = "API for getting media and list media."
-)
+  )
 )
 public class MediaHandler {
   private final StreamingService streamingService;
   private final MediaRepository mediaRepository;
-
 
   @Operation
   @ApiResponses(value = {

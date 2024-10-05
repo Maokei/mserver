@@ -3,12 +3,14 @@ package se.maokei.mserver.service;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import se.maokei.mserver.BaseIT;
+import org.springframework.context.annotation.Import;
+import se.maokei.mserver.TestcontainersConfiguration;
 import se.maokei.mserver.model.Media;
 import se.maokei.mserver.services.FileService;
 
+@Import(TestcontainersConfiguration.class)
 @SpringBootTest
-public class FileServiceTest extends BaseIT {
+public class FileServiceTest {
     @Autowired
     private FileService fileService;
 

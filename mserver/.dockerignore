@@ -3,6 +3,5 @@ Dockerfile
 .git
 .gitignore
 .md
-docker-compose.yml
 aws.json
 .env
