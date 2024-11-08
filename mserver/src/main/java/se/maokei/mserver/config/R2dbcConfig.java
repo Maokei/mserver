@@ -68,18 +68,4 @@ public class R2dbcConfig {
             }
         }
     }
-
-    public static <T> String toJson(T obj) {
-        String json = null;
-        if (obj != null) {
-            try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                json = objectMapper.writeValueAsString(obj);
-            } catch (JsonProcessingException e) {
-                //log.warn(e.getMessage(), e);
-                throw new IllegalArgumentException(e.getMessage());
-            }
-        }
-        return json;
-    }
 }
