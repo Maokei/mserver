@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -12,9 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Builder
-@Schema(
-    name = "Media", description = "Generic media class, for media files"
-)
+@Schema(name = "Media", description = "Generic media class, for media files")
 @Table
 public class Media extends EntityMetadata {
     private String foreignId;
@@ -23,8 +22,7 @@ public class Media extends EntityMetadata {
     private String url;
     private UUID userId;
     private MediaType type;
-    //TODO jsonb metadata?
-    //private HashMap<String, String> metadata;
+    private HashMap<String, String> metadata;
     @JsonIgnore
     private String filename;
     private long size;

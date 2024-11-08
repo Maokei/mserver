@@ -35,9 +35,12 @@ CREATE TABLE media (
     updated TIMESTAMP DEFAULT now(),
     foreign_id VARCHAR(30) NOT NULL,
     title VARCHAR(60) NOT NULL,
+    views INT DEFAULT 0,
+    url TEXT,
     user_id UUID NOT NULL,
     type TEXT NOT NULL,
-    /*metadata JSONB NOT NULL,*/
+    /*metadata JSONB NOT NULL, default '{}'*/
+    metadata JSON,
     filename VARCHAR(60) NOT NULL,
     size INT NOT NULL,
     content TEXT NOT NULL,
