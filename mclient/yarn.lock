@@ -2041,10 +2041,10 @@
   resolved "https://registry.npmjs.org/@types/mime/-/mime-1.3.2.tgz"
   integrity sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==
 
-"@types/node@*", "@types/node@^22.13.5":
-  version "22.13.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.5.tgz#23add1d71acddab2c6a4d31db89c0f98d330b511"
-  integrity sha512-+lTU0PxZXn0Dr1NBtC7Y8cR21AJr87dLLU953CWA6pMxxv/UDc7jYAY90upcrie1nRcD6XNG5HOYEDtgW5TxAg==
+"@types/node@*", "@types/node@^22.13.8":
+  version "22.13.8"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.13.8.tgz#57e2450295b33a6518d6fd4f65f47236d3e41d8d"
+  integrity sha512-G3EfaZS+iOGYWLLRCEAXdWK9my08oHNZ+FHluRiggIYJPOXzhOiDgpVCUHaUvyIC5/fj7C/p637jdzC666AOKQ==
   dependencies:
     undici-types "~6.20.0"
 
@@ -7775,10 +7775,10 @@ sass-loader@^12.3.0:
     klona "^2.0.4"
     neo-async "^2.6.2"
 
-sass@^1.85.0:
-  version "1.85.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.85.0.tgz#0127ef697d83144496401553f0a0e87be83df45d"
-  integrity sha512-3ToiC1xZ1Y8aU7+CkgCI/tqyuPXEmYGJXO7H4uqp0xkLXUqp88rQQ4j1HmP37xSJLbCJPaIiv+cT1y+grssrww==
+sass@^1.85.1:
+  version "1.85.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.85.1.tgz#18ab0bb48110ae99163778f06445b406148ca0d5"
+  integrity sha512-Uk8WpxM5v+0cMR0XjX9KfRIacmSG86RH4DCCZjLU2rFh5tyutt9siAXJ7G+YfxQ99Q6wrRMbMlVl6KqUms71ag==
   dependencies:
     chokidar "^4.0.0"
     immutable "^5.0.2"
