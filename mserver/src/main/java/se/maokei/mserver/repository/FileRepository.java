@@ -3,6 +3,7 @@ package se.maokei.mserver.repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
@@ -39,6 +40,8 @@ public class FileRepository {
     return filePartMono
         .doOnNext(fp -> LOGGER.info("FileRepository saving file: " + fp.filename()))
         .flatMap(fp -> {
+          //Files.write(outputFile.toPath(), dataForWriting);
+
           media.setLocation(BASE_PATH + File.separator + fp.filename());
           return fp.transferTo(BASE_PATH.resolve(fp.filename()))
               .then(

@@ -17,6 +17,10 @@ public class Comment extends EntityMetadata {
   private UUID user_id;
   @Schema(name = "comment", description = "Comment text")
   private String comment;
+  // user
+  // children
+  // parent_id
+  // likes []
 
   public record CommentDto(UUID id, UUID user_id, String comment) {
     public Comment toComment() {

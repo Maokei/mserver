@@ -39,11 +39,10 @@ CREATE TABLE media (
     url TEXT,
     user_id UUID NOT NULL,
     type TEXT NOT NULL,
-    /*metadata JSONB NOT NULL, default '{}'*/
     metadata JSON,
     filename VARCHAR(60) NOT NULL,
     size INT NOT NULL,
-    content TEXT NOT NULL,
+    content bytea NOT NULL,
     location TEXT NOT NULL,
     PRIMARY KEY (id)
 );

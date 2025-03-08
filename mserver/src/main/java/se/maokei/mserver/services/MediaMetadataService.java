@@ -1,5 +1,6 @@
 package se.maokei.mserver.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
@@ -21,6 +22,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class MediaMetadataService {
 

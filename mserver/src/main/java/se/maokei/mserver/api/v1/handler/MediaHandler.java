@@ -38,6 +38,8 @@ public class MediaHandler {
           })
   })
   public Mono<ServerResponse> listAllMedia(ServerRequest req) {
+    //int pageNumber = req.queryParam("page");
+    //int pageSize = req.queryParam("size");
     Flux<Media> mediaFlux = mediaRepository.findAll();
     return ServerResponse.ok()
         .contentType(MediaType.APPLICATION_JSON)

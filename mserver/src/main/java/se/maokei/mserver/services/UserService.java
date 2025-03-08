@@ -2,6 +2,7 @@ package se.maokei.mserver.services;
 
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,6 +18,7 @@ import se.maokei.mserver.repository.UserRepository;
 
 import java.util.*;
 
+@Slf4j
 @AllArgsConstructor
 @Service
 public class UserService {

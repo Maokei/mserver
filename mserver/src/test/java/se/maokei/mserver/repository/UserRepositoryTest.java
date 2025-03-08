@@ -50,36 +50,38 @@ public class UserRepositoryTest {
         var persisted = userRepository.save(user)
                 .then(userRepository.findByEmail(user.getEmail()));
         StepVerifier.create(persisted)
-                .assertNext(
-                        f -> {
-                            Assertions.assertEquals(user.getUsername(), f.getUsername(), "Usernames does not match");
-                            Assertions.assertEquals(user.getRoles(), f.getRoles(), "Roles does not match");
-                            Assertions.assertNotNull(f.getEmail(), "Email is missing");
-                            Assertions.assertNotNull(f.getId(), "Id does not exist");
-                        }
-                )
-                .verifyComplete();
+            .assertNext(
+                f -> {
+                    Assertions.assertEquals(user.getUsername(), f.getUsername(), "Usernames does not match");
+                    Assertions.assertEquals(user.getRoles(), f.getRoles(), "Roles does not match");
+                    Assertions.assertNotNull(f.getEmail(), "Email is missing");
+                    Assertions.assertNotNull(f.getId(), "Id does not exist");
+                }
+            )
+            .verifyComplete();
     }
 
     @Test
     public void updateUserTest() {
-        User user = new User("user1", passwordEncoder.encode("password"), "user@gmail.com", List.of(Role.ROLE_USER), true, true);
+        User user = new User("user1", passwordEncoder.encode("password"), "user1@gmail.com", List.of(Role.ROLE_USER), true, true);
         String newEmail = "updated@gmail.com";
+
         var updated = userRepository.save(user).map(u -> {
             u.setEmail(newEmail);
             return u;
-        }).doOnNext(u -> userRepository.save(u).subscribe()).then(userRepository.findByUsername(user.getUsername()));
+        }).flatMap((User u) -> userRepository.save(u));
+
         StepVerifier.create(updated)
-                .assertNext(
-                        f -> {
-                            Assertions.assertEquals(user.getUsername(), f.getUsername(), "Usernames does not match");
-                            Assertions.assertEquals(List.of(Role.ROLE_USER), f.getRoles(), "Roles does not match");
-                            Assertions.assertNotNull(f.getEmail(), "Email is missing");
-                            Assertions.assertEquals(newEmail, f.getEmail(), "Email does not match");
-                            Assertions.assertNotNull(f.getId(), "Id does not exist");
-                        }
-                )
-                .verifyComplete();
+        .assertNext(
+            (User f) -> {
+                    Assertions.assertEquals(user.getUsername(), f.getUsername(), "Usernames does not match");
+                Assertions.assertEquals(List.of(Role.ROLE_USER), f.getRoles(), "Roles does not match");
+                Assertions.assertNotNull(f.getEmail(), "Email is missing");
+                Assertions.assertEquals(newEmail, f.getEmail(), "Email does not match");
+                Assertions.assertNotNull(f.getId(), "Id does not exist");
+                }
+        )
+        .verifyComplete();
     }
 
     @Test

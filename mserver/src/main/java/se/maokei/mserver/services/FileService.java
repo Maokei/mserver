@@ -1,8 +1,10 @@
 package se.maokei.mserver.services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,12 @@ import se.maokei.mserver.repository.MediaRepository;
 
 import java.util.UUID;
 
+@Slf4j
 @AllArgsConstructor
 @Service
 public class FileService {
+  //@Value("${app.file.location}")
+  //private String defaultLocation;
   private final Logger LOGGER = LoggerFactory.getLogger(getClass());
   private FileRepository fileRepository;
   private MediaRepository mediaRepository;

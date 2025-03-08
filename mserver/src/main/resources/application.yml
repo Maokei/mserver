@@ -4,12 +4,14 @@
 #    enabled: true
 ## swagger-ui custom path
 ## springdoc.swagger-ui.path=/swagger-ui.html
-#app:
-#  jjwt:
-#    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
-#    expiration: 28800
-#    iteration: 33
-#    keylength: 256
+app:
+  jjwt:
+    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+    expiration: 28800
+    iteration: 33
+    keylength: 256
+#  file:
+#    location:
 #spring:
 #  flyway:
 #    enabled: true
