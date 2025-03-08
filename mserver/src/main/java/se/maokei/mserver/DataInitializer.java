@@ -20,24 +20,21 @@ import se.maokei.mserver.services.FileService;
 
 import java.util.List;
 
-@Profile("!test")
+//@Profile("!test")
 @AllArgsConstructor
 @Slf4j
 @Component
 class DataInitializer implements CommandLineRunner {
-    @Override
-    public void run(String[] args) throws Exception {
-
-    }
-    /*private final UserRepository userRepository;
-    private final CommentRepository commentRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    /*private final CommentRepository commentRepository;
     private final FileService fileService;
     private final MediaRepository mediaRepository;
     private final PlaylistRepository playlistRepository;
     private final PasswordEncoder passwordEncoder;
     private ResourceLoader resourceLoader;
     private static final String R_VIDEO_FORMAT = "classpath:videos/%s.mp4";
-    private static final String R_AUDIO_FORMAT = "classpath:audios/%s.mp3";
+    private static final String R_AUDIO_FORMAT = "classpath:audios/%s.mp3";*/
 
 
     @Override
@@ -45,15 +42,16 @@ class DataInitializer implements CommandLineRunner {
         log.info("Starting data initialization  ...");
 
         User userOne = User.builder().password(passwordEncoder.encode("password")).username("cat").email("cat@gmail.com").roles(List.of(Role.ROLE_ADMIN)).enabled(true).build();
-
+        User user1 = new User("user1", passwordEncoder.encode("password"), "user1@gmail.com", List.of(Role.ROLE_USER), true, true);
         addInitUser(userOne).subscribe();
-        addInitUser(new User("user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER))).subscribe();
+        //addInitUser(userOne).subscribe();
+        //addInitUser(new User("user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER))).subscribe();
         //username:password-> admin:admin
-        addInitUser(new User("admin", passwordEncoder.encode("password"), "admin@gmail.com", true, List.of(Role.ROLE_ADMIN))).subscribe();
+        //addInitUser(new User("admin", passwordEncoder.encode("password"), "admin@gmail.com", true, List.of(Role.ROLE_ADMIN))).subscribe();
 
         userRepository.findAll().subscribe(System.out::println);
 
-        log.info("Initialization of testing data ...");
+        /*log.info("Initialization of testing data ...");
 
         // Video
         Media netflixCyberpunkMedia = Media.builder().location("file:test_files/netflix_cyberpunk.mp4").fileName("netflix_cyberpunk.mp4").title("Cyberpunk: Edgerunners trailer").foreignId("c7192772-0c1c-11ed-861d-0242ac120001").build();
@@ -90,12 +88,13 @@ class DataInitializer implements CommandLineRunner {
                 .switchIfEmpty(mediaRepository.save(media).doFinally(c -> {
                     log.info("Init media added: " +  media.getTitle());
                 }));
+    }*/
     }
 
     private Mono<User> addInitUser(User user) {
         return userRepository.findByEmail(user.getEmail())
-                .switchIfEmpty(userRepository.save(user).doFinally(c -> {
-                    log.info("Init user added: " +  user.getUsername());
-                }));
-    }*/
+        .switchIfEmpty(userRepository.save(user).doFinally(c -> {
+            log.info("Init user added: " +  user.getUsername());
+        }));
+    }
 }

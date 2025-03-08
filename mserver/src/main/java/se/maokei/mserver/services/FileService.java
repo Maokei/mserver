@@ -79,8 +79,9 @@ public class FileService {
   }
 
   public Mono<FileSystemResource> monoFind(Mono<UUID> imageId) {
-    return mediaRepository.findById(imageId).flatMap(
+    return imageId.flatMap(id -> mediaRepository.findById(id).flatMap(
         metadata -> fileRepository.findFileMono(metadata.getLocation())
+        )
     );
   }
 }

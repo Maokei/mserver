@@ -10,3 +10,8 @@ logging:
       springframework:
         r2dbc:
           core: DEBUG
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true

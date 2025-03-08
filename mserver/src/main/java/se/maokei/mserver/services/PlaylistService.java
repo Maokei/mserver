@@ -17,25 +17,24 @@ import java.util.UUID;
 public class PlaylistService {
   private final PlaylistRepository playlistRepository;
   private final MediaRepository mediaRepository;
+
   public Flux<Playlist> getAllPlaylists() {
     return this.playlistRepository.findAll();
   }
 
-  public Mono<Playlist> getPlaylist(UUID id) {
-    return this.playlistRepository.findById(id).flatMap(found -> this.mediaRepository
-            .findAllById(found.getMedias())
-            .collectList()
-            .doOnNext(found::setMedia)
-            .then(Mono.just(found)));
+  public Mono<Playlist> getPlaylist(UUID playlistId) {
+    return this.playlistRepository.findById(playlistId)
+      .doOnNext(pl -> pl.getMediaIds().stream().parallel().map(mediaRepository::findById).forEach(Mono::subscribe));
   }
-  public void deletePlaylist() {
+  public Mono<UUID> deletePlaylist(UUID playlistId) {
+    return this.playlistRepository.deleteById(playlistId).thenReturn(playlistId);
   }
 
-  public void updatePlaylist() {
-
+  public Mono<Playlist> updatePlaylist(Playlist playlist) {
+    return this.playlistRepository.save(playlist);
   }
 
-  public void addPlaylist(Playlist pl) {
-
+  public Mono<Playlist> addMediaToPlaylist(UUID playlistID, UUID mediaID) {
+    return this.playlistRepository.findById(playlistID).doOnNext(pl -> pl.addMediaId(mediaID)).flatMap(this.playlistRepository::save);
   }
 }

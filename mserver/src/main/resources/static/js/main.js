@@ -1,3 +1,17 @@
+document.querySelector('#subBtn')
+    .addEventListener('click', function (event) {
+      event.preventDefault();
+      const evtSource = new EventSource("http://localhost:8080/admin/logged-users");
+      evtSource.onmessage = (event) => {
+        console.log(event)
+      };
+
+      const evt2Source = new EventSource("/admin/events");
+      evt2Source.onmessage = (event) => {
+        //console.log(event)
+      };
+}, false);
+
 document.querySelector('#loginForm')
   .addEventListener('submit', function (event) {
   event.preventDefault();
@@ -31,6 +45,7 @@ document.querySelector('#loginForm')
         let child = children[i];
         child.src = child.src + tknStart + token;
       }
+
     }).catch((err) => {
       console.warn("Login failed: ", err)
     })

@@ -16,26 +16,26 @@ public class Playlist extends EntityMetadata {
 
     public Playlist() {
         this.media = new ArrayList<>();
-        this.medias = new ArrayList<>();
+        this.mediaIds = new ArrayList<>();
     }
 
     public Playlist(String playlistName, List<UUID> medias) {
         this.playlistName = playlistName;
-        this.medias = medias;
+        this.mediaIds = medias;
     }
 
     private List<Media> media;
-    private List<UUID> medias;
+    private List<UUID> mediaIds;
 
     public void addMedia(Media media) {
         this.media.add(media);
     }
 
     public void addMediaId(UUID id) {
-        this.medias.add(id);
+        this.mediaIds.add(id);
     }
 
     public void addMediaId(Media media) {
-        this.medias.add(media.getId());
+        this.mediaIds.add(media.getId());
     }
 }
