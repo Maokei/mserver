@@ -1,16 +1,17 @@
 package se.maokei.mserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,23 +19,37 @@ import java.util.List;
 @Setter
 @ToString
 @Builder
-@Document
-public class User extends EntityMetadata implements UserDetails {
-    @Indexed(unique = true)
+@Table("users")
+public class User implements UserDetails, Persistable<UUID> {
+    @Id
+    private UUID id;
+    @NotBlank(message = "Username cannot be empty")
     private String username;
     @JsonIgnore
     private String password;
-    @Indexed(unique = true)
+    @NotBlank(message = "Email cannot be empty")
     private String email;
     @JsonIgnore
-    private Boolean enabled;
+    private List<@NotBlank(message = "Roles should not be empty") Role> roles;
     @JsonIgnore
-    private List<Role> roles;
+    private Boolean enabled;
+    @Transient
+    @JsonIgnore
+    private boolean isNew;
 
     @JsonIgnore
     @Override
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public User(String username, String password, String email, List<Role> roles, Boolean enabled, boolean isNew) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.roles = roles;
+        this.enabled = enabled;
+        this.isNew = isNew;
     }
 
     @JsonIgnore
@@ -56,12 +71,19 @@ public class User extends EntityMetadata implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return this.enabled;
     }
 
     @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return false;
+    }
+
+    @Override
+    public boolean isNew() {
+        boolean result = Objects.isNull(id);
+        this.id = result ? UUID.randomUUID() : this.id;
+        return result;
     }
 }

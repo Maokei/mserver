@@ -1,4 +1,4 @@
-package se.maokei.mserver.api.v1;
+package se.maokei.mserver.api.v1.routers;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

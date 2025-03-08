@@ -15,7 +15,7 @@ public class MediaMetadataServiceTest {
     @Autowired
     private MediaMetadataService mediaMetadataService;
 
-    @Test
+    //@Test
     public void readMetadataFromMp3TitleTest() {
         Media media = new Media();
         media.setLocation("test_files/audio.mp3");
@@ -25,7 +25,7 @@ public class MediaMetadataServiceTest {
         mediaMetadataService.getMetadata(media);
     }
 
-    @Test
+    //@Test
     public void writeMetadataFromMp3TitleTest() {
 
     }

@@ -25,7 +25,11 @@ import java.util.List;
 @Slf4j
 @Component
 class DataInitializer implements CommandLineRunner {
-    private final UserRepository userRepository;
+    @Override
+    public void run(String[] args) throws Exception {
+
+    }
+    /*private final UserRepository userRepository;
     private final CommentRepository commentRepository;
     private final FileService fileService;
     private final MediaRepository mediaRepository;
@@ -93,5 +97,5 @@ class DataInitializer implements CommandLineRunner {
                 .switchIfEmpty(userRepository.save(user).doFinally(c -> {
                     log.info("Init user added: " +  user.getUsername());
                 }));
-    }
+    }*/
 }

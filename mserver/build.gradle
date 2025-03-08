@@ -2,11 +2,17 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.0'
 	id 'io.spring.dependency-management' version '1.1.5'
+	//id 'org.graalvm.buildtools.native' version '0.10.2'
 }
 
 group = 'se.maokei'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '20'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
 
 configurations {
 	compileOnly {
@@ -20,16 +26,21 @@ repositories {
 }
 
 ext {
-	set('testcontainersVersion', "1.17.6")
+  set('springShellVersion', "3.3.0")
 }
-
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'org.springframework.shell:spring-shell-starter'
+	//implementation 'org.flywaydb:flyway-core:10.14.0'
+	//implementation 'org.flywaydb:flyway-database-postgresql:10.14.0'
+
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.postgresql:r2dbc-postgresql'
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
@@ -52,26 +63,30 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.boot:spring-boot-testcontainers'
 	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation 'org.testcontainers:junit-jupiter'
-	testImplementation 'org.testcontainers:mongodb'
+	testImplementation 'org.flywaydb:flyway-database-postgresql:10.14.0'
+	testImplementation 'org.testcontainers:postgresql'
+	testImplementation 'org.testcontainers:r2dbc'
 }
 
 dependencyManagement {
-	imports {
-		mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
-	}
+  imports {
+    mavenBom "org.springframework.shell:spring-shell-dependencies:${springShellVersion}"
+  }
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
 
-tasks.named('bootBuildImage') {
+/*tasks.named('bootBuildImage') {
 	builder = 'paketobuildpacks/builder:tiny'
 	environment = ['BP_NATIVE_IMAGE': 'true']
 	imageName = "mserver/server"
-}
+}*/

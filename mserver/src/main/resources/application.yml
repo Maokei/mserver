@@ -1,66 +1,86 @@
-#open-api
-springdoc:
-  api-docs:
-    enabled: true
-# swagger-ui custom path
-# springdoc.swagger-ui.path=/swagger-ui.html
+##open-api
+#springdoc:
+#  api-docs:
+#    enabled: true
+## swagger-ui custom path
+## springdoc.swagger-ui.path=/swagger-ui.html
 app:
   jjwt:
     secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
     expiration: 28800
     iteration: 33
     keylength: 256
-
-spring:
-  data:
-    mongodb:
-      auto-index-creation: true
-  profiles:
-    active: dev
-management:
-  endpoints:
-    web:
-      exposure:
-        include:
-          - prometheus
----
-spring:
-  config:
-    activate:
-      on-profile: dev
-  data:
-    mongodb:
-      host: localhost
-      port: 27017
-      database: mserver
-      auto-index-creation: true
-      authentication-database: admin
-      username: root
-      password: example
-logging:
-  level:
-    org:
-      springframework:
-        data: debug
----
-spring:
-  config:
-    activate:
-      on-profile: docker
-  data:
-    mongodb:
-      host: mongo
-      port: 27017
-      database: mserver
-      auto-index-creation: true
-      authentication-database: admin
-      username: root
-      password: example
-      #uri: mongodb://root:example@mongo:27017/mserver
----
-spring:
-  config:
-    activate:
-      on-profile:
-        - test
----
+#  file:
+#    location:
+#spring:
+#  flyway:
+#    enabled: true
+#  docker:
+#    compose:
+#      enabled: false
+#      file: compose.yaml
+#  data:
+#    mongodb:
+#      auto-index-creation: true
+#  ##profiles:
+#  ##  active: dev
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include:
+#          - prometheus
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: dev
+#  r2dbc:
+#    url: r2dbc:postgresql://localhost:5432/mserver
+#    username:
+#    password:
+#  data:
+#    mongodb:
+#      host: localhost
+#      port: 27017
+#      database: mserver
+#      auto-index-creation: true
+#      authentication-database: admin
+#      username: root
+#      password: example
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        data: debug
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: docker
+#  data:
+#    mongodb:
+#      host: mongo
+#      port: 27017
+#      database: mserver
+#      auto-index-creation: true
+#      authentication-database: admin
+#      username: root
+#      password: example
+#      #uri: mongodb://root:example@mongo:27017/mserver
+#---
+##spring:
+##  config:
+##    activate:
+##      on-profile: test
+##  flyway:
+##    enabled: true
+##  r2dbc:
+##    url: r2dbc:tc:postgresql:///mserver?TC_IMAGE_TAG=16
+##app:
+##  jjwt:
+##    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+##    expiration: 28800
+##    iteration: 33
+##    keylength: 256
+##---

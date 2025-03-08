@@ -25,12 +25,11 @@ import se.maokei.mserver.services.StreamingService;
 @OpenAPIDefinition(info = @Info(
         title = "Media API",
         description = "API for getting media and list media."
-)
+  )
 )
 public class MediaHandler {
   private final StreamingService streamingService;
   private final MediaRepository mediaRepository;
-
 
   @Operation
   @ApiResponses(value = {
@@ -39,6 +38,8 @@ public class MediaHandler {
           })
   })
   public Mono<ServerResponse> listAllMedia(ServerRequest req) {
+    //int pageNumber = req.queryParam("page");
+    //int pageSize = req.queryParam("size");
     Flux<Media> mediaFlux = mediaRepository.findAll();
     return ServerResponse.ok()
         .contentType(MediaType.APPLICATION_JSON)

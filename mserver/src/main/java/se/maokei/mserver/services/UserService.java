@@ -2,6 +2,7 @@ package se.maokei.mserver.services;
 
 import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,31 +18,44 @@ import se.maokei.mserver.repository.UserRepository;
 
 import java.util.*;
 
+@Slf4j
 @AllArgsConstructor
 @Service
 public class UserService {
   private final Logger LOGGER = LoggerFactory.getLogger(getClass());
   private UserRepository userRepository;
   private PasswordEncoder passwordEncoder;
-  private Map<String, User> data;
+  //private Map<String, User> data = new HashMap<>();
 
   @PostConstruct
   public void init() {
-    data = new HashMap<>();
+    //data = new HashMap<>();
     //username:password -> user:user
-    data.put("user", new User("user", passwordEncoder.encode("password"), "user@gmail.com",true, List.of(Role.ROLE_USER)));
+    //data.put("user", new User(UUID.randomUUID(), "user", passwordEncoder.encode("password"), "user@gmail.com", List.of(Role.ROLE_USER), true, false));
     //username:password-> admin:admin
-    data.put("admin", new User("admin", passwordEncoder.encode("password"), "admin@gmail.com",true, List.of(Role.ROLE_ADMIN)));
+    //data.put("admin", new User(UUID.randomUUID(), "admin", passwordEncoder.encode("password"), "admin@gmail.com", List.of(Role.ROLE_ADMIN), true, false));
   }
 
+  /**
+   * findByUsername
+   * @param username User's username
+   * */
   public Mono<User> findByUsername(String username) {
     return userRepository.findByUsername(username);
   }
 
   /**
-   *
+   * findByEmail
+   * @param email User's email
+   * */
+  public Mono<User> findByEmail(String email) {
+    return userRepository.findByEmail(email);
+  }
+
+  /**
+   * registerNewUser
    * @param userDto UserRegistrationDto
-   * @return  User or empty
+   * @return User or empty
    */
   public Mono<User> registerNewUser(UserRegisterDto userDto) throws RuntimeException {
     User newUser = User.builder()
@@ -57,7 +71,7 @@ public class UserService {
         return Mono.error(new UserAlreadyExistException("User with email already exists: " + found.getEmail()));
       }
       return Mono.just(newUser);
-    }).switchIfEmpty(userRepository.insert(newUser))
+    }).switchIfEmpty(userRepository.save(newUser))
             .doOnError(Mono::error)
             .publishOn(Schedulers.boundedElastic())
             .doFinally(signal -> {
@@ -69,7 +83,12 @@ public class UserService {
     });
   }
 
-  public Mono<User> updateUserPassword(String userId, User user) {
+  /**
+   * updateUserPassword
+   * @param userId user id to lookup
+   * @param user User pojo
+   * */
+  public Mono<User> updateUserPassword(UUID userId, User user) {
     return userRepository.findById(userId)
             .flatMap(dbUser -> {
               dbUser.setPassword(user.getPassword());

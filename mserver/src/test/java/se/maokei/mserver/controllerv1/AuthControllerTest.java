@@ -6,11 +6,12 @@ import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.core.publisher.Mono;
-import se.maokei.mserver.BaseIT;
+import se.maokei.mserver.TestcontainersConfiguration;
 import se.maokei.mserver.dto.AuthRequest;
 import se.maokei.mserver.model.Role;
 import se.maokei.mserver.model.User;
@@ -19,9 +20,10 @@ import se.maokei.mserver.repository.UserRepository;
 import java.util.List;
 
 @SpringBootTest
+@Import(TestcontainersConfiguration.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @AutoConfigureWebTestClient
-public class AuthControllerTest extends BaseIT {
+public class AuthControllerTest {
     private final String LOGIN_URL = "/api/v1/login";
     @Autowired
     private WebTestClient webTestClient;
@@ -32,15 +34,15 @@ public class AuthControllerTest extends BaseIT {
 
     @BeforeAll
     public void setup() {
-        User admin = new User("admin", passwordEncoder.encode("password"), "admin@gmail.com", true, List.of(Role.ROLE_ADMIN));
-        User user = new User("user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER));
+        this.userRepository.deleteAll().subscribe();
+        User admin = new User("admin", passwordEncoder.encode("password"), "admin@gmail.com", List.of(Role.ROLE_ADMIN), true, true);
+        User user = new User("user", passwordEncoder.encode("password"), "user@gmail.com", List.of(Role.ROLE_USER), true, true);
         this.userRepository.save(admin).subscribe();
         this.userRepository.save(user).subscribe();
     }
+
     @Test
     public void attemptLoginSuccessUser() throws Exception {
-        //User user = new User("user", passwordEncoder.encode("password"), "user@gmail.com", true, List.of(Role.ROLE_USER));
-        //when(userRepository.findByUsername("user").thenReturn(Mono.just(user))).subscribe();
         AuthRequest dto = new AuthRequest();
         dto.setUsername("user");
         dto.setPassword("password");

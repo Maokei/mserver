@@ -9,6 +9,8 @@ import se.maokei.mserver.model.Playlist;
 import se.maokei.mserver.repository.MediaRepository;
 import se.maokei.mserver.repository.PlaylistRepository;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class PlaylistService {
     return this.playlistRepository.findAll();
   }
 
-  public Mono<Playlist> getPlaylist(String id) {
+  public Mono<Playlist> getPlaylist(UUID id) {
     return this.playlistRepository.findById(id).flatMap(found -> this.mediaRepository
             .findAllById(found.getMedias())
             .collectList()

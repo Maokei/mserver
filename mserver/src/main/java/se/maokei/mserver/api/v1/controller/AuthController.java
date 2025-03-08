@@ -25,7 +25,6 @@ import se.maokei.mserver.security.JwtUtility;
 import se.maokei.mserver.services.UserService;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 
 @AllArgsConstructor
@@ -63,8 +62,8 @@ public class AuthController {
     DataBuffer buffer = new DefaultDataBufferFactory().wrap(bytes);
 
     return ServerResponse
-            .ok()
-            .contentType(MediaType.IMAGE_JPEG)
-            .body(BodyInserters.fromDataBuffers(Flux.just(buffer)));
+      .ok()
+      .contentType(MediaType.IMAGE_JPEG)
+      .body(BodyInserters.fromDataBuffers(Flux.just(buffer)));
   }
 }

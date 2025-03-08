@@ -1,5 +1,6 @@
 package se.maokei.mserver.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.AudioHeader;
@@ -19,7 +20,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.UUID;
 
+@Slf4j
 @Service
 public class MediaMetadataService {
 
@@ -40,9 +43,10 @@ public class MediaMetadataService {
 
   }
 
-  public void setArtwork(Artwork artwork, Long mediaId) {
+  public void setArtwork(Artwork artwork, UUID mediaId) {
 
   }
+
   public static void main(String[] args) throws CannotReadException, TagException, InvalidAudioFrameException, ReadOnlyFileException, IOException {
     File mp3File = new File("test_files/audio.mp3");
     Path path = Path.of("test_files/never_fade_away.mp3");

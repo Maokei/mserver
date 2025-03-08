@@ -1,7 +1,9 @@
 package se.maokei.mserver.model;
 
+import java.util.UUID;
+
 public record PlayListItem(
-        String mediaId,
+        UUID mediaId,
         String foreignId,
         String title
 ) {}

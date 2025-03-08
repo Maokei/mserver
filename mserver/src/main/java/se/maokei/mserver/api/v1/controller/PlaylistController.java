@@ -10,18 +10,21 @@ import reactor.core.publisher.Mono;
 import se.maokei.mserver.model.Playlist;
 import se.maokei.mserver.services.PlaylistService;
 
+import java.util.UUID;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
 public class PlaylistController {
     private PlaylistService playlistService;
+
     @GetMapping("/playlist")
     public Flux<Playlist> getAllPlaylists() {
         return this.playlistService.getAllPlaylists();
     }
 
     @GetMapping("/playlist/{id}")
-    public Mono<Playlist> getPlaylistById(@PathVariable("id") String id) {
+    public Mono<Playlist> getPlaylistById(@PathVariable("id") UUID id) {
         return this.playlistService.getPlaylist(id);
     }
 
