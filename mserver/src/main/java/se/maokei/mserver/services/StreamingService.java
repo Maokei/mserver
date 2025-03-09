@@ -17,7 +17,6 @@ public class StreamingService {
   private static final String VIDEO_FORMAT = "classpath:videos/%s.mp4";
   private FileService fileService;
   private MediaRepository mediaRepository;
-
   private ResourceLoader resourceLoader;
 
   public Mono<Resource> getMedia(String foreignId) {

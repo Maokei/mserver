@@ -22,6 +22,7 @@ import java.util.Map;
 public class QRCodeServiceImpl implements QRCodeService {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
+    @Override
     public Mono<byte[]> generate(String data) {
         return this.generate(data, 250, 250);
     }
