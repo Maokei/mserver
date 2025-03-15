@@ -22,8 +22,6 @@ import se.maokei.mserver.model.Media;
 import se.maokei.mserver.repository.MediaRepository;
 import se.maokei.mserver.services.StreamingService;
 
-import java.util.Optional;
-
 @RequiredArgsConstructor
 @Component
 @OpenAPIDefinition(info = @Info(

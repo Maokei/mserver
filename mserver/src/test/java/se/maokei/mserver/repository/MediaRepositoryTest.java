@@ -10,7 +10,10 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 import se.maokei.mserver.TestcontainersConfiguration;
 import se.maokei.mserver.model.Media;
+import se.maokei.mserver.util.Utils;
 
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -22,7 +25,7 @@ public class MediaRepositoryTest {
     private MediaRepository mediaRepository;
 
     @Test
-    public void saveMedia() {
+    public void saveMedia() throws NoSuchAlgorithmException, IOException {
         Media media = new Media();
         String title = "first media";
         HashMap<String, String> metadata = new HashMap<>();
@@ -34,16 +37,16 @@ public class MediaRepositoryTest {
         media.setMetadata(metadata);
         media.setType(Media.MediaType.AUDIO);
         media.setFilename("first media");
-        media.setSize(333L);
+        media.setSize(Utils.calculateFileSize("file:test_files/netflix_cyberpunk.mp4"));
         String content = "Mock content";
         media.setContent(content.getBytes());
-        media.setLocation("test location");
-        media.setViews(0);
+        media.setLocation("file:test_files/netflix_cyberpunk.mp4");
         media.setUrl("test url");
+        media.setHash(Utils.calculateMD5Hash(media.getLocation()));
 
         Mono<Media> persistedMedia = mediaRepository.save(media)
             .doOnNext(m -> mediaRepository.findById(m.getId())
-        );
+        ).onErrorStop();
 
         StepVerifier.create(persistedMedia)
             .assertNext(m -> {

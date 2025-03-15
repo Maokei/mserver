@@ -37,9 +37,12 @@ docker-compose up
 docker-compose -f docker-compose.prod.yml up
 ```
 
+[actuator](http://localhost:8080/actuator)
+[api-docs](http://localhost:8080/v3/api-docs)
+
 ## Swagger
 Swagger generated documentation:
-`http://localhost:8080/swagger-ui.html`
+[swagger-ui](http://localhost:8080/webjars/swagger-ui/index.html)
 
 ## Testing page
 Browse too `http://localhost:8080`

@@ -15,3 +15,7 @@ springdoc:
     enabled: true
   swagger-ui:
     enabled: true
+spring:
+  docker:
+    compose:
+      enabled: false

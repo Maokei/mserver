@@ -10,6 +10,7 @@ app:
     expiration: 28800
     iteration: 33
     keylength: 256
+
 #  file:
 #    location:
 #spring:

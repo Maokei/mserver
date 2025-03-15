@@ -33,7 +33,7 @@ CREATE TABLE media (
     id UUID NOT NULL,
     created TIMESTAMP DEFAULT now(),
     updated TIMESTAMP DEFAULT now(),
-    foreign_id VARCHAR(30) NOT NULL,
+    foreign_id VARCHAR(40) NOT NULL,
     title VARCHAR(60) NOT NULL,
     views INT DEFAULT 0,
     url TEXT,
@@ -42,7 +42,8 @@ CREATE TABLE media (
     metadata JSON,
     filename VARCHAR(60) NOT NULL,
     size INT NOT NULL,
-    content bytea NOT NULL,
-    location TEXT NOT NULL,
+    hash BYTEA NULL,
+    content bytea NULL,
+    location TEXT NULL,
     PRIMARY KEY (id)
 );
