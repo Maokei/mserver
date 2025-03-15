@@ -31,16 +31,15 @@ import java.io.ByteArrayOutputStream;
 @RestController
 @RequestMapping("/api/v1")
 public class AuthController {
-  private final Logger LOGGER = LoggerFactory.getLogger(getClass());
+  private final Logger log = LoggerFactory.getLogger(getClass());
   private JwtUtility jwtUtil;
 
-  //private PBKDF2Encoder passwordEncoder;
   private PasswordEncoder passwordEncoder;
   private UserService userService;
 
   @PostMapping("/login")
   public Mono<ResponseEntity<AuthResponse>> login(@Valid @RequestBody AuthRequest ar) {
-    LOGGER.debug("Login AuthRequest dto {}", ar);
+    log.debug("Login AuthRequest dto {}", ar);
     return userService.findByUsername(ar.getUsername())
             .filter(userDetails -> passwordEncoder.matches(ar.getPassword(), userDetails.getPassword()))
             .map(userDetails -> ResponseEntity.ok(new AuthResponse(jwtUtil.generateToken(userDetails))))

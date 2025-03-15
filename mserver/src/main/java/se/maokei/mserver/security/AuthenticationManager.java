@@ -3,6 +3,8 @@ package se.maokei.mserver.security;
 import io.jsonwebtoken.Claims;
 import lombok.AllArgsConstructor;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.ReactiveAuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +18,7 @@ import java.util.stream.Collectors;
 @Component
 @AllArgsConstructor
 public class AuthenticationManager implements ReactiveAuthenticationManager {
+  private static final Logger log = LoggerFactory.getLogger(AuthenticationManager.class);
   private JwtUtility jwtUtil;
 
   @Override
@@ -29,6 +32,7 @@ public class AuthenticationManager implements ReactiveAuthenticationManager {
             .map(valid -> {
               Claims claims = jwtUtil.getAllClaimsFromToken(authToken);
               List<String> rolesMap = claims.get("role", List.class);
+              log.debug("Authenticated user: {}, list of roles: {}, token:  {}", username, rolesMap, authToken);
               return new UsernamePasswordAuthenticationToken(
                       username,
                       null,

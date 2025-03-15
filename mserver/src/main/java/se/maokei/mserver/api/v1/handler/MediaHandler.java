@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.CacheControl;
@@ -30,6 +32,7 @@ import se.maokei.mserver.services.StreamingService;
   )
 )
 public class MediaHandler {
+  private static final Logger log = LoggerFactory.getLogger(MediaHandler.class);
   private final StreamingService streamingService;
   private final MediaRepository mediaRepository;
 
@@ -45,7 +48,7 @@ public class MediaHandler {
         .contentType(MediaType.APPLICATION_JSON)
         .cacheControl(CacheControl.noCache())
         .location(req.uri())
-        .body(mediaFlux, Media.class);
+        .body(mediaFlux, Media.class).log();
   }
 
   @Operation
@@ -62,6 +65,7 @@ public class MediaHandler {
 
   @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
   public Mono<ServerResponse> getMedia(ServerRequest req) {
+    //principal.subscribe(p -> log.info("Principal: {}", p));
     final String foreignId = req.pathVariable("foreignId");
     return ServerResponse.ok()
         .body(streamingService.getMedia(foreignId), Resource.class);
