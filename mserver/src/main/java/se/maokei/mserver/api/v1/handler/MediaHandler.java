@@ -24,6 +24,8 @@ import se.maokei.mserver.model.Media;
 import se.maokei.mserver.repository.MediaRepository;
 import se.maokei.mserver.services.StreamingService;
 
+import java.security.Principal;
+
 @RequiredArgsConstructor
 @Component
 @OpenAPIDefinition(info = @Info(
@@ -57,7 +59,7 @@ public class MediaHandler {
       @Content(mediaType = "application/json")
     })
   })
-  public Mono<ServerResponse> listMedia(ServerRequest req) {
+  public Mono<ServerResponse> listMedia(ServerRequest req) { //TODO keep this?
     Flux<Media> mediaFlux = req.bodyToMono(PageRequest.class)
         .flatMapMany(pr -> mediaRepository.findAllBy(pr).log());
     return ServerResponse.ok().body(mediaFlux, Media.class);
@@ -65,9 +67,9 @@ public class MediaHandler {
 
   @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
   public Mono<ServerResponse> getMedia(ServerRequest req) {
-    //principal.subscribe(p -> log.info("Principal: {}", p));
+    Mono<Principal> principal = req.exchange().getPrincipal();
     final String foreignId = req.pathVariable("foreignId");
     return ServerResponse.ok()
-        .body(streamingService.getMedia(foreignId), Resource.class);
+        .body(streamingService.getMedia(foreignId, principal), Resource.class);
   }
 }

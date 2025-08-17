@@ -6,8 +6,13 @@ app:
     keylength: 256
 logging:
   level:
+    se:
+      maokei: DEBUG
     org:
       springframework:
+        security: DEBUG
+        web: DEBUG
+        webflux: DEBUG
         r2dbc:
           core: DEBUG
 springdoc:

@@ -21,6 +21,7 @@ public class UserController {
     @PostMapping("/user/{id}")
     @PreAuthorize("hasRole('ADMIN') || (principal.id == #id)")
     public Mono<ResponseEntity<User>> updateUser(@RequestBody User newInfo, @PathVariable Long id) {
+        // TODO: Update user
         return Mono.just(ResponseEntity.ok(newInfo));
     }
 }
