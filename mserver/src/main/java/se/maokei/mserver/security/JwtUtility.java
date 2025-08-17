@@ -36,6 +36,9 @@ public class JwtUtility {
   public String getUsernameFromToken(String token) {
     return getAllClaimsFromToken(token).getSubject();
   }
+  public String getUserIdFromToken(String authToken) {
+    return getAllClaimsFromToken(authToken).get("id", String.class);
+  }
 
   public Date getExpirationDateFromToken(String token) {
     return getAllClaimsFromToken(token).getExpiration();
@@ -49,6 +52,7 @@ public class JwtUtility {
   public String generateToken(User user) {
     Map<String, Object> claims = new HashMap<>();
     claims.put("role", user.getRoles());
+    claims.put("id", user.getId());
     return doGenerateToken(claims, user.getUsername());
   }
 
