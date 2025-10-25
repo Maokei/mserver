@@ -2,9 +2,9 @@ import SidebarItem from './SidebarItem';
 
 const Sidebar = ({ isCollapsed, toggleSidebar }) => {
   const sidebarItems = [
-    { href: 'one', label: 'one', icon: 'one' },
-    { href: 'two', label: 'two', icon: 'two' },
+    { href: '/', label: 'Home', icon: 'home' },
     { href: 'media', label: 'Media', icon: 'media' },
+    { href: 'profile', label: 'Profile', icon: 'profile' },
   ];
 
   return (
