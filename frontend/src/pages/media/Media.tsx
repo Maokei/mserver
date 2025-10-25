@@ -49,11 +49,11 @@ const Media = () => {
   const renderVideo = () => {
     const fid = 'c7192772-0c1c-11ed-861d-0242ac120001';
     if (userToken) {
-      const media = baseUrl + mediaUrl + `${fid}?token=${userToken?.token}`;
+      const media = baseUrl + mediaUrl + `${fid}?token=${userToken}`;
       return (
         <div>
           <video
-            src={baseUrl + mediaUrl + `${fid}?token=${userToken.token}`}
+            src={baseUrl + mediaUrl + `${fid}?token=${userToken}`}
             width='720px'
             height='480px'
             controls={true}
@@ -76,7 +76,7 @@ const Media = () => {
               <source
                 key={id}
                 ref={videoRef}
-                src={baseUrl + mediaUrl + `${id}?token=${userToken.token}`}
+                src={baseUrl + mediaUrl + `${id}?token=${userToken}`}
                 type='audio/mp3'
               />
             ))}
