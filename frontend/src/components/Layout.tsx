@@ -22,7 +22,7 @@ const Layout = () => {
 
   return (
     <div className='h-screen flex flex-col'>
-      <Navbar />
+      <Navbar loggedIn={userToken} />
       <div className='flex grow overflow-hidden'>
         {/* Sidebar */}
         {<Sidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />}

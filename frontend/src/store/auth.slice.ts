@@ -23,11 +23,9 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setToken: (state) => {
-      state.userToken = 'fake token';
-    },
-    logout: (state) => {
-      state.userToken = '';
+    logout: (state: AuthState) => {
+      state.userToken = null;
+      state = initialState;
       localStorage.removeItem('auth');
     },
   },
@@ -48,4 +46,5 @@ export const authSlice = createSlice({
   },
 });
 
+export const { logout } = authSlice.actions;
 export default authSlice.reducer;

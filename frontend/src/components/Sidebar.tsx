@@ -1,6 +1,11 @@
 import SidebarItem from './SidebarItem';
 
-const Sidebar = ({ isCollapsed, toggleSidebar }) => {
+interface SidebarProps {
+  isCollapsed: boolean;
+  toggleSidebar: () => void;
+}
+
+const Sidebar = ({ isCollapsed, toggleSidebar }: SidebarProps) => {
   const sidebarItems = [
     { href: '/', label: 'Home', icon: 'home' },
     { href: 'media', label: 'Media', icon: 'media' },

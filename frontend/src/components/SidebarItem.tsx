@@ -1,6 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
 
-const SidebarItem = ({ href, label, icon, isCollapsed }) => {
+interface SidebarItemProps {
+  href: string;
+  label: string;
+  icon: string;
+  isCollapsed: boolean;
+}
+
+const SidebarItem = ({ href, label, icon, isCollapsed }: SidebarItemProps) => {
   const location = useLocation();
   const isActive = location.pathname === href;
 
