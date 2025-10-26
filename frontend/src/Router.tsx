@@ -5,6 +5,7 @@ import Error from './pages/error/Error';
 import Login from './components/login/Login';
 import Media from './pages/media/Media';
 import Profile from './pages/profile/Profile';
+import Register from './pages/register/Register';
 import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { path: '/login', element: <Login /> },
+      { path: '/register', element: <Register /> },
       {
         element: <ProtectedRoute />,
         children: [
@@ -25,17 +27,5 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-/*const public = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    errorElement: <Error />,
-    children: [
-      { index: true, element: <Home /> },
-      { path: '/login', element: <Login /> },
-    ],
-  },
-]);*/
 
 export const Router = () => <RouterProvider router={router} />;
