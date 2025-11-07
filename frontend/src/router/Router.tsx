@@ -1,11 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Layout from './components/Layout';
-import Home from './pages/home/Home';
-import Error from './pages/error/Error';
-import Login from './components/login/Login';
-import Media from './pages/media/Media';
-import Profile from './pages/profile/Profile';
-import Register from './pages/register/Register';
+import Layout from '../components/Layout';
+import Home from '../pages/home/Home';
+import Error from '../pages/error/Error';
+import Login from '../components/login/Login';
+import Media from '../pages/media/Media';
+import Profile from '../pages/profile/Profile';
+import Register from '../pages/register/Register';
 import ProtectedRoute from './ProtectedRoute';
 
 const router = createBrowserRouter([
