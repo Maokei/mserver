@@ -8,9 +8,9 @@ export const login = createAsyncThunk<
   AuthResponse,
   AuthRequest,
   {
-    dispatch: AppDispatch; // Type for dispatch within the thunk
-    state: RootState; // Type for getState within the thunk
-    rejectValue: string; // Optional: Type for the rejected action's payload
+    dispatch: AppDispatch;
+    state: RootState;
+    rejectValue: string;
   }
 >('auth/login', async (req, { dispatch, getState, rejectWithValue }) => {
   try {
