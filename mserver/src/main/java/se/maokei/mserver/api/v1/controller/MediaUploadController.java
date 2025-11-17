@@ -40,14 +40,6 @@ public class MediaUpload {
         .then();
   }
 
-  @Valid
-  @RequestMapping(value = "/saveFile")
-  public @ResponseBody String storeAd(@NotNull @RequestPart ("model") String adString, @NotNull @RequestPart ("file") FilePart file) throws IOException {
-    System.out.println("adString > "+adString);
-    System.out.println(file.filename());
-    return file.filename();
-  }
-
   @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
   public Mono<FileSystemResource> downloadImage(@PathVariable UUID imageId) throws Exception {
     return fileService.monoFind(Mono.just(imageId));
