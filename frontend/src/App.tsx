@@ -1,12 +1,12 @@
 import './App.css';
-import { Router } from './Router';
-//import { AppProvider } from './context/AppContext';
+import { Router } from './router/Router';
+import AppProvider from './store/AppProvider';
 
 function App() {
   return (
-    <>
+    <AppProvider>
       <Router />
-    </>
+    </AppProvider>
   );
 }
 

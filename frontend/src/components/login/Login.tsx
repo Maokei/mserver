@@ -1,28 +1,20 @@
-import React, { useState, useRef, ChangeEvent } from 'react';
-import ReactPlayer from 'react-player';
+import React, { useState, ChangeEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../store/auth.actions';
+import { AuthRequest } from '../../api/types';
 //import { interceptor } from '../../intercept/fetch-intercept';
 //import useQuery from '../../hooks/UseQuery';
 
 const Login: React.FC = () => {
-  const baseUrl: string = 'http://localhost:8080/api/v1/';
-  const mediaUrl: string = 'media/';
-  const audioList: string[] = [
-    'c7192772-0c1c-11ed-861d-0242ac120003',
-    'c7192772-0c1c-11ed-861d-0242ac120004',
-    'c7192772-0c1c-11ed-861d-0242ac120005',
-    'c7192772-0c1c-11ed-861d-0242ac120006',
-  ];
-  //const [media, setMedia] = useState([]); //TODO propper type
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { userToken } = useSelector((state) => state?.auth);
+
   const [input, setInput] = useState({
     username: 'cat',
     password: 'password',
   });
-  const [token, setToken] = useState<string>();
-  const videoRef = useRef(null);
-
-  React.useEffect(() => {
-    if (videoRef.current) console.log(videoRef);
-  }, [videoRef]);
 
   /*React.useEffect(() => {
     if (token) {
@@ -30,23 +22,13 @@ const Login: React.FC = () => {
     }
     }, [token]);*/
 
+  React.useEffect(() => {
+    if (userToken) navigate('/');
+  }, [userToken]);
+
   const loginReq = async () => {
-    await fetch(baseUrl + 'login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(input),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
-      .then((data) => {
-        setToken(data);
-      });
+    const req: AuthRequest = input;
+    dispatch(login(req));
   };
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -65,75 +47,6 @@ const Login: React.FC = () => {
     } else {
       alert('please provide a valid input');
     }
-  };
-
-  const handleEnded = (e: React.ChangeEvent<HTMLVideoElement>) => {
-    console.log(e);
-    if (videoRef.current) {
-      console.log('ended');
-    }
-  };
-
-  const getBtn = async (e) => {
-    const res = await fetch(baseUrl + 'media', {
-      method: 'GET',
-      headers: {},
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(res);
-      })
-      .then((data) => {
-        return data;
-      });
-    setMedia(res);
-  };
-
-  const getInfo = async (e) => {
-    console.log(videoRef.current);
-  };
-
-  const renderVideo = () => {
-    const fid = 'c7192772-0c1c-11ed-861d-0242ac120001';
-    if (token) {
-      const media = baseUrl + mediaUrl + `${fid}?token=${token?.token}`;
-      return (
-        <div>
-          <video
-            src={baseUrl + mediaUrl + `${fid}?token=${token.token}`}
-            width='720px'
-            height='480px'
-            controls={true}
-            preload='none'
-            onEnded={handleEnded}
-          ></video>
-          <ReactPlayer src={media} controls />
-        </div>
-      );
-    }
-    return;
-  };
-
-  const renderAudio = () => {
-    if (token) {
-      return (
-        <div>
-          <audio controls={true} autoPlay={true} preload='metadata' playsInline={true}>
-            {audioList.map((id) => (
-              <source
-                key={id}
-                ref={videoRef}
-                src={baseUrl + mediaUrl + `${id}?token=${token.token}`}
-                type='audio/mp3'
-              />
-            ))}
-          </audio>
-        </div>
-      );
-    }
-    return;
   };
 
   return (
@@ -159,10 +72,6 @@ const Login: React.FC = () => {
           Login
         </button>
       </form>
-      {renderVideo()}
-      {renderAudio()}
-      {token && <button onClick={getBtn}>Get</button>}
-      {token && <button onClick={getInfo}>Info</button>}
     </>
   );
 };
