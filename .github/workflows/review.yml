@@ -10,6 +10,6 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Secure AI PR Reviewer
-        uses: maokei/areviewer@v1.0.0 # Resolves to the release tag
+        uses: maokei/areviewer@v1 # Resolves to the release tag
         with:
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
