@@ -14,7 +14,7 @@
       <div class="field">
         <p class="control has-icons-left has-icons-right">
           <label>
-            <input class="input" type="text" placeholder="Username" name="username" value="user">
+            <input class="input" type="text" placeholder="Username" name="username" value="cat">
           </label>
           <span class="icon is-small is-left">
       <i class="fas fa-envelope"></i>
@@ -47,32 +47,39 @@
     <button id="subBtn" class="button is-success">Sub</button>
   </div>
   <div id="testMedia">
-  <video src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120003" width="720px" height="480px"
-         controls preload="none">
-  </video>
-  <audio src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120003" width="720px" height="480px"
-         controls preload="none">
-  </audio>
-  <video src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120002" width="720px" height="480px"
-         controls preload="none">
-  </video>
-  <p>video</p>
-  <video src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120001" width="720px" height="480px"
-         controls preload="none">
-  </video>
-  <video src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120002" width="720px" height="480px"
-         controls preload="none">
-  </video>
-  <p>Some audio again</p>
-  <audio src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120004" width="720px" height="480px"
-         controls preload="none">
-  </audio>
-  <audio src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120005" width="720px" height="480px"
-         controls preload="none">
-  </audio>
-  <audio src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120006" width="720px" height="480px"
-         controls preload="none">
-  </audio>
+    <section>
+      <video src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120003" width="720px" height="480px"
+             controls preload="none">
+      </video>
+      <audio src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120003" width="720px" height="480px"
+             controls preload="none">
+      </audio>
+      <video src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120002" width="720px" height="480px"
+             controls preload="none">
+      </video>
+      <p>video</p>
+      <video src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120001" width="720px" height="480px"
+             controls preload="none">
+      </video>
+      <video src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120002" width="720px" height="480px"
+             controls preload="none">
+      </video>
+    </section>
+    <section>
+      <h2>Websocket test</h2>
+      <video id="video" width="640" height="480" autoplay></video>
+    </section>
+
+    <h2>Some audio again</h2>
+    <audio src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120004" width="720px" height="480px"
+           controls preload="none">
+    </audio>
+    <audio src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120005" width="720px" height="480px"
+           controls preload="none">
+    </audio>
+    <audio src="http://localhost:8080/api/v1/media/c7192772-0c1c-11ed-861d-0242ac120006" width="720px" height="480px"
+           controls preload="none">
+    </audio>
   </div>
   <p>Image file test</p>
   <form method="POST" action="/image" enctype="multipart/form-data">

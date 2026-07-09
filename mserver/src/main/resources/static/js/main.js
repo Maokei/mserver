@@ -20,7 +20,7 @@ document.querySelector('#loginForm')
   const usernameInput = fields.username;
   const passwordInput = fields.password;
   console.log("Attempting login: " + usernameInput.value, passwordInput.value)
-    fetch ("http://localhost:8080/api/v1/login", {
+    fetch ("/api/v1/login", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -49,4 +49,28 @@ document.querySelector('#loginForm')
     }).catch((err) => {
       console.warn("Login failed: ", err)
     })
+
+
+    const video = document.getElementById('video');
+    const ws = new WebSocket('ws://localhost:8080/stream');
+
+    ws.onmessage = (event) => {
+      if (event.data instanceof Blob) {
+        const blob = event.data;
+        const url = URL.createObjectURL(blob);
+        video.src = url;
+      }
+    };
+
+    ws.onopen = () => {
+      console.log('Connected to WebSocket');
+    };
+
+    ws.onerror = (error) => {
+      console.log('Error occurred:', error);
+    };
+
+    ws.onclose = () => {
+      console.log('Disconnected from WebSocket');
+    };
 });

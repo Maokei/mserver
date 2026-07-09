@@ -22,8 +22,8 @@ CREATE TABLE comments (
     comment_id UUID NOT NULL,
     user_id UUID REFERENCES users(user_id) ON DELETE CASCADE NOT NULL,
     comment TEXT NOT NULL,
-    created TIMESTAMP DEFAULT now(),
-    updated TIMESTAMP DEFAULT now(),
+    created TIMESTAMPTZ DEFAULT now(),
+    updated TIMESTAMPTZ DEFAULT now(),
     PRIMARY KEY(comment_id)
 );
 
