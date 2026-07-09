@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -22,6 +23,7 @@ import java.util.*;
 @Table("users")
 public class User implements UserDetails, Persistable<UUID> {
     @Id
+    @Column("user_id")
     private UUID id;
     @NotBlank(message = "Username cannot be empty")
     private String username;
@@ -85,5 +87,17 @@ public class User implements UserDetails, Persistable<UUID> {
         boolean result = Objects.isNull(id);
         this.id = result ? UUID.randomUUID() : this.id;
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return isNew == user.isNew && Objects.equals(id, user.id) && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(roles, user.roles) && Objects.equals(enabled, user.enabled);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, email, roles, enabled, isNew);
     }
 }

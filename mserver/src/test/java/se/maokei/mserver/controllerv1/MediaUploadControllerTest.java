@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWeb
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.MultipartBodyBuilder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.reactive.server.WebTestClient;
@@ -27,10 +28,26 @@ public class MediaUploadControllerTest {
         MultipartBodyBuilder builder = new MultipartBodyBuilder();
 
         builder.part("file", new FileSystemResource("test_files/audio.mp3").getInputStream().readAllBytes())
-                .header("Content-Disposition", "form-data; name=fileToUpload; filename=song.mp3");
+                .header("Content-Disposition", "form-data; name=file; filename=song.mp3");
 
         webTestClient.post()
                 .uri("/api/v1/media/single")
+                .body(BodyInserters.fromMultipartData(builder.build()))
+                .exchange()
+                .expectStatus().isCreated();
+    }
+
+    //@Test
+    @WithMockUser(roles = "USER")
+    public void uploadTwoTest() throws IOException {
+        MultipartBodyBuilder builder = new MultipartBodyBuilder();
+
+        builder.part("files", new FileSystemResource("test_files/audio.mp3").getInputStream().readAllBytes());
+        //builder.part("files", new FileSystemResource("test_files/audio.mp3").getInputStream().readAllBytes());
+
+        webTestClient.post()
+                .uri("/api/v1/media/multi")
+                .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData(builder.build()))
                 .exchange()
                 .expectStatus().isCreated();

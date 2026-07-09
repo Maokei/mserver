@@ -7,15 +7,17 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import se.maokei.mserver.model.EntityMetadata;
 
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Component
 public class EntityBeforeConvert implements BeforeConvertCallback<EntityMetadata> {
     @Override
     public Publisher<EntityMetadata> onBeforeConvert(EntityMetadata entity, SqlIdentifier table) {
-        if (entity.getId() == null) {
-            entity.setId(UUID.randomUUID());
+        entity.generateId();
+        if (entity.getCreated() == null) {
+           entity.setCreated(LocalDateTime.now());
         }
+        entity.setUpdated(LocalDateTime.now());
         return Mono.just(entity);
     }
 }

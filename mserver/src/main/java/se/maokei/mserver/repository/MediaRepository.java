@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface MediaRepository extends ReactiveSortingRepository<Media, UUID> {
-  Mono<Media> findById(UUID id);
+  Mono<Media> findByMediaId(UUID id);
   Flux<Media> findAllBy(PageRequest pr);
   Mono<Media> findByForeignId(String foreignId);
   Mono<Media> findByLocation(String location);

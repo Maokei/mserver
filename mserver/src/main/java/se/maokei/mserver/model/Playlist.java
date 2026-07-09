@@ -1,7 +1,9 @@
 package se.maokei.mserver.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.ArrayList;
@@ -10,17 +12,20 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@Table
+@Table("playlists")
 public class Playlist extends EntityMetadata {
-    private String playlistName;
+    @Schema(name = "id", description = "The generated ID when saved into the database")
+    @Id
+    private UUID playlistId;
+    private String title;
 
     public Playlist() {
         this.media = new ArrayList<>();
         this.mediaIds = new ArrayList<>();
     }
 
-    public Playlist(String playlistName, List<UUID> medias) {
-        this.playlistName = playlistName;
+    public Playlist(String title, List<UUID> medias) {
+        this.title = title;
         this.mediaIds = medias;
     }
 
@@ -36,6 +41,12 @@ public class Playlist extends EntityMetadata {
     }
 
     public void addMediaId(Media media) {
-        this.mediaIds.add(media.getId());
+        this.mediaIds.add(media.getMediaId());
+    }
+
+    @Override
+    public void generateId() {
+        if (playlistId == null)
+            this.playlistId = UUID.randomUUID();
     }
 }
