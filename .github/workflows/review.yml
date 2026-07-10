@@ -5,6 +5,9 @@ on:
 jobs:
   review:
     runs-on: ubuntu-latest
+    env:
+        GEMINI_API_KEY: {{ secrets.GEMINI_API_KEY }}
+        GEMINI_MODEL: {{ secrets.GEMINI_MODEL }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
