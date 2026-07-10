@@ -59,25 +59,4 @@ public class CustomAuthentication implements Authentication {
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
         this.isAuthenticated = isAuthenticated;
     }
-
-
-    /*
-    When authenticating a user, create an instance of CustomAuthentication and set it as the authentication object:
-
-
-CopyInsert
-SecurityContextHolder.getContext().setAuthentication(
-    new CustomAuthentication(userId, username)
-);
-
-    Then, in your controller or service, you can access the user ID from the Principal object:
-
-
-
-    @GetMapping("/profile")
-public Mono<String> profile(@AuthenticationPrincipal CustomAuthentication authentication) {
-    String userId = authentication.getUserId();
-    // use the user ID
-}
-     */
 }
