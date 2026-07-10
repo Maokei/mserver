@@ -23,13 +23,15 @@ public class StreamingService {
 
   public Mono<Resource> getMedia(String foreignId, Mono<Principal> principal) {
     return mediaRepository.findByForeignId(foreignId)
-        .flatMap(media -> principal
-            .flatMap(p -> {
+        .flatMap(media ->
+            principal.flatMap(p -> {
               String userId = ((CustomAuthentication) p).getUserId();
               log.info("StreamingService: User: {} UserId: {} ,requested media with id({}) ", p.getName(), userId, foreignId);
-              return Mono.fromSupplier(() -> resourceLoader.getResource(media.getLocation()));
-            })
-            .switchIfEmpty(Mono.defer(() -> {
+              return Mono.fromSupplier(() -> resourceLoader.getResource(media.getLocation())).doOnSuccess(resource -> {
+                  media.setViews(media.getViews() + 1);
+                  mediaRepository.save(media).subscribe();
+              });
+            }).switchIfEmpty(Mono.defer(() -> {
               if (media.getUserId() == null) { //todo public or not
                 log.info("StreamingService: Public request for media({}) with id({}) ", media.getType().name(), foreignId);
                 return Mono.fromSupplier(() -> resourceLoader.getResource(media.getLocation()));
@@ -37,6 +39,10 @@ public class StreamingService {
                 return Mono.error(new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Media is not public"));
               }
             }))
+            .doOnSuccess(resource -> {
+              media.setViews(media.getViews() + 1);
+              mediaRepository.save(media).subscribe();
+            })
         ).switchIfEmpty(Mono.error(new ResponseStatusException(HttpStatus.NOT_FOUND, "Media not found")));
   }
 }
