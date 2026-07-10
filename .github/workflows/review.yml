@@ -14,5 +14,4 @@ jobs:
       - name: Run Secure AI PR Reviewer
         uses: maokei/areviewer@v1 # Resolves to the release tag
         with:
-          node-version: 24
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
