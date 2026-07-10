@@ -2,6 +2,8 @@ package se.maokei.mserver.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.UUID;
@@ -13,18 +15,25 @@ import java.util.UUID;
 @Builder
 @Table("comments")
 public class Comment extends EntityMetadata {
+  @Schema(name = "comment_id", description = "The generated ID when saved into the database")
+  @Id
+  @Column("comment_id")
+  private UUID commentId;
   @Schema(name = "user_id", description = "User that created comment")
-  private UUID user_id;
+  @Column("user_id")
+  private UUID userId;
   @Schema(name = "comment", description = "Comment text")
   private String comment;
-  // user
-  // children
-  // parent_id
-  // likes []
 
   public record CommentDto(UUID id, UUID user_id, String comment) {
     public Comment toComment() {
-      return Comment.builder().user_id(id).user_id(user_id).comment(comment).build();
+      return Comment.builder().userId(id).userId(user_id).comment(comment).build();
     }
+  }
+
+  @Override
+  public void generateId() {
+    if (commentId == null)
+      this.commentId = UUID.randomUUID();
   }
 }

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AppDispatch, RootState } from '../store';
+import { AppDispatch, RootState } from '.';
 import { AuthRequest, AuthResponse } from '../api/types';
 
 const BACKEND_URL: string = 'http://localhost:8080/api/v1/';

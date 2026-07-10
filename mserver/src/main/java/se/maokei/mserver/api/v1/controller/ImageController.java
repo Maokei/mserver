@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import se.maokei.mserver.model.Media;
-import se.maokei.mserver.model.Photo;
 import se.maokei.mserver.services.PhotoService;
 
 import java.io.IOException;
@@ -34,6 +33,6 @@ public class ImageController {
         //model.addAttribute("image",
         //        Base64.getEncoder().encodeToString(photo.getImage().getData()));
         model.addAttribute("image", "todo");
-        return "photos";
+        return "image";
     }
 }

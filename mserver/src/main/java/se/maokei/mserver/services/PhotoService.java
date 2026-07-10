@@ -37,6 +37,6 @@ public class PhotoService { //TODO rename to ImageService
     }
 
     public Media getPhoto(UUID id) {
-        return repo.findById(id).block();
+        return repo.findByMediaId(id).block();
     }
 }

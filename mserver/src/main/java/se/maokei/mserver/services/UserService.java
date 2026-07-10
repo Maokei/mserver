@@ -1,6 +1,5 @@
 package se.maokei.mserver.services;
 
-import jakarta.annotation.PostConstruct;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -25,16 +24,6 @@ public class UserService {
   private final Logger LOGGER = LoggerFactory.getLogger(getClass());
   private UserRepository userRepository;
   private PasswordEncoder passwordEncoder;
-  //private Map<String, User> data = new HashMap<>();
-
-  @PostConstruct
-  public void init() {
-    //data = new HashMap<>();
-    //username:password -> user:user
-    //data.put("user", new User(UUID.randomUUID(), "user", passwordEncoder.encode("password"), "user@gmail.com", List.of(Role.ROLE_USER), true, false));
-    //username:password-> admin:admin
-    //data.put("admin", new User(UUID.randomUUID(), "admin", passwordEncoder.encode("password"), "admin@gmail.com", List.of(Role.ROLE_ADMIN), true, false));
-  }
 
   /**
    * findByUsername

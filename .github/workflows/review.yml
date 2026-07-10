@@ -1,0 +1,17 @@
+name: Code Review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Run Secure AI PR Reviewer
+        uses: maokei/areviewer@v1 # Resolves to the release tag
+        with:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}

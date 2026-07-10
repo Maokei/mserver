@@ -45,12 +45,12 @@ public class MediaRepositoryTest {
         media.setHash(Utils.calculateMD5Hash(media.getLocation()));
 
         Mono<Media> persistedMedia = mediaRepository.save(media)
-            .doOnNext(m -> mediaRepository.findById(m.getId())
+            .doOnNext(m -> mediaRepository.findByMediaId(m.getMediaId())
         ).onErrorStop();
 
         StepVerifier.create(persistedMedia)
             .assertNext(m -> {
-                Assertions.assertNotNull(m.getId(), "Should have a UUID");
+                Assertions.assertNotNull(m.getMediaId(), "Should have a UUID");
                 Assertions.assertEquals(title, m.getTitle());
                 Assertions.assertEquals(2, m.getMetadata().size(), "Metadata should have two items");
                 Assertions.assertEquals("HelloWorld", m.getMetadata().get("first"));
