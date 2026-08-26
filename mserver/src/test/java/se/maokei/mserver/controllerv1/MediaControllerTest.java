@@ -31,7 +31,6 @@ public class MediaControllerTest {
             .exchange().returnResult(Object.class).getResponseBody()
                 .collectList().subscribe(res -> {
                     try {
-                        System.out.println(res.toString());
                         String json = mapper.writeValueAsString(res);
                         List<Media> mlist = mapper.readValue(json, List.class);
                         Assertions.assertEquals(6, mlist.size(), "Should be 6 media");

@@ -23,8 +23,9 @@ public class PlaylistService {
   }
 
   public Mono<Playlist> getPlaylist(UUID playlistId) {
-    return this.playlistRepository.findById(playlistId)
-      .doOnNext(pl -> pl.getMediaIds().stream().parallel().map(mediaRepository::findByMediaId).forEach(Mono::subscribe));
+    //return this.playlistRepository.findById(playlistId)
+      //.doOnNext(pl -> pl.getMediaIds().stream().parallel().map(mediaRepository::findByMediaId).forEach(Mono::subscribe));
+    return null;
   }
   public Mono<UUID> deletePlaylist(UUID playlistId) {
     return this.playlistRepository.deleteById(playlistId).thenReturn(playlistId);

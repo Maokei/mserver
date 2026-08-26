@@ -4,10 +4,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -16,32 +15,34 @@ import java.util.UUID;
 public class Playlist extends EntityMetadata {
     @Schema(name = "id", description = "The generated ID when saved into the database")
     @Id
+    @Column("playlist_id")
     private UUID playlistId;
+    @Column("user_id")
+    private UUID userId;
     private String title;
+    private String description;
+    @Column("is_public")
+    private boolean isPublic;
+    @Column("is_collaborative")
+    private boolean isCollaborative;
 
     public Playlist() {
-        this.media = new ArrayList<>();
-        this.mediaIds = new ArrayList<>();
+
     }
 
-    public Playlist(String title, List<UUID> medias) {
+    public Playlist(UUID userId, String title, String description) {
+        this.userId = userId;
         this.title = title;
-        this.mediaIds = medias;
+        this.description = description;
     }
-
-    private List<Media> media;
-    private List<UUID> mediaIds;
 
     public void addMedia(Media media) {
-        this.media.add(media);
     }
 
     public void addMediaId(UUID id) {
-        this.mediaIds.add(id);
     }
 
     public void addMediaId(Media media) {
-        this.mediaIds.add(media.getMediaId());
     }
 
     @Override

@@ -56,7 +56,7 @@ public class RegisterControllerTest {
                 .json("[\"Passwords don't match\"]");
     }
 
-    //TODO @Test
+    @Test
     public void registerAlreadyExistingEmail() {
         final String EMAIL = "test@gmail.com";
         String username1 = String.valueOf(UUID.randomUUID());
@@ -73,7 +73,15 @@ public class RegisterControllerTest {
                 .exchange()
                 .expectStatus().isOk();
 
-
+        dto.setUsername(username2);
+        dto.setPassword("123456e");
+        dto.setMatchingPassword("123456e");
+        dto.setEmail(EMAIL);
+        webTestClient.post()
+                .uri(REGISTER_URL)
+                .body(Mono.just(dto), UserRegisterDto.class)
+                .exchange()
+                .expectStatus().isBadRequest();
     }
 
     //TODO @Test

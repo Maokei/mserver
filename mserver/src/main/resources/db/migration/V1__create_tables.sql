@@ -75,6 +75,14 @@ CREATE TABLE playlists (
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE playlist_item (
+    playlist_id UUID REFERENCES playlists(playlist_id) ON DELETE CASCADE,
+    media_id UUID REFERENCES medias(media_id) ON DELETE CASCADE,
+    created TIMESTAMPTZ DEFAULT now(),
+    pos INT NOT NULL,
+    PRIMARY KEY (playlist_id, pos)
+);
+
 CREATE TABLE user_library (
     user_id UUID REFERENCES users(user_id) ON DELETE CASCADE,
     media_id UUID REFERENCES medias(media_id) ON DELETE CASCADE,

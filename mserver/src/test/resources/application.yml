@@ -9,6 +9,7 @@ logging:
     se:
       maokei: DEBUG
     org:
+      flywaydb: DEBUG
       springframework:
         security: DEBUG
         web: DEBUG
