@@ -11,5 +11,8 @@ import java.util.UUID;
 @Repository
 public interface PlaylistRepository extends ReactiveCrudRepository<Playlist, UUID> {
     Mono<Playlist> findByPlaylistId(UUID playlistId);
-    Flux<Playlist> findPlaylistByUserId(UUID userId);
+    Flux<Playlist> findByUserId(UUID userId);
+    Flux<Playlist> findByIsPublicTrue();
+    Flux<Playlist> findByUserIdOrIsPublicTrue(UUID userId);
 }
+
